@@ -1,0 +1,228 @@
+.campus-event{
+  display: block;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 10px 10px;
+}
+.campus-news{
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: top;
+  font-family: "Microsoft Yahei";
+}
+.comprehensive{
+  margin: 0 50px;
+}
+.campus-news a{
+  text-decoration: none;
+  color: #333;
+}
+.panel-header{
+  padding: 10px 15px;
+  padding-bottom: 20px;
+  border: 0;
+}
+.campus-news .panel-header img{
+  width:22px;
+  height: 22px;
+  position: relative;
+  top: 3px;
+  left:0px;
+}
+.campus-news .mytitle{
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+}
+.campus-news .mytitle small{
+  font-size: 16px;
+  font-weight: normal;
+  color: #c4c4c4;
+}
+.campus-news .campus-news-content{
+  width:320px;
+  height: 375px;
+  padding: 5px 10px;
+  border-bottom: 2px solid #dedede;
+  border-top: 2px solid #dedede;
+}
+.comprehensive .campus-news-content{
+  width: 340px;
+}
+.campus-news .campus-news-content .img-news{
+  width: 100%;
+  height:143px;
+  padding: 5px 0;
+  display: block;
+}
+.campus-news-content .img-news img{
+  width: 175px;
+  height:150px;
+  float: left;
+  margin-right: 5px;
+}
+.campus-news-content .img-news .img-title{
+  height:44px;
+  display: block;
+  overflow:hidden;
+  padding: 0 5px;
+}
+.campus-news-content .img-news:hover .img-title{
+  text-decoration: underline;
+  color: #6B8AC2;
+}
+.campus-news-content .img-news .img-describe{
+  font-size: 13px;
+  color: #a8a0a0;
+  padding: 0 5px;
+  height: 80px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.campus-news-content .img-news .img-news-date{
+  display: block;
+  text-align: right;
+  margin-top: 5px;
+  font-size: 13px;
+  color: #a8a0a0;
+}
+.campus-news-content .img-news .img-describe:hover{
+  color: #6B8AC2;
+}
+.campus-news-content ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-top:5px;
+}
+.campus-news-content ul li{
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 13px;
+  line-height: 25px;
+}
+.campus-news-content ul li a{
+  text-decoration: none;
+  display: inline-block;
+  width: 84%;
+  overflow: hidden;
+  height:20px;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
+  color:#000;
+}
+.campus-news-content ul li a:hover{
+  color:rgb(27, 115, 186);
+  text-decoration: underline;
+}
+.campus-news-content ul li span{
+  text-align: right;
+  display: inline-block;
+  width: 16%;
+  height: 20px;
+  font-size: 13px;
+  color: #a8a0a0;
+  vertical-align: bottom;
+}
+.campus-news.events article.end-event{
+  border-left: 5px solid grey;
+}
+.campus-news.events article.on-hold-arrival{
+  border-left: 5px solid #fda84b;
+}
+.campus-news.events article.pickup-appointment{
+  border-left: 5px solid #67c;
+}
+.campus-news.events article:hover{
+  box-shadow:0 0 4px rgba(0,0,0,0.4);
+}
+.campus-news.events article{
+  margin: 7px 0;
+  display: block;
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0;
+}
+.campus-news.events article p{
+  display: inline-block;
+  box-sizing:border-box;
+}
+.campus-news.events article p:first-child{
+  width: 60px;
+  text-align: center;
+  padding: 0;
+  border-right: 1px solid #ccc;
+  display: inline-block;
+}
+.campus-news.events article p:last-child{
+  margin: 0;
+}
+.campus-news .event-day{
+  font-size: 1.2em;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+.campus-news .event-month{
+  font-size: .80em;
+  color: #bbb;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+.campus-news .event-name{
+  font-size: 1.16em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 244px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  display: block;
+}
+.campus-news .event-describe{
+  font-size: .60em;
+  color:#bbb;
+  cursor: pointer;
+  font-weight: 600;
+  width: 244px;
+  max-height: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  display: block;
+}
+.campus-news .event-describe:hover{
+  color:#6B8AC2;
+}
+.campus-news.events article:nth-child(3):after{
+  content: "";
+  border-bottom: 1px solid #ccc;
+  width: 95%;
+  position: absolute;
+  bottom:0;
+  left: 15px;
+  z-index: 1;
+}
+.campus-news p.campus-news-more{
+  margin: 0;
+}
+.campus-news p.campus-news-more a{
+  font-size: 14px;
+  text-decoration:none;
+  color:#333;
+}
+.campus-news p.campus-news-more a:hover{
+  color:#6B8AC2;
+  text-decoration: none;
+}
+
+.campus-news p.campus-news-more a img{
+  vertical-align:bottom;
+  margin-left:5px;
+}
