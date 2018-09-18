@@ -1,53 +1,46 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import official from '@/components/official'
-import about from '@views/about'
-import communistWork from '@views/communistWork'
-import foreignCooperation from '@views/foreignCooperation'
-import gallery from '@views/gallery'
-import main from '@views/main'
-import news from '@views/news'
-import recruit from '@views/recruit'
-import studentWork from '@views/studentWork'
-import teacher from '@views/teacher'
-import educationManagement from '@views/educationManagement'
+
 Vue.use(Router)
+
+var _import = file => resolve => require([`@views/${file}`], resolve)
+
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   base: __dirname,
   routes: [{
     path: '/',
-    component: official,
+    component: _import('layout/official'),
     children: [{
       path: '',
-      component: main
+      component: _import('main')
     }, {
       path: 'about/:id',
-      component: about
+      component: _import('about')
     }, {
       path: 'communistWork/:id',
-      component: communistWork
+      component: _import('communistWork')
     }, {
       path: 'foreignCooperation/:id',
-      component: foreignCooperation
+      component: _import('foreignCooperation')
     }, {
       path: 'gallery',
-      component: gallery
+      component: _import('gallery')
     }, {
       path: 'news',
-      component: news
+      component: _import('news')
     }, {
       path: 'recruit/:id',
-      component: recruit
+      component: _import('recruit')
     }, {
       path: 'studentWork/:id',
-      component: studentWork
+      component: _import('studentWork')
     }, {
       path: 'teacher',
-      component: teacher
+      component: _import('teacher')
     }, {
       path: 'educationManagement/:id',
-      component: educationManagement
+      component: _import('educationManagement')
     }]
   }]
 })

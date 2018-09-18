@@ -239,7 +239,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 #gallery-container{
   width: 85%;
   margin: auto;

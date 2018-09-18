@@ -13,8 +13,8 @@
       <div id="main-menu">
         <router-link to="/">
           <div class="main-menu-logo">
-            <img src="../assets/img/logo/logo.png" alt="">
-            <img src="../assets/img/logo/学院.png" alt="">
+            <img src="@img/logo/logo.png" alt="">
+            <img src="@img/logo/学院.png" alt="">
           </div>
         </router-link>
         <div class="main-menu-bar">
@@ -23,7 +23,7 @@
               <iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=34&icon=1&num=3"></iframe>
             </div>
             <ul>
-              <li><i class="iconfont icon-scan"></i><img src="../assets/img/scan/scan-code.jpg"  alt=""></li>
+              <li><i class="iconfont icon-scan"></i><img src="@img/scan/scan-code.jpg"  alt=""></li>
               <li><a href="#" target="_blank"><i class="iconfont icon-email"></i></a></li>
               <li><a href="http://10.5.1.246:8080/clock/" target="_blank"><i class="iconfont icon-alarm"></i></a></li>
               <li><i class="iconfont icon-search" @click="showSearch"></i></li>
@@ -35,7 +35,7 @@
                 <router-link :to="item.path" tag="a">{{item.menuItem}}<i v-if="item.subMenuItem" class="iconfont icon-down"></i></router-link>
                 <div class="second-nav-menu" v-if="item.subMenuItem">
                   <div class="second-nav-menu-left">
-                    <img src="../assets/img/220.jpg" alt="">
+                    <img src="@img/220.jpg" alt="">
                     <div>
                       <h3>链接简介</h3>
                       <p></p>
@@ -57,7 +57,7 @@
         </div>
       </div>
       <el-carousel trigger="click" indicator-position="inside">
-        <el-carousel-item v-for="(errand,index) in errands" :key="index" v-bind:style="{backgroundImage: errand.backgroundUrl}">
+        <el-carousel-item v-for="(errand,index) in errands" :key="index" v-bind:style="{backgroundImage: 'url(' + errand.backgroundUrl + ')'}">
             <div class="errands-introduction">
               <h3>{{errand.title}}</h3>
               <p>{{errand.introduction}}</p>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import $ from '../assets/jquery-vender'
+import $ from '@assets/jquery-vender'
 import '@css/header/main-menu.css'
 import '@css/header/header-carousel.css'
 import '@css/header/quotes.css'

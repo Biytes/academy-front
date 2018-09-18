@@ -146,7 +146,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 .teacher-quotes{
   width:60%;
   margin: 0 auto;

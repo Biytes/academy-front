@@ -18,27 +18,27 @@ const state = {
       {
         title: 'First Panel',
         introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-        backgroundUrl: 'url(' + require('@img/school/学院风景-14.jpg') + ')'
+        backgroundUrl: require('@img/school/学院风景-14.jpg')
       },
       {
         title: 'Second Panel',
         introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-        backgroundUrl: 'url(' + require('@img/school/图书馆-1.jpg') + ')'
+        backgroundUrl: require('@img/school/图书馆-1.jpg')
       },
       {
         title: 'Third Panel',
         introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-        backgroundUrl: 'url(' + require('@img/school/文科楼.jpg') + ')'
+        backgroundUrl: require('@img/school/文科楼.jpg')
       },
       {
         title: 'Fourth Panel',
         introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-        backgroundUrl: 'url(' + require('@img/school/学院小景-1.jpg') + ')'
+        backgroundUrl: require('@img/school/学院小景-1.jpg')
       },
       {
         title: 'Fifth Panel',
         introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-        backgroundUrl: 'url(' + require('@img/school/学院日落景.jpg') + ' )'
+        backgroundUrl: require('@img/school/学院日落景.jpg')
       }
     ],
     headerMenuItem: [

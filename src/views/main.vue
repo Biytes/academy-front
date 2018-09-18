@@ -453,11 +453,12 @@ export default {
 }
 </script>
 
-<style>
-/*teacher*/
-section.campus-event{
-  margin-top: 30px;
+<style lang="css" scoped>
+
+section.campus-event {
+  padding-top: 15px;
 }
+/*teacher*/
 section.campus-teacher{
   display: block;
   overflow-x: hidden;

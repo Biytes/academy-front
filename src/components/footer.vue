@@ -1,5 +1,5 @@
 <template lang="html">
-  <footer>
+  <footer v-bind:style="{backgroundImage: 'url(' + footerBackgroundImg + ')'}">
     <div id="wrapper-footer">
       <div class="wrapper-footer-top">
         <div class="footer-top-left">
@@ -13,13 +13,13 @@
           </ul>
         </div>
         <div class="footer-top-right">
-          <img src="../assets/img/logo/logo.png" alt="">
-          <img src="../assets/img/logo/学院.png" alt="">
+          <img src="@img/logo/logo.png" alt="">
+          <img src="@img/logo/学院.png" alt="">
         </div>
       </div>
       <div class="wrapper-footer-bottom">
         <div class="footer-bottom-left">
-          <h4>Copyright @2018华南理工大学广州学院 计算机工程学院</h4>
+          <h4>Copyright <a href="../../Backstage/dist/index.html">@</a> 2018华南理工大学广州学院 计算机工程学院</h4>
         </div>
         <div class="footer-bottom-right">
           <ul>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import $ from '../assets/jquery-vender'
+import $ from '@assets/jquery-vender'
 export default {
   data () {
     return {
@@ -60,7 +60,8 @@ export default {
           departmentName: [{Name: '教育部'}, {Name: '广东省教育厅'}, {Name: '华南理工大学'}, {Name: '华南师范大学'}, {Name: '暨南大学'}],
           isClass: false
         }
-      ]
+      ],
+      footerBackgroundImg: require('@img/background/footerBackground.jpg')
     }
   },
   mounted () {
@@ -93,11 +94,9 @@ export default {
 
 <style>
 footer {
-  background: url('../assets/img/background/footerBackground.jpg');
   background-size: cover;
   color: #D4D2D2;
   height: 300px;
-  margin-top: 50px;
 }
 #wrapper-footer {
   height: 100%;
@@ -154,6 +153,13 @@ footer {
   margin:13px 5px;
 }
 
+.footer-bottom-left a:first-child {
+  color: inherit;
+}
+
+.footer-bottom-left a:first-child:hover {
+  color: #333;
+}
 .footer-bottom-right {
   float: right;
   padding: 0 20px;
@@ -175,6 +181,7 @@ footer {
   line-height: 24px;
   margin-left: 5px;
   position: absolute;
+  transition: 0.33s all;
 }
 
 .icon-transform{
