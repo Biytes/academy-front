@@ -7,7 +7,6 @@ import ElementUI from 'element-ui'
 import 'babel-polyfill'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
-import '@assets/icon/iconfont.css'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
