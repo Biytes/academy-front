@@ -188,7 +188,6 @@
 </template>
 
 <script type="text/javascript">
-import $ from '@assets/jquery-vender'
 import '@css/custom/campusNews.css'
 import '@css/main/campusHighlight.css'
 import '@css/main/majorSet.css'
@@ -453,8 +452,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-
+<style lang="scss" scoped>
 section.campus-event {
   padding-top: 15px;
 }

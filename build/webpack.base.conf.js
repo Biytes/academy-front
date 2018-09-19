@@ -39,7 +39,9 @@ module.exports = {
       '@static': resolve('../static'),
       '@assets': resolve('src/assets'),
       '@css': resolve('static/css'),
-      '@img': resolve('src/assets/img')
+      '@img': resolve('src/assets/img'),
+      '@store': resolve('src/store'),
+      '@router': resolve('src/router')
     }
   },
   module: {
@@ -70,6 +72,10 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,

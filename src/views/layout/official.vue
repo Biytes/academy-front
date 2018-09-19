@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import HeaderComponent from '@/components/header.vue'
-import FooterComponent from '@/components/footer.vue'
-import scrollHeader from '@/components/scrollHeader.vue'
-import imgShowcase from '@/components/showImg.vue'
+import HeaderComponent from '@views/layout/header.vue'
+import FooterComponent from '@views/layout/footer.vue'
+import scrollHeader from '@views/layout/scrollHeader.vue'
+import imgShowcase from '@views/layout/showImg.vue'
 export default {
   components: {
     HeaderComponent,

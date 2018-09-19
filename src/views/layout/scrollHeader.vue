@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div class="scroll-header">
-      <router-link to="/"><img src="../assets/img/logo/学院.png" alt=""></router-link>
+      <router-link to="/"><img src="@img/logo/学院.png" alt=""></router-link>
       <ul class="scroll-menu">
         <li v-for="(item, scroll) in scrollHeaderData" :key="scroll"><a @click="switchNav(item.path)">{{item.menuItem}}</a></li>
         <div class="scroll-sub-menu">
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import $ from '../assets/jquery-vender'
 export default {
   created () {
 
@@ -121,7 +120,7 @@ export default {
   transition: all 0.45s; */
 }
 .scroll-header .scroll-menu > li:hover {
-  background: url("../assets/img/scrollMenu.svg");
+  background: url("../../assets/img/scrollMenu.svg");
   -webkit-animation: line 1s;
           animation: line 1s;
 }

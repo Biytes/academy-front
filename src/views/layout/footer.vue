@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import $ from '@assets/jquery-vender'
 export default {
   data () {
     return {

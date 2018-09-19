@@ -79,7 +79,6 @@
 </template>
 
 <script>
-import $ from '@assets/jquery-vender'
 import '@css/header/main-menu.css'
 import '@css/header/header-carousel.css'
 import '@css/header/quotes.css'
