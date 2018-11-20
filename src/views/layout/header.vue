@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import '@css/header/searchPage.css'
 
 export default {
   data () {
@@ -152,4 +151,5 @@ export default {
 @import '@css/header/quotes.scss';
 @import '@css/header/main-menu.scss';
 @import '@css/header/header-carousel.scss';
+@import '@css/header/searchPage.scss';
 </style>
