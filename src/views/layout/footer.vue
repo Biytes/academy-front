@@ -1,11 +1,10 @@
 <template lang="html">
-  <footer v-bind:style="{backgroundImage: 'url(' + footerBackgroundImg + ')'}">
-    <div id="wrapper-footer">
+  <footer :style="{backgroundImage: 'url(' + footerBackgroundImg + ')'}" class="footer-container" @click="resetSelectForm">
+    <div class="wrapper-footer">
       <div class="wrapper-footer-top">
         <div class="footer-top-left">
           <ul>
-            <li>
-              <h3>Contact Us</h3></li>
+            <li><h3>Contact Us</h3></li>
             <li>地址：广州市花都区新华街道学府路一号</li>
             <li>邮编：510800</li>
             <li>电话：020-36903155(学院办公室)</li>
@@ -18,20 +17,25 @@
         </div>
       </div>
       <div class="wrapper-footer-bottom">
-        <div class="footer-bottom-left">
-          <h4>Copyright <a href="../../Backstage/dist/index.html">@</a> 2018华南理工大学广州学院 计算机工程学院</h4>
-        </div>
-        <div class="footer-bottom-right">
-          <ul>
-            <li v-for="(department,index) in departments" :key="index" >{{department.triggerName}}<i class="iconfont icon-down-copy"></i>
-              <div class="select-form" v-bind:class="{'second-select-form':department.isClass}">
-                <ul>
-                  <li v-for="(Item,index) in department.departmentName" :key="index"><a href="#">{{Item.Name}}</a></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <el-row>
+          <el-col :span="12" align="left" class="footer-bottom-left">
+            <h4>Copyright <a href="../../Backstage/dist/index.html">@</a> 2018华南理工大学广州学院 计算机工程学院</h4>
+          </el-col>
+          <el-col :span="12" align="right" class="footer-bottom-right">
+            <ul>
+              <li v-for="(department, index) in departments"
+                  :key="index"
+                  @click.stop="switchSelectForm(index)">{{ department.triggerName }}
+                  <i :class="[currSelectForm === index ? 'icon-transform' : '', 'iconfont' ,'icon-down-copy']"></i>
+                <div :class="[index === 1 ? 'second-select-form' : '', 'select-form']" v-show="currSelectForm === index">
+                  <ul>
+                    <li v-for="(Item,index) in department.departmentName" :key="index"><a href="#">{{Item.Name}}</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </el-col>
+        </el-row>
       </div>
     </div>
   </footer>
@@ -60,224 +64,299 @@ export default {
           isClass: false
         }
       ],
+      currSelectForm: null,
       footerBackgroundImg: require('@img/background/footerBackground.jpg')
     }
   },
   mounted () {
-    $('.footer-bottom-right ul li').on('click', function () {
-      $('.footer-bottom-right ul li').children('i').removeClass('icon-transform')
-      $(this).children('i').addClass('icon-transform')
-      $('.footer-bottom-right ul li').children('.select-form').hide()
-      $(this).children('.select-form').show()
-      if (event.stopPropagation) {
-        // 针对 Mozilla 和 Opera
-        event.stopPropagation()
-      } else if (window.event) {
-        // 针对 IE
-        window.event.cancelBubble = true
-      }
-    })
-    $(window).on('click', function () {
-      $('.footer-bottom-right ul li').children('.select-form').hide()
-      if (event.stopPropagation) {
-        // 针对 Mozilla 和 Opera
-        event.stopPropagation()
-      } else if (window.event) {
-        // 针对 IE
-        window.event.cancelBubble = true
-      }
-    })
+  },
+  methods: {
+    switchSelectForm (index) {
+      this.currSelectForm = index
+    },
+    resetSelectForm () {
+      this.currSelectForm = null
+    }
   }
 }
 </script>
 
-<style>
-footer {
+<style lang="scss">
+.footer-container {
   background-size: cover;
   color: #D4D2D2;
   height: 300px;
-}
-#wrapper-footer {
-  height: 100%;
-  width: 75%;
-  margin: 0 auto;
-  position:relative;
-}
+  .wrapper-footer {
+    height: 100%;
+    width: 75%;
+    margin: 0 auto;
+    position:relative;
 
-.wrapper-footer-top {
-  height: 75%;
-  width: 100%;
-  position: absolute;
-  top: 10px;
-}
-.wrapper-footer-top h3{
-  margin:15px 0;
-}
-.wrapper-footer-bottom {
-  position: absolute;
-  height: 20%;
-  width: 100%;
-  bottom: 0px;
-  border-top: 3px solid rgb(96, 96, 96);
-}
-.footer-top-left {
-  padding: 0 20px;
-  width: auto;
-  float: left;
-  /* border:2px solid rgb(80, 81, 184); */
-  border-radius: 4px;
-}
+    &-top {
+      height: 75%;
+      width: 100%;
+      position: absolute;
+      top: 10px;
+      h3 {
+        margin:15px 0;
+      }
+    }
 
-.footer-top-left li:first-child ~ li{
-  padding: 7px;
-}
+    &-bottom {
+      position: absolute;
+      height: 20%;
+      width: 100%;
+      bottom: 0px;
+      border-top: 3px solid rgb(96, 96, 96);
+    }
 
-.footer-top-right {
-  float: right;
-  padding: 20px;
-  width: auto;
-}
-.footer-top-right img {
-  display: block;
-  width:306.6px;
-  height:88.175px;
-}
-.footer-bottom-left {
-  padding: 0 20px;
-  width: auto;
-  float: left;
-}
+    .footer-top {
+      &-left {
+        padding: 0 20px;
+        float: left;
+        /* border:2px solid rgb(80, 81, 184); */
+        border-radius: 4px;
 
-.footer-bottom-left h4{
-  margin:13px 5px;
-}
+        li:first-child ~ li {
+          padding: 7px;
+        }
+      }
 
-.footer-bottom-left a:first-child {
-  color: inherit;
-}
+      &-right {
+        float: right;
+        padding: 20px;
 
-.footer-bottom-left a:first-child:hover {
-  color: #333;
-}
-.footer-bottom-right {
-  float: right;
-  padding: 0 20px;
-  width: auto;
-}
-.footer-bottom-right > ul > li{
-  position: relative;
-  float:right;
-  padding: 14px 20px 12px;
-  cursor: pointer
-}
+        img {
+          display: block;
+          width:306.6px;
+          height:88.175px;
+        }
+      }
+    }
 
-.footer-bottom-right > ul > li:hover{
-  color: rgb(59, 82, 240);
-}
-.footer-bottom-right > ul > li i{
-  vertical-align: middle;
-  font-size: 18px;
-  line-height: 24px;
-  margin-left: 5px;
-  position: absolute;
-  transition: 0.33s all;
-}
+    .footer-bottom {
+      &-left {
+        padding: 0 20px;
+        h4 {
+          margin:13px 5px;
+        }
+        a:first-child {
+          color: inherit;
+          &:hover {
+            color: #333;
+          }
+        }
+      }
 
-.icon-transform{
-  transform: rotate(180deg);
-  margin-top: -2px;
-  transform-origin: center;
-}
+      &-right {
+        padding: 0 20px;
+        & > ul {
+          & > li {
+            display: inline-block;
+            position: relative;
+            padding: 14px 20px 12px;
+            cursor: pointer;
 
-.select-form{
-  position: absolute;
-  height:auto;
-  width:250px;
-  padding: 15px;
-  background-color: rgba(34, 34, 34, 0.76);
-  border-radius: 8px;
-  color:#fff;
-  display: none;
-  line-height: 25px;
-  bottom: 53px;
-  left: -50px;
-  z-index: 50;
-  transition: 0.33s all;
-  box-shadow: 0 0 8px #DDD;
-}
+            &:hover{
+              color: rgb(59, 82, 240);
+            }
 
-.second-select-form::-webkit-scrollbar {
-    width: 3px;
-    height: 8px;
-    background-color: #655d5d;
-}
+            i {
+              vertical-align: middle;
+              font-size: 18px;
+              line-height: 24px;
+              margin-left: 5px;
+              display: inline-block;
+              transition: all 0.33s;
+              &.icon-transform {
+                transform: rotate(180deg);
+                margin-top: -2px;
+                transform-origin: center;
+              }
+            }
 
-.second-select-form::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: #f4f4f4;
-}
+            .select-form{
+              position: absolute;
+              height:auto;
+              width:250px;
+              padding: 15px;
+              background-color: rgba(34, 34, 34, 0.76);
+              border-radius: 8px;
+              color:#fff;
+              line-height: 25px;
+              bottom: 53px;
+              right: -30px;
+              transition: all 0.33s;
+              box-shadow: 0 0 8px #DDD;
+              ul {
+                list-style: none;
+                padding:0;
+                width:94%;
+                margin: auto;
+                li {
+                  display: inline-block;
+                  text-align: left;
+                  width:50%;
+                  line-height: 25px;
+                  &:hover {
+                    a{
+                      background-color:#3355ff;
+                    }
+                  }
+                  a {
+                    display: block;
+                    padding:4px;
+                    text-decoration: none;
+                    color:#ddd;
+                    transition: all 0.33s;
+                  }
+                }
+              }
+            }
 
-.second-select-form::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-    background-color: #655d5d;
-}
-.second-select-form{
-  width:400px;
-  height:auto;
-}
-.select-form  ul{
-    list-style: none;
-    padding:0;
-    width:94%;
-    margin: auto;
-}
-.select-form  li{
-    display: inline-block;
-    width:50%;
-    line-height: 25px;
-    float:left;
-}
-.select-form  a{
-    display: block;
-    padding:4px;
-    text-decoration: none;
-    color:#ddd;
-    transition: 0.33s all;
-}
-.select-form  li:hover a{
-  background-color:#3355ff;
-}
-/*responsive 1366*/
-@media (min-width: 1200px) and (max-width: 1366px) {
-  footer{
-      height: 250px;
-  }
-  .footer-top-left{
-    font-size: 15px;
-  }
-  .wrapper-footer-top h3{
-    margin: 9px 0;
-  }
-  .footer-top-left li:first-child ~ li{
-    padding:5px;
-  }
-  .footer-top-right{
-    padding: 22px 20px;
-  }
-  .footer-top-right img{
-    width: 259.6px;
-    height: 69.175px;
-  }
-  .wrapper-footer-bottom{
-    font-size: 13px;
-  }
-  .footer-bottom-left h4{
-    color:#7e7e84;
-  }
-  .select-form{
-    bottom: 37px;
+            .select-form.second-select-form {
+              width:400px;
+              height:auto;
+              &::-webkit-scrollbar {
+                width: 3px;
+                height: 8px;
+                background-color: #655d5d;
+              }
+              &::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+                border-radius: 10px;
+                background-color: #f4f4f4;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+                box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+                background-color: #655d5d;
+              }
+            }
+            .second-select-form::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+                box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+                background-color: #655d5d;
+            }
+          }
+        }
+      }
+    }
   }
 }
+
+/* Extra Large Devices, Wide Screens */
+@media only screen and (max-width : 1400px) {
+  .footer-container {
+    height: 250px;
+    .wrapper-footer {
+
+      &-top {
+        top: 5px;
+        h3 {
+          margin:10px 0;
+        }
+      }
+
+      .footer-top {
+        &-left {
+          font-size: 15px;
+          padding: 0 15px;
+          /* border:2px solid rgb(80, 81, 184); */
+
+          li:first-child ~ li {
+            padding: 6px;
+          }
+        }
+
+        &-right {
+          padding: 25px 30px;
+
+          img {
+            width:245.28px;
+            height:70.54px;
+          }
+        }
+      }
+
+      .footer-bottom {
+        &-left {
+          padding: 0 5px;
+          h4 {
+            font-size: 14px;
+            margin:13px 0px;
+          }
+        }
+
+        &-right {
+          padding: 0 5px;
+          & > ul {
+            & > li {
+              padding: 14px 10px 12px;
+              font-size: 15px;
+              i {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  .footer-container {
+    .wrapper-footer {
+      .footer-top {
+        &-left {
+          font-size: 15px;
+          /* border:2px solid rgb(80, 81, 184); */
+
+          li:first-child ~ li {
+            padding: 6px;
+          }
+        }
+      }
+
+      .footer-bottom {
+        &-left {
+          padding: 0 3px;
+          h4 {
+            font-size: 13px;
+            margin:14px 0px;
+          }
+        }
+
+        &-right {
+          & > ul {
+            & > li {
+              padding: 14px 5px 12px;
+              font-size: 14px;
+              i {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+
 </style>
