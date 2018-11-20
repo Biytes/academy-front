@@ -1,129 +1,52 @@
 <template lang="html">
   <div>
-    <section class="campus-event">
-      <div class="campus-news important">
-        <div class="panel-header">
-          <img src="@assets/icons/item.png">
-          <span class="mytitle">
-            学院要闻
-            <small>Top News</small>
-          </span>
-        </div>
-        <div class="campus-news-content">
-          <a class="img-news clearfloat" v-for="(item, index) in topNews" :key="index" v-if="index === 0">
-            <img v-if="item.imgUrl" :src="item.imgUrl" alt="">
-            <span class="img-title"><a href="">{{item.title}}</a></span>
-            <span class="img-describe">{{item.brief}}</span>
-            <span class="img-news-date">{{item.time}}</span>
-          </a>
-          <ul>
-            <el-tooltip v-for="(item, index) in topNews" :key="index" v-if="index!==0" class="item" effect="dark" :content="item.brief" placement="top-end">
-              <li :id="item.id"><a :href="item.path" >{{item.title}}</a><span class="campus-news-content-date">{{item.time}}</span></li>
-            </el-tooltip>
-          </ul>
-          <p class="campus-news-more"><a href="">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></a></p>
-        </div>
-      </div>
-      <div class="campus-news comprehensive">
-        <div class="panel-header">
-          <img src="@assets/icons/item.png">
-          <span class="mytitle">
-            综合新闻
-            <small>Academy News</small>
-          </span>
-        </div>
-        <div class="campus-news-content">
-          <ul>
-            <el-tooltip v-for="(item, index) in news" :key="index" class="item" effect="dark" :content="item.brief" placement="top-end">
-              <li :id="item.id"><a :href="item.path" >{{item.title}}</a><span class="campus-news-content-date">{{item.time}}</span></li>
-            </el-tooltip>
-          </ul>
-          <p class="campus-news-more"><a href="">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></a></p>
-        </div>
-      </div>
-      <div class="campus-news events">
-        <div class="panel-header">
-          <img src="@assets/icons/events.png">
-          <span class="mytitle">
-            最近活动
-            <small>Events</small>
-          </span>
-        </div>
-        <div class="campus-news-content">
-          <article v-for="(item, index) in events" :key="index"  :class="[ isEnd(item.endTime) ? 'end-event':(isStart(item.startTime) ? 'pickup-appointment':'on-hold-arrival')]">
-            <p>
-              <span class="event-day">{{item.startTime | getDay}}</span>
-              <br>
-              <span class="event-month">{{item.startTime | getMonthEnglish}}</span>
-            </p>
-            <p>
-              <span class="event-name">{{item.title}}</span>
-              <span class="event-describe">{{item.brief}}</span>
-            </p>
-            <p></p>
-          </article>
-          <p class="campus-news-more"><a href="">更多活动<img src="@assets/icons/right-arrow.png" alt=""></a></p>
-        </div>
-      </div>
+    <section class="campus-event-row">
+      <el-row>
+        <el-col :span="8">
+          <campus-news type="important"
+                      title="学院要闻"
+                      subTitle="Top News"
+                      routeLink="sss"
+                      :newsData="topNews"></campus-news>
+        </el-col>
+        <el-col :span="8">
+          <campus-news type="comprehensive"
+                      title="综合新闻"
+                      subTitle="Academy News"
+                      routeLink="sss"
+                      :newsData="news"></campus-news>
+        </el-col>
+        <el-col :span="8">
+          <campus-event :events="events"
+                        title="最近活动"
+                        subTitle="events"></campus-event>
+        </el-col>
+      </el-row>
     </section>
-    <section class="campus-event">
-      <div class="campus-news important">
-        <div class="panel-header">
-          <img src="@assets/icons/item.png">
-          <span class="mytitle">
-            教学管理
-            <small>Education</small>
-          </span>
-        </div>
-        <div class="campus-news-content">
-          <a class="img-news clearfloat" v-for="(item, index) in educationManagement" :key="index" v-if="index ===0">
-            <img v-if="item.imgUrl" :src="item.imgUrl" alt="">
-            <span class="img-title"><a href="">{{item.title}}</a></span>
-            <span class="img-describe">{{item.brief}}</span>
-            <span class="img-news-date">{{item.time}}</span>
-          </a>
-          <ul>
-            <el-tooltip v-for="(item, index) in educationManagement" :key="index" v-if="index!==0" class="item" effect="dark" :content="news.brief" placement="top-end">
-              <li :id="item.id"><a :href="item.path" >{{item.title}}</a><span class="campus-news-content-date">{{item.time}}</span></li>
-            </el-tooltip>
-          </ul>
-          <p class="campus-news-more"><a href="">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></a></p>
-        </div>
-      </div>
-      <div class="campus-news comprehensive">
-        <div class="panel-header">
-          <img src="@assets/icons/item.png">
-          <span class="mytitle">
-            学生工作
-            <small>Student Work</small>
-          </span>
-        </div>
-        <div class="campus-news-content">
-          <ul>
-            <el-tooltip v-for="(item, index) in studentWork" :key="index" class="item" effect="dark" :content="news.brief" placement="top-end">
-              <li :id="item.id"><a :href="item.path" >{{item.title}}</a><span class="campus-news-content-date">{{item.time}}</span></li>
-            </el-tooltip>
-          </ul>
-          <p class="campus-news-more"><a href="">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></a></p>
-        </div>
-      </div>
-      <div class="campus-news">
-          <div class="panel-header">
-            <img src="@assets/icons/item.png">
-            <span class="mytitle">
-              招生就业
-              <small>Recruit</small>
-            </span>
-          </div>
-          <div class="campus-news-content">
-            <ul>
-              <el-tooltip v-for="(item, index) in recruitInfo" :key="index" class="item" effect="dark" :content="news.brief" placement="top-end">
-                <li :id="item.id"><a :href="item.path" >{{item.title}}</a><span class="campus-news-content-date">{{item.time}}</span></li>
-              </el-tooltip>
-            </ul>
-            <p class="campus-news-more"><a href="">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></a></p>
-          </div>
-      </div>
+    <section class="campus-event-row">
+      <el-row>
+        <el-col :span="8">
+          <campus-news type="important"
+                       title="教学管理"
+                       subTitle="Education"
+                       routeLink="sss"
+                       :newsData="educationManagement"></campus-news>
+        </el-col>
+        <el-col :span="8">
+          <campus-news type="comprehensive"
+                       title="学生工作"
+                       subTitle="Student Work"
+                       routeLink="sss"
+                       :newsData="studentWork"></campus-news>
+        </el-col>
+        <el-col :span="8">
+          <campus-news type=" "
+                       title="招生就业"
+                       subTitle="Recruit"
+                       routeLink="sss"
+                       :newsData="recruitInfo"></campus-news>
+        </el-col>
+      </el-row>
     </section>
     <section class="campus-teacher">
       <div class="campus-teacher-inner">
@@ -188,7 +111,6 @@
 </template>
 
 <script type="text/javascript">
-import '@css/custom/campusNews.css'
 import '@css/main/campusHighlight.css'
 import '@css/main/majorSet.css'
 import '@css/main/teacherCarousel.css'
@@ -341,22 +263,11 @@ export default {
       item: state => state.testData.article,
       topNews: state => state.testData.topNews.slice(0, 6),
       news: state => state.testData.news.slice(0, 9),
-      events: state => state.testData.events.slice(0, 4),
+      events: state => state.testData.events,
       educationManagement: state => state.testData.educationManagement.slice(0, 6),
       studentWork: state => state.testData.studentWork.slice(0, 9),
       recruitInfo: state => state.testData.recruitInfo.slice(0, 9)
     })
-  },
-  filters: {
-    getDay: (val) => {
-      let day = new Date(val).getDate()
-      return day
-    },
-    getMonthEnglish: (val) => {
-      let monthArray = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      let month = new Date(val).getMonth()
-      return monthArray[month]
-    }
   },
   mounted () {
     // campus-highlight
@@ -427,25 +338,6 @@ export default {
     }
   },
   methods: {
-    isEnd: (val) => {
-      let now = new Date().getTime() // 现在的时间
-      let end = new Date(val).getTime() // 事件结束的时间
-      if (now - end > 0) { // 现在的时间大于结束的时间
-        return true // isEnd true 已经结束了
-      } else {
-        return false // isEnd false 还没结束
-      }
-    },
-    isStart: (val) => {
-      let now = new Date().getTime() // 现在的时间
-      let start = new Date(val).getTime() // 事件开始的时间
-      if (now > start) {
-        return true // 已经开始 添加 class: pick-up-appointment
-      } else {
-        // 最好在做一个判断7天之内开始的
-        return false // 还没开始 添加 class: on-hold-arrival
-      }
-    },
     testIndex: (index) => {
     }
   }
@@ -453,8 +345,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section.campus-event {
-  padding-top: 15px;
+
+section.campus-event-row {
+  display: block;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 30px 10px 0;
 }
 /*teacher*/
 section.campus-teacher{

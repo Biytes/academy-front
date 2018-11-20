@@ -134,13 +134,13 @@ footer {
 
 .footer-top-right {
   float: right;
-  padding: 0 20px;
+  padding: 20px;
   width: auto;
 }
 .footer-top-right img {
   display: block;
-  width:336.6px;
-  height:98.175px;
+  width:306.6px;
+  height:88.175px;
 }
 .footer-bottom-left {
   padding: 0 20px;
@@ -202,6 +202,7 @@ footer {
   bottom: 53px;
   left: -50px;
   z-index: 50;
+  transition: 0.33s all;
   box-shadow: 0 0 8px #DDD;
 }
 
@@ -243,6 +244,7 @@ footer {
     padding:4px;
     text-decoration: none;
     color:#ddd;
+    transition: 0.33s all;
 }
 .select-form  li:hover a{
   background-color:#3355ff;

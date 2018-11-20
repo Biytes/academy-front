@@ -17,7 +17,7 @@ export default {
       },
       {
         title: 'Second Panel',
-        introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
+        introduction: '当天傍晚17时许，杭玉泉派出所接了群众的一通报警：在玉古路一座大厦楼下，一个七岁女孩，找不到家。白文雨迅速出警到达现场。路边站着一个穿粉白相间棉袄的小姑娘，背着粉色的小书包，梳着一头马尾辫，很是可爱。',
         backgroundUrl: require('@img/school/图书馆-1.jpg')
       },
       {
@@ -366,8 +366,8 @@ export default {
       {
         title: '模拟ACM程序设计大赛通知',
         brief: '为培养和激励我校写程解决问题的能力',
-        startTime: 'Mon Jul 15 2018 10:40:35 GMT+0800 (台北标准时间)',
-        endTime: 'Mon Jul 22 2018 10:40:35 GMT+0800 (台北标准时间)',
+        startTime: 'Mon Oct 15 2018 10:40:35 GMT+0800 (台北标准时间)',
+        endTime: 'Mon Dec 22 2018 10:40:35 GMT+0800 (台北标准时间)',
         path: ''
       },
       {
@@ -394,8 +394,8 @@ export default {
       {
         title: '模拟ACM程序设计大赛通知',
         brief: '为培养和激励我校写程解决问题的能力',
-        startTime: 'Mon Jul 05 2018 10:40:35 GMT+0800 (台北标准时间)',
-        endTime: 'Mon Jul 30 2018 10:40:35 GMT+0800 (台北标准时间)',
+        startTime: 'Mon Dec 15 2018 10:40:35 GMT+0800 (台北标准时间)',
+        endTime: 'Mon Dec 30 2018 10:40:35 GMT+0800 (台北标准时间)',
         path: ''
       }
     ],

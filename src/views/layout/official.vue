@@ -3,7 +3,7 @@
     <div>
         <imgShowcase></imgShowcase>
         <HeaderComponent></HeaderComponent>
-        <scrollHeader></scrollHeader>
+        <scrollHeader style="display: none;"></scrollHeader>
         <section id="wrapper-content">
           <router-view></router-view>
         </section>
@@ -46,7 +46,7 @@ var wrapperHeader = new Vue({
 */
 </script>
 
-<style>
+<style lang="scss">
 /*global*/
 #wrapper-content {
   height: auto;

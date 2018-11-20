@@ -1,0 +1,108 @@
+.quotes {
+  height: 13vh;
+  display: block;
+  width: 100%;
+  line-height: 20px;
+  background-color: #293D91;
+  .quotes-content {
+    width: 80%;
+    min-width: 930px;
+    margin: 0 auto;
+    .quotes-content-container {
+      padding: 15px 0 ;
+    }
+    span {
+      display: block;
+      color: #fff;
+      font-size: 20px;
+      padding: 6px;
+    }
+    &__cn {
+
+    }
+    &__en {
+      text-indent: 10px;
+    }
+    &__writer {
+      text-align: right;
+    }
+
+    &-button {
+      line-height: 13vh;
+      button {
+        background-color: grey;
+        padding: 1em 2em;
+        cursor: pointer;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 17px;
+        border: none;
+        text-transform: uppercase;
+        transition: background 0.5s;
+        &:hover {
+          background-color: #fda84b;
+        }
+      }
+    }
+  }
+}
+
+/* Extra Large Devices, Wide Screens */
+@media only screen and (max-width : 1400px) {
+  .quotes {
+    line-height: 18px;
+    .quotes-content {
+      .quotes-content-container {
+        padding: 6px 0 ;
+      }
+      span {
+        display: block;
+        color: #fff;
+        font-size: 15px;
+        padding: 2px;
+      }
+  
+      &-button {
+        button {
+          padding: 0.8em 1.6em;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  .quotes {
+    line-height: 18px;
+    .quotes-content {
+      .quotes-content-container {
+        padding: 6px 0 ;
+      }
+      span {
+        display: block;
+        color: #fff;
+        font-size: 15px;
+        padding: 2px;
+      }
+  
+      &-button {
+        button {
+          padding: 0.8em 1.4em;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+ 
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+ 
+}
