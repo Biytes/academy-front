@@ -1,5 +1,6 @@
 .quotes {
   height: 13vh;
+  min-height: 13vh;
   display: block;
   width: 100%;
   line-height: 20px;
@@ -9,13 +10,15 @@
     min-width: 930px;
     margin: 0 auto;
     .quotes-content-container {
-      padding: 15px 0 ;
+      padding: 1.4vh 0 ;
     }
     span {
       display: block;
+      white-space: nowrap;
+      height: 2vh;
       color: #fff;
-      font-size: 20px;
-      padding: 6px;
+      font-size: 19px;
+      padding: 0.7vh;
     }
     &__cn {
 
@@ -53,13 +56,11 @@
     line-height: 18px;
     .quotes-content {
       .quotes-content-container {
-        padding: 6px 0 ;
       }
       span {
         display: block;
         color: #fff;
         font-size: 15px;
-        padding: 2px;
       }
   
       &-button {
@@ -78,13 +79,11 @@
     line-height: 18px;
     .quotes-content {
       .quotes-content-container {
-        padding: 6px 0 ;
       }
       span {
         display: block;
         color: #fff;
         font-size: 15px;
-        padding: 2px;
       }
   
       &-button {

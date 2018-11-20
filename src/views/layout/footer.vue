@@ -86,6 +86,7 @@ export default {
   background-size: cover;
   color: #D4D2D2;
   height: 300px;
+  min-width: 940px;
   .wrapper-footer {
     height: 100%;
     width: 75%;
