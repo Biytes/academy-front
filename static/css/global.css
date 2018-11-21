@@ -54,3 +54,8 @@ a {
 .clearfloat {
   zoom: 1
 }
+
+.el-popup-parent--hidden {
+  padding: 0 !important;
+  overflow-y: auto !important; 
+}

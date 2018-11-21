@@ -1,3 +1,3 @@
-require('./misc')
 require('./element')
+require('./misc')
 require('./vue')

@@ -1,8 +1,5 @@
 <template lang="html">
   <div>
-    <div class="split-line">
-      <i class="fa fa-angle-down"></i>
-    </div>
     <div class="about-content">
       <aside class="content-side-bar">
         <a v-for="(nav, navIndex) in navBarTitles" :class="{current:navIndex === current}" @click="navSwitch(navIndex, nav.routerLink)" :key="navIndex">{{nav.linkTitle}}</a>
@@ -46,22 +43,22 @@ export default {
         {
           linkTitle: '党建工作',
           id: '',
-          routerLink: '/communistWork/work'
+          routerLink: '/partyNews/work'
         },
         {
           linkTitle: '机构设置',
           id: '',
-          routerLink: '/communistWork/facility'
+          routerLink: '/partyNews/facility'
         },
         {
           linkTitle: '师资队伍建设',
           id: '',
-          routerLink: '/communistWork/organization'
+          routerLink: '/partyNews/organization'
         },
         {
           linkTitle: '实验中心简介',
           id: '',
-          routerLink: '/communistWork/instruction'
+          routerLink: '/partyNews/instruction'
         }
       ],
       items: [

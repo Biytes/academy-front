@@ -1,16 +1,6 @@
 <template lang="html">
   <div>
-    <div class="split-line">
-      <i class="fa fa-angle-down"></i>
-    </div>
     <div class="about-content">
-      <aside class="content-side-bar">
-        <a v-for="(nav, navIndex) in navBarTitles" :class="{current:navIndex === current}" @click="navSwitch(navIndex, nav.routerLink)" :key="navIndex">{{nav.linkTitle}}</a>
-        <!-- <router-link to="/about" tag="a" class="current">home</router-link>
-        <router-link to="/about" tag="a">users</router-link>
-        <router-link to="/about" tag="a">sechdule</router-link>
-        <router-link to="/about" tag="a">info</router-link> -->
-      </aside>
       <div class="news-container">
         <div class="figure-container">
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
@@ -27,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div style="text-align:center;font-size:18px;margin-top:15px;">
+      <div class="pagination">
         <el-pagination
           background
           layout="prev, pager, next"
@@ -44,19 +34,20 @@ export default {
     return {
       navBarTitles: [
         {
-          linkTitle: '对外合作',
-          id: '',
-          routerLink: '/foreignCooperation/index'
+          linkTitle: '机构设置',
+          id: ''
         },
         {
-          linkTitle: '国际合作',
-          id: '',
-          routerLink: '/foreignCooperation/international'
+          linkTitle: '师资队伍建设',
+          id: ''
         },
         {
-          linkTitle: '校企合作',
-          id: '',
-          routerLink: '/foreignCooperation/enterprise'
+          linkTitle: '实验中心简介',
+          id: ''
+        },
+        {
+          linkTitle: '专业设置',
+          id: ''
         }
       ],
       items: [
@@ -98,7 +89,8 @@ export default {
           content: '2017年9月2日，延安新区党工委副书记、延安市新区管委会主任薛鹏春一行到访我校，俞峰院长在南大殿会见来访，双方就开展交流合作事宜进行了商谈。',
           href: ''
         }
-      ]
+      ],
+      pageData: []
     }
   },
   created () {
@@ -106,19 +98,12 @@ export default {
     console.log(date)
   },
   methods: {
-    // padDate (val) { // 小于10的时间 在前面加个 0
-    //   return val < 10 ? '0' + val : val
-    // },
-    navSwitch (index, routerLink) {
-      console.log(index)
-      this.$store.state.page.currentNav = index
-      this.$router.push({ path: routerLink })
-      // Swtich Data
-    }
-  },
-  computed: {
-    current () {
-      return this.$store.state.page.currentNav
+    getPageData () {
+      console.log(this.pageData)
+    },
+    getNewsInfo (id) {
+      let path = ''
+      this.$router.push({ path })
     }
   },
   filters: {
@@ -139,31 +124,21 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 
 /* External CSS */
 
 .about-content{
   position: relative;
-  margin:0 0 50px;
+  padding :0 0 50px;
+
+  .pagination {
+     text-align: center;
+     font-size: 18px;
+     margin-top: 30px;
+  }
 }
 /* Content */
 
 /* .side-barigation */
-
-@media screen and (max-width: 1000px){
-
-}
-@media (min-width: 1200px) and (max-width: 1366px) {
-  .newslist_dt li{
-    height: 69px;
-  }
-  .side-bar{
-    width: 230px;
-    left:-150px;
-  }
-  .side-bar li a{
-    font-size: 14px;
-  }
-}
 </style>

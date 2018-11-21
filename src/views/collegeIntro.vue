@@ -1,8 +1,5 @@
 <template lang="html">
   <div>
-    <div class="split-line">
-      <i class="fa fa-angle-down"></i>
-    </div>
     <div class="about-content">
       <aside class="content-side-bar">
         <a v-for="(nav, navIndex) in navBarTitles" :class="{current:navIndex === current}" @click="navSwitch(navIndex, nav.routerLink)" :key="navIndex">{{nav.linkTitle}}</a>
@@ -16,7 +13,7 @@
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
             <h3 class="news-title"><a href="">{{news.title}}</a></h3>
             <p class="news-info clearfix">
-              <span class="news-type orange"><a href="">教学管理</a></span>
+              <span class="news-type orange"><a href="">学院简介</a></span>
               <span class="news-date">{{ news.publicTime | formatDate }}</span>
               <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">12900</em></span>
             </p>
@@ -44,24 +41,29 @@ export default {
     return {
       navBarTitles: [
         {
-          linkTitle: '教学管理',
+          linkTitle: '学院简介',
           id: '',
-          routerLink: '/educationManagement/index'
+          routerLink: '/collegeIntro/brief'
         },
         {
-          linkTitle: '教学文件',
+          linkTitle: '机构设置',
           id: '',
-          routerLink: '/educationManagement/file'
+          routerLink: '/collegeIntro/facility'
         },
         {
-          linkTitle: '资源下载',
+          linkTitle: '师资队伍建设',
           id: '',
-          routerLink: '/educationManagement/download'
+          routerLink: '/collegeIntro/teacher'
         },
         {
-          linkTitle: '实验中心',
+          linkTitle: '实验中心简介',
           id: '',
-          routerLink: '/educationManagement/lab'
+          routerLink: '/collegeIntro/lab'
+        },
+        {
+          linkTitle: '专业设置',
+          id: '',
+          routerLink: '/collegeIntro/major'
         }
       ],
       items: [
@@ -107,8 +109,6 @@ export default {
     }
   },
   created () {
-    var date = new Date()
-    console.log(date)
   },
   methods: {
     // padDate (val) { // 小于10的时间 在前面加个 0

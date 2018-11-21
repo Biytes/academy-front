@@ -1,39 +1,36 @@
 <template lang="html">
-  <div>
-    <div class="scroll-header">
-      <router-link to="/"><img src="@img/logo/学院.png" alt=""></router-link>
-      <ul class="scroll-menu">
-        <li v-for="(item, scroll) in scrollHeaderData" :key="scroll"><a @click="switchNav(item.path)">{{item.menuItem}}</a></li>
-        <div class="scroll-sub-menu">
-          <ul class="sub-menu">
-            <li v-for="(parent, sup) in scrollHeaderData" :key="sup" class="sub-menu-list">
-              <ul>
-                <li v-for="(subItem, sub) in parent.subMenuItem" :key="sub"><a @click="switchNav(subItem.path, sub)">{{subItem.menuItem}}</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </ul>
-    </div>
+  <div :class="[isShowScrollHeader ? 'show-scroll-header' : '', 'scroll-header']">
+    <el-row>
+      <el-col :span="3" align="left" class="scroll-header-logo">
+        <router-link to="/" tag="a"><img src="@img/logo/学院.png" alt=""></router-link>
+      </el-col>
+      <el-col :span="21"
+              align="right">
+        <ul class="scroll-menu">
+          <li v-for="(item, scroll) in scrollHeaderData" :key="scroll"><a @click="switchNav(item.path)">{{item.menuItem}}</a></li>
+          <div class="scroll-sub-menu">
+            <ul class="sub-menu">
+              <li v-for="(parent, sup) in scrollHeaderData" :key="sup" class="sub-menu-list">
+                <ul>
+                  <li v-for="(subItem, sub) in parent.subMenuItem" :key="sub"><a @click="switchNav(subItem.path, sub)">{{subItem.menuItem}}</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
-  created () {
-
-  },
   mounted () {
-    $(window).scroll(function () {
-      if ($(window).scrollTop() > 600) {
-        $('.scroll-header').addClass('show-scroll-header')
-      } else {
-        $('.scroll-header').removeClass('show-scroll-header')
-      }
-    })
+    window.addEventListener('scroll', this.handleScroll)
   },
   data () {
     return {
+      isShowScrollHeader: false
     }
   },
   computed: {
@@ -42,6 +39,11 @@ export default {
     }
   },
   methods: {
+    handleScroll () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      let targetScrollTop = 0.95 * document.documentElement.clientHeight - 10
+      this.isShowScrollHeader = scrollTop >= targetScrollTop
+    },
     switchNav (routerLink, sub) {
       this.$store.state.page.currentNav = 0
       if (sub !== undefined) { // 判断sub是否存在
@@ -60,112 +62,131 @@ export default {
 }
 </script>
 
-<style lang="css">
-.scroll-header {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
+<style lang="scss" scoped>
 
-.scroll-header *,
-.scroll-header *:before,
-.scroll-header *:after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit;
-  padding: 0;
-  margin: 0;
-  letter-spacing: 1.1px;
-}
-.scroll-header img{
-  width: 204px;
-  height: 59.5px;
-  cursor: pointer;
-}
-.scroll-header{
-  width: 100%;
-  background: rgb(53, 89, 198);
-  height:65px;
+.scroll-header {
+  z-index: 10;
   position: fixed;
   top: 0;
-  z-index: 10;
-  transform: translateY(-70px);
-  /* transition: all 400ms; */
-}
-.scroll-header .scroll-menu {
-  width: 60%;
-  float: right;
-  height: 65px;
-  list-style: none;
-  padding-top: 10px;
-  position: relative;
-}
-.scroll-header .scroll-menu:hover .scroll-sub-menu{
-  display: block;
-}
-.scroll-header .scroll-menu > li {
-  width: 100px;
-  height: 100%;
-  cursor: pointer;
-  line-height: 40px;
-  /* -webkit-transition: background-position-x 0.9s linear;
-  transition: background-position-x 0.9s linear; */
-  text-align: center;
-  display: inline-block;
-}
-.scroll-header .scroll-menu > li > a {
-  font-size: 18px;
-  font-weight: bold;
-  color: #e4e0dc;
-  text-decoration: none;
-  /* -webkit-transition: all 0.45s;
-  transition: all 0.45s; */
-}
-.scroll-header .scroll-menu > li:hover {
-  background: url("../../assets/img/scrollMenu.svg");
-  -webkit-animation: line 1s;
-          animation: line 1s;
-}
-.scroll-header .scroll-menu > li:hover > a {
-  color: #dea066;
-}
-.scroll-sub-menu{
-  width:calc(100% - 32px);
-  height:255px;
-  right: 50px;
-  background-color: rgba(28, 30, 241, 1);
-  position: absolute;
-  display: none;
-  top:65px;
-  z-index: 10;
-  padding: 10px 20px;
-}
-.scroll-sub-menu .sub-menu{
-  width:100%;
-  height:100%;
-}
-.scroll-sub-menu .sub-menu .sub-menu-list{
-  display: inline-block;
-  height: 210px;
-  width: 100px;
-  vertical-align:top;
-}
-.scroll-sub-menu .sub-menu .sub-menu-list ul{
   width: 100%;
-  height:100%;
+  min-width: 992px;
+  height:65px;
+  background: rgb(53, 89, 198);
+  transition: transform 0.66s;
+  transform: rotateX(90deg);
+  transform-origin: 0% 0%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  &.show-scroll-header {
+    transform: rotate(0deg);
+  }
+
+  *,
+  *::before,
+  *:after {
+    padding: 0;
+    margin: 0;
+    letter-spacing: 1.1px;
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+  }
+
+  .scroll-header-logo {
+    a {
+      display: block;
+      img{
+        width: 204px;
+        height: 59.5px;
+        cursor: pointer;
+      }
+    }
+  }
+
+   .scroll-menu {
+    position: relative;
+    padding: 10px;
+    height: 65px;
+    margin-right: 60px;
+    list-style: none;
+
+    &:hover {
+      .scroll-sub-menu{
+        display: block;
+      }
+    }
+
+    & > li {
+      display: inline-block;
+      width: 100px;
+      height: 100%;
+      line-height: 40px;
+      cursor: pointer;
+      text-align: center;
+      -webkit-transition: background-position-x 0.9s linear;
+      transition: background-position-x 0.9s linear;
+
+      &:hover {
+        background: url("../../assets/img/scrollMenu.svg");
+        // -webkit-animation: line 1s;
+        //         animation: line 1s;
+        & > a {
+          color: #dea066;
+        }
+      }
+      & > a {
+        font-size: 18px;
+        font-weight: bold;
+        color: #e4e0dc;
+        text-decoration: none;
+        -webkit-transition: all 0.45s;
+        transition: all 0.45s;
+      }
+    }
+
+    .scroll-sub-menu {
+      z-index: 10;
+      position: absolute;
+      right: 0px;
+      top:65px;
+      display: none;
+      width: auto;
+      padding: 10px;
+      height:255px;
+      background-color: rgba(53, 89, 198, 0.95);
+      .sub-menu{
+        width:100%;
+        height:100%;
+        .sub-menu-list{
+          display: inline-block;
+          height: 210px;
+          width: 100px;
+          vertical-align:top;
+          ul {
+            width: 100%;
+            height:100%;
+            li {
+              padding: 6px 7px;
+              text-align: center;
+              cursor: pointer;
+              /* transition: background 1s; */
+
+              &:hover {
+                background-color: rgb(55, 103, 249);
+              }
+              a {
+                font-size: 17px;
+                color: #fff;
+                transition: all 1s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
-.scroll-sub-menu .sub-menu .sub-menu-list ul li{
-  padding: 6px 7px;
-  text-align: center;
-  cursor: pointer;
-  /* transition: background 1s; */
-}
-.scroll-sub-menu .sub-menu .sub-menu-list ul li a{
-  font-size: 17px;
-  color: #dea066;
-  /* transition: all 1s; */
-}
-.scroll-sub-menu .sub-menu .sub-menu-list ul li:hover{
-  background-color: rgb(55, 103, 249);
-}
+
 /* @-webkit-keyframes line {
   0% {
     background-position-x: 390px;
@@ -177,63 +198,113 @@ export default {
     background-position-x: 390px;
   }
 } */
-.show-scroll-header{
-  transform: translateY(0px);
+
+/* Extra Large Devices, Wide Screens */
+@media only screen and (max-width : 1400px) {
+  .scroll-header {
+    height:55px;
+
+    .scroll-header-logo {
+      a {
+        img{
+          width: 174.2px;
+          height: 52.6px;
+        }
+      }
+    }
+
+    .scroll-menu {
+      padding: 10px;
+      height: 55px;
+      margin-right: 60px;
+      list-style: none;
+
+      &:hover {
+        .scroll-sub-menu{
+          display: block;
+        }
+      }
+
+      & > li {
+        line-height: 35px;
+        width: 80px;
+        & > a {
+          font-size: 16px;
+          font-weight: bold;
+          color: #e4e0dc;
+          text-decoration: none;
+          -webkit-transition: all 0.45s;
+          transition: all 0.45s;
+        }
+      }
+
+      .scroll-sub-menu {
+        top:55px;
+        padding: 10px;
+        height:220px;
+        .sub-menu{
+          .sub-menu-list{
+            height: 210px;
+            width: 80px;
+            ul {
+              li {
+                padding: 4px 6px;
+                a {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
-@media (min-width: 1367px) and (max-width: 1630px) {
-  .scroll-header .scroll-menu > li{
-    width: 90px;
-  }
-  .scroll-sub-menu{
-    right: 50px;
-  }
-  .scroll-sub-menu .sub-menu .sub-menu-list{
-    width: 90px;
-  }
-  .scroll-header .scroll-menu:hover .scroll-sub-menu{
-    min-width: 860px;
-    right: 30px;
-  }
-}
-@media (min-width: 1200px) and (max-width: 1366px) {
-  .scroll-header .scroll-menu{
-    height: 60px;
-    padding-top: 8px;
-  }
-  .content-side-bar{
-    width: 14%;
-    padding: 15px 0 15px 0;
-    margin-left: 45px;
-  }
-  .news-container{
-    width: 800px;
-  }
-  .scroll-header{
-    height: 60px;
-  }
-  .scroll-sub-menu{
-    top:60px;
-    height: 220px;
-    padding: 10px 0px 10px 10px;
-  }
-  .scroll-header .scroll-menu:hover .scroll-sub-menu{
-    min-width: 743px;
-    right: 10px;
-  }
-  .scroll-header .scroll-menu > li{
-    width: 75px;
-  }
-  .scroll-sub-menu .sub-menu .sub-menu-list{
-    width: 75px;
-  }
-  .scroll-header .scroll-menu > li > a{
-    font-size: 15px;
-  }
-  .scroll-sub-menu .sub-menu .sub-menu-list ul li{
-    padding: 3px 5px;
-  }
-  .scroll-sub-menu .sub-menu .sub-menu-list ul li a{
-    font-size: 15px;
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+  .scroll-header {
+
+    .scroll-menu {
+      margin-right: 40px;
+      list-style: none;
+
+      & > li {
+        width: 80px;
+        & > a {
+          font-size: 16px;
+        }
+      }
+      .scroll-sub-menu {
+        padding: 8px;
+        height:210px;
+        .sub-menu{
+          .sub-menu-list{
+            height: 210px;
+            width: 80px;
+            ul {
+              li {
+                padding: 3px 6px;
+                a {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+
 </style>

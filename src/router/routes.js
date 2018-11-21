@@ -8,31 +8,49 @@ export default [{
     path: '',
     component: _import('main')
   }, {
-    path: 'about/:id',
-    component: _import('about')
+    name: 'coolegeintro',
+    title: '学院简介',
+    path: 'coolegeIntro/:category',
+    component: _import('coolegeIntro')
   }, {
-    path: 'communistWork/:id',
-    component: _import('communistWork')
+    name: 'teacherinfo',
+    title: '教师队伍',
+    path: 'teacherInfo',
+    component: _import('teacherInfo')
   }, {
-    path: 'foreignCooperation/:id',
-    component: _import('foreignCooperation')
+    name: 'collegenews',
+    title: '新闻中心',
+    path: 'collegeNews',
+    component: _import('collegeNews')
   }, {
+    name: 'gallery',
+    title: '学院相册',
     path: 'gallery',
     component: _import('gallery')
   }, {
-    path: 'news',
-    component: _import('news')
+    name: 'educationnews',
+    title: '教学管理',
+    path: 'educationNews/:category',
+    component: _import('educationNews')
   }, {
-    path: 'recruit/:id',
+    name: 'studentnews',
+    title: '学生工作',
+    path: 'studentNews/:category',
+    component: _import('studentNews')
+  }, {
+    name: 'partynews',
+    title: '党建工作',
+    path: 'partyNews/:category',
+    component: _import('partyNews')
+  }, {
+    name: 'recruit',
+    title: '招生就业',
+    path: 'recruit/:category',
     component: _import('recruit')
   }, {
-    path: 'studentWork/:id',
-    component: _import('studentWork')
-  }, {
-    path: 'teacher',
-    component: _import('teacher')
-  }, {
-    path: 'educationManagement/:id',
-    component: _import('educationManagement')
+    name: 'cooperateinfo',
+    title: '对外合作',
+    path: 'cooperateInfo/:category',
+    component: _import('cooperateInfo')
   }]
 }]

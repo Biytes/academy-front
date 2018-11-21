@@ -56,8 +56,13 @@
           </div>
         </div>
       </div>
-      <el-carousel trigger="click" indicator-position="inside" class="header-carousel">
-        <el-carousel-item v-for="(errand,index) in errands" :key="index" v-bind:style="{backgroundImage: 'url(' + errand.backgroundUrl + ')'}">
+      <el-carousel trigger="click"
+                   indicator-position="inside"
+                   class="header-carousel"
+                   :interval="10000">
+        <el-carousel-item v-for="(errand,index) in errands"
+                          :key="index"
+                          :style="{backgroundImage: 'url(' + errand.backgroundUrl + ')'}">
             <div class="errands-introduction">
               <h3>{{errand.title}}</h3>
               <p>{{errand.introduction}}</p>

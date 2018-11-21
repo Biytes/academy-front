@@ -1,8 +1,5 @@
 <template lang="html">
   <div>
-    <div class="split-line">
-      <i class="fa fa-angle-down"></i>
-    </div>
     <div class="about-content">
       <aside class="content-side-bar">
         <a v-for="(nav, navIndex) in navBarTitles" :class="{current:navIndex === current}" @click="navSwitch(navIndex, nav.routerLink)" :key="navIndex">{{nav.linkTitle}}</a>
@@ -16,7 +13,7 @@
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
             <h3 class="news-title"><a href="">{{news.title}}</a></h3>
             <p class="news-info clearfix">
-              <span class="news-type orange"><a href="">学院简介</a></span>
+              <span class="news-type orange"><a href="">教学管理</a></span>
               <span class="news-date">{{ news.publicTime | formatDate }}</span>
               <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">12900</em></span>
             </p>
@@ -44,39 +41,24 @@ export default {
     return {
       navBarTitles: [
         {
-          linkTitle: '学生工作',
+          linkTitle: '教学管理',
           id: '',
-          routerLink: '/studentWork/index'
+          routerLink: '/educationNews/index'
         },
         {
-          linkTitle: '工作动态',
+          linkTitle: '教学文件',
           id: '',
-          routerLink: '/studentWork/condition'
+          routerLink: '/educationNews/file'
         },
         {
-          linkTitle: '班团风采',
+          linkTitle: '资源下载',
           id: '',
-          routerLink: '/studentWork/moment'
+          routerLink: '/educationNews/download'
         },
         {
-          linkTitle: '新生军训',
+          linkTitle: '实验中心',
           id: '',
-          routerLink: '/studentWork/militaryTraining'
-        },
-        {
-          linkTitle: '实践创新',
-          id: '',
-          routerLink: '/studentWork/practice'
-        },
-        {
-          linkTitle: '学风建设',
-          id: '',
-          routerLink: '/studentWork/motto'
-        },
-        {
-          linkTitle: '学生荣誉',
-          id: '',
-          routerLink: '/studentWork/glory'
+          routerLink: '/educationNews/lab'
         }
       ],
       items: [

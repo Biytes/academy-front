@@ -1,8 +1,5 @@
 <template lang="html">
   <div>
-    <div class="split-line">
-      <i class="fa fa-angle-down"></i>
-    </div>
     <div class="about-content">
       <aside class="content-side-bar">
         <a v-for="(nav, navIndex) in navBarTitles" :class="{current:navIndex === current}" @click="navSwitch(navIndex, nav.routerLink)" :key="navIndex">{{nav.linkTitle}}</a>

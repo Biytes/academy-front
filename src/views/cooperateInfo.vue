@@ -1,9 +1,13 @@
 <template lang="html">
   <div>
-    <div class="split-line">
-      <i class="fa fa-angle-down"></i>
-    </div>
     <div class="about-content">
+      <aside class="content-side-bar">
+        <a v-for="(nav, navIndex) in navBarTitles" :class="{current:navIndex === current}" @click="navSwitch(navIndex, nav.routerLink)" :key="navIndex">{{nav.linkTitle}}</a>
+        <!-- <router-link to="/about" tag="a" class="current">home</router-link>
+        <router-link to="/about" tag="a">users</router-link>
+        <router-link to="/about" tag="a">sechdule</router-link>
+        <router-link to="/about" tag="a">info</router-link> -->
+      </aside>
       <div class="news-container">
         <div class="figure-container">
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
@@ -35,23 +39,21 @@
 export default {
   data () {
     return {
-      current: 0,
       navBarTitles: [
         {
-          linkTitle: '机构设置',
-          id: ''
+          linkTitle: '对外合作',
+          id: '',
+          routerLink: '/cooperateInfo/index'
         },
         {
-          linkTitle: '师资队伍建设',
-          id: ''
+          linkTitle: '国际合作',
+          id: '',
+          routerLink: '/cooperateInfo/international'
         },
         {
-          linkTitle: '实验中心简介',
-          id: ''
-        },
-        {
-          linkTitle: '专业设置',
-          id: ''
+          linkTitle: '校企合作',
+          id: '',
+          routerLink: '/cooperateInfo/enterprise'
         }
       ],
       items: [
@@ -104,10 +106,16 @@ export default {
     // padDate (val) { // 小于10的时间 在前面加个 0
     //   return val < 10 ? '0' + val : val
     // },
-    navSwitch (index) {
+    navSwitch (index, routerLink) {
       console.log(index)
-      this.current = index
+      this.$store.state.page.currentNav = index
+      this.$router.push({ path: routerLink })
       // Swtich Data
+    }
+  },
+  computed: {
+    current () {
+      return this.$store.state.page.currentNav
     }
   },
   filters: {

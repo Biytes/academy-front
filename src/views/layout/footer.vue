@@ -85,7 +85,7 @@ export default {
 .footer-container {
   background-size: cover;
   color: #D4D2D2;
-  height: 300px;
+  height: 200px;
   min-width: 940px;
   .wrapper-footer {
     height: 100%;
@@ -99,7 +99,7 @@ export default {
       position: absolute;
       top: 10px;
       h3 {
-        margin:15px 0;
+        margin:5px 0;
       }
     }
 
@@ -119,7 +119,8 @@ export default {
         border-radius: 4px;
 
         li:first-child ~ li {
-          padding: 7px;
+          padding: 3px;
+          font-size: 15px;
         }
       }
 
@@ -129,8 +130,8 @@ export default {
 
         img {
           display: block;
-          width:306.6px;
-          height:88.175px;
+          width:202.2px;
+          height:58.783px;
         }
       }
     }
@@ -139,7 +140,8 @@ export default {
       &-left {
         padding: 0 20px;
         h4 {
-          margin:13px 5px;
+          margin:9px 5px;
+          font-size: 14px;
         }
         a:first-child {
           color: inherit;
@@ -155,7 +157,8 @@ export default {
           & > li {
             display: inline-block;
             position: relative;
-            padding: 14px 20px 12px;
+            font-size: 15px;
+            padding: 8px 20px 6px;
             cursor: pointer;
 
             &:hover{
@@ -164,7 +167,7 @@ export default {
 
             i {
               vertical-align: middle;
-              font-size: 18px;
+              font-size: 16px;
               line-height: 24px;
               margin-left: 5px;
               display: inline-block;
@@ -185,7 +188,7 @@ export default {
               border-radius: 8px;
               color:#fff;
               line-height: 25px;
-              bottom: 53px;
+              bottom: 33px;
               right: -30px;
               transition: all 0.33s;
               box-shadow: 0 0 8px #DDD;
@@ -253,33 +256,17 @@ export default {
 /* Extra Large Devices, Wide Screens */
 @media only screen and (max-width : 1400px) {
   .footer-container {
-    height: 250px;
     .wrapper-footer {
-
+      width: 80%;
       &-top {
-        top: 5px;
         h3 {
-          margin:10px 0;
+          margin:5px 0;
         }
       }
-
       .footer-top {
         &-left {
-          font-size: 15px;
-          padding: 0 15px;
-          /* border:2px solid rgb(80, 81, 184); */
-
           li:first-child ~ li {
-            padding: 6px;
-          }
-        }
-
-        &-right {
-          padding: 25px 30px;
-
-          img {
-            width:245.28px;
-            height:70.54px;
+            font-size: 14px;
           }
         }
       }
@@ -288,19 +275,33 @@ export default {
         &-left {
           padding: 0 5px;
           h4 {
-            font-size: 14px;
-            margin:13px 0px;
+            margin:9px 2px;
+            font-size: 13px;
+          }
+          a:first-child {
+            color: inherit;
+            &:hover {
+              color: #333;
+            }
           }
         }
 
         &-right {
-          padding: 0 5px;
+          padding: 0 10px;
           & > ul {
             & > li {
-              padding: 14px 10px 12px;
+              display: inline-block;
+              position: relative;
               font-size: 15px;
+              padding: 8px 5px 6px;
+              cursor: pointer;
+
+              &:hover{
+                color: rgb(59, 82, 240);
+              }
+
               i {
-                font-size: 16px;
+                font-size: 15px;
               }
             }
           }
@@ -312,42 +313,6 @@ export default {
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
-  .footer-container {
-    .wrapper-footer {
-      .footer-top {
-        &-left {
-          font-size: 15px;
-          /* border:2px solid rgb(80, 81, 184); */
-
-          li:first-child ~ li {
-            padding: 6px;
-          }
-        }
-      }
-
-      .footer-bottom {
-        &-left {
-          padding: 0 3px;
-          h4 {
-            font-size: 13px;
-            margin:14px 0px;
-          }
-        }
-
-        &-right {
-          & > ul {
-            & > li {
-              padding: 14px 5px 12px;
-              font-size: 14px;
-              i {
-                font-size: 15px;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }
 
 /* Medium Devices, Desktops */

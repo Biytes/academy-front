@@ -1,8 +1,5 @@
 <template lang="html">
   <div>
-    <div class="split-line">
-      <i class="fa fa-angle-down"></i>
-    </div>
     <div class="about-content">
       <aside class="content-side-bar">
         <a v-for="(nav, navIndex) in navBarTitles" :class="{current:navIndex === current}" @click="navSwitch(navIndex, nav.routerLink)" :key="navIndex">{{nav.linkTitle}}</a>
@@ -44,29 +41,39 @@ export default {
     return {
       navBarTitles: [
         {
-          linkTitle: '学院简介',
+          linkTitle: '学生工作',
           id: '',
-          routerLink: '/about/brief'
+          routerLink: '/studentNews/index'
         },
         {
-          linkTitle: '机构设置',
+          linkTitle: '工作动态',
           id: '',
-          routerLink: '/about/facility'
+          routerLink: '/studentNews/condition'
         },
         {
-          linkTitle: '师资队伍建设',
+          linkTitle: '班团风采',
           id: '',
-          routerLink: '/about/teacher'
+          routerLink: '/studentNews/moment'
         },
         {
-          linkTitle: '实验中心简介',
+          linkTitle: '新生军训',
           id: '',
-          routerLink: '/about/lab'
+          routerLink: '/studentNews/militaryTraining'
         },
         {
-          linkTitle: '专业设置',
+          linkTitle: '实践创新',
           id: '',
-          routerLink: '/about/major'
+          routerLink: '/studentNews/practice'
+        },
+        {
+          linkTitle: '学风建设',
+          id: '',
+          routerLink: '/studentNews/motto'
+        },
+        {
+          linkTitle: '学生荣誉',
+          id: '',
+          routerLink: '/studentNews/glory'
         }
       ],
       items: [
@@ -112,6 +119,8 @@ export default {
     }
   },
   created () {
+    var date = new Date()
+    console.log(date)
   },
   methods: {
     // padDate (val) { // 小于10的时间 在前面加个 0

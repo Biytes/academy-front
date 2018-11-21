@@ -3,7 +3,7 @@
     <div>
         <imgShowcase></imgShowcase>
         <HeaderComponent></HeaderComponent>
-        <scrollHeader style="display: none;"></scrollHeader>
+        <scrollHeader></scrollHeader>
         <section id="wrapper-content">
           <router-view></router-view>
         </section>
@@ -47,12 +47,13 @@ var wrapperHeader = new Vue({
 </script>
 
 <style lang="scss">
+@import '@css/custom/newsFigure.scss';
 /*global*/
 #wrapper-content {
   height: auto;
   min-height: 1200px;
   width: 100%;
-  background: #ededed;
+  background: #f0f0f0;
 }
 /*button-animate*/
 </style>

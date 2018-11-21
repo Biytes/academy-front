@@ -40,7 +40,7 @@
                        :newsData="studentWork"></campus-news>
         </el-col>
         <el-col :span="8">
-          <campus-news type=" "
+          <campus-news type=""
                        title="招生就业"
                        subTitle="Recruit"
                        routeLink="sss"
@@ -49,69 +49,43 @@
       </el-row>
     </section>
     <section class="campus-teacher">
-      <div class="campus-teacher-inner">
-        <div class="clearfloat">
-          <div class="majorSet">
-            <div class="majorSetContent">
-              <h3 class="smallTitle">
-                <img src="@assets/icons/atom.png" width="48" height="48"  style="vertical-align:bottom" alt="">
-                <span>专业设置</span>
-                <span class="english">About Major</span>
-                <img src="@assets/icons/more.png" width="32.58" height="16.15"  style="float:right;margin-top:20px;cursor:pointer;" alt="">
-              </h3>
-              <p>We zijn een alles-in-één bureau voor online en offline communicatie. Wij gaan graag voor jouw organisatie aan de slag om samen het verschil te maken.</p>
-              <ul class="majorList">
-                <li v-for="(major, index) in majorList" :key="index" @click="testIndex(index)">
-                  <h4>{{major.name}}<i class="iconfont icon-arrowsleftline"></i></h4>
-                  <p>{{major.brief}}</p>
-                </li>
-              </ul>
-              <a href="" class="customButton blue-btn">Learn more</a>
-            </div>
-          </div>
-          <div class="teacher-carousel">
-            <h3 class="smallTitle">
-              <img src="@assets/icons/team.png" width="48" height="48" style="vertical-align:bottom" alt="">
-              <span>教师队伍</span>
-              <span class="english">Our Team</span>
-              <img src="@assets/icons/more.png" width="32.58" height="16.15"  style="float:right;margin-top:20px;cursor:pointer;" alt="">
-            </h3>
-            <el-carousel indicator-position="none">
-              <el-carousel-item v-for="(teacher,index) in teacherCarousel" :key="index
-              " v-bind:style="{backgroundImage: teacher.backgroundUrl}">
-                <div class="teacher-introduction">
-                  <h4>{{teacher.name}}</h4>
-                  <p>{{teacher.position}}</p>
-                </div>
+      <img class="bg" src="@assets/img/background/logo3.jpg" alt="">
+      <el-row class="campus-teacher-container">
+        <el-col :span="12" class="campus-teacher-carousel">
+          <div style="width: 80%;margin: 0 auto">
+            <el-carousel :interval="8000"
+                          height="350px"
+                          indicator-position="outside"
+                          trigger="click" @change="onTeacherCarouselChange">
+              <el-carousel-item v-for="teacher in teacherCarousel"
+                                :key="teacher.id"
+                                :style="{backgroundImage: teacher.backgroundUrl}">
               </el-carousel-item>
             </el-carousel>
           </div>
-        </div>
-      </div>
-    </section>
-    <section class="campus-highlight">
-      <h3 class="smallTitle"><img src="@assets/icons/yearbook.png" alt=""><span>学院风采</span><span class="english">YearBook</span> </h3>
-      <!-- <h1>Horizontal Portfolio Layout With CSS3 Animations and jQuery</h1> -->
-      <ul class="portfolio-items">
-       <li class="item" v-for="(highlight, index) in highlights" :key="index">
-         <figure>
-           <div class="view">
-             <img :src="highlight.imgUrl" />
-           </div>
-           <figcaption>
-             <p><span><a href="">{{highlight.detail}}</a></span></p>
-             <p><span>{{highlight.time}}</span></p>
-           </figcaption>
-         </figure>
-         <div class="date">{{highlight.year}}</div>
-       </li>
-     </ul>
+
+        </el-col>
+        <el-col :span="12" class="campus-teacher-info">
+          <div class="teacher-info-box">
+            <div class="teacher-header">
+              <img src="@assets/icons/events.png">
+              <span class="mytitle">
+                教师队伍
+                <small>Our Team</small>
+              </span>
+            </div>
+            <span class="spliter"></span>
+            <span class="teacher-name">{{ currTeacher.name }}</span>
+            <span class="teacher-position"> {{ currTeacher.position }}</span>
+            <p class="teacher-introduction"> {{ currTeacher.introduction }} </p>
+          </div>
+        </el-col>
+      </el-row>
     </section>
   </div>
 </template>
-
+#3559c6
 <script type="text/javascript">
-import '@css/main/campusHighlight.css'
 import '@css/main/majorSet.css'
 import '@css/main/teacherCarousel.css'
 import { mapState } from 'vuex' // 引入mapState
@@ -120,6 +94,7 @@ export default {
     return {
       teacherCarousel: [
         {
+          id: 1,
           title: 'First Panel',
           name: '李仲麟',
           position: '计算机学院顾问',
@@ -127,6 +102,7 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec1.jpg') + ')'
         },
         {
+          id: 2,
           title: 'Second Panel',
           name: '邓春晖',
           position: '计算机学院院长',
@@ -134,6 +110,7 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec2.jpg') + ')'
         },
         {
+          id: 3,
           title: 'Third Panel',
           name: '岑有文',
           position: '计算机学院副院长',
@@ -141,6 +118,7 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec3.jpg') + ')'
         },
         {
+          id: 4,
           title: 'Fourth Panel',
           name: '蔡沂',
           position: '计算机学院副院长',
@@ -148,6 +126,7 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec4.jpg') + ')'
         },
         {
+          id: 5,
           title: 'Fifth Panel',
           name: '周小明',
           position: '计算机科学与技术教研室副主任，讲师',
@@ -155,6 +134,7 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec5.jpg') + ' )'
         },
         {
+          id: 6,
           title: 'Second Panel',
           name: '邓春晖',
           position: '计算机学院院长',
@@ -162,6 +142,7 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec2.jpg') + ')'
         },
         {
+          id: 7,
           title: 'Third Panel',
           name: '岑有文',
           position: '计算机学院副院长',
@@ -169,6 +150,7 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec3.jpg') + ')'
         },
         {
+          id: 8,
           title: 'Fourth Panel',
           name: '蔡沂',
           position: '计算机学院副院长',
@@ -176,6 +158,47 @@ export default {
           backgroundUrl: 'url(' + require('@img/teacher/tec4.jpg') + ')'
         },
         {
+          id: 9,
+          title: 'Fifth Panel',
+          name: '周小明',
+          position: '计算机科学与技术教研室副主任，讲师',
+          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
+          backgroundUrl: 'url(' + require('@img/teacher/tec5.jpg') + ' )'
+        },
+        {
+          id: 10,
+          title: 'Fifth Panel',
+          name: '周小明',
+          position: '计算机科学与技术教研室副主任，讲师',
+          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
+          backgroundUrl: 'url(' + require('@img/teacher/tec5.jpg') + ' )'
+        },
+        {
+          id: 11,
+          title: 'Second Panel',
+          name: '邓春晖',
+          position: '计算机学院院长',
+          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
+          backgroundUrl: 'url(' + require('@img/teacher/tec2.jpg') + ')'
+        },
+        {
+          id: 12,
+          title: 'Third Panel',
+          name: '岑有文',
+          position: '计算机学院副院长',
+          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
+          backgroundUrl: 'url(' + require('@img/teacher/tec3.jpg') + ')'
+        },
+        {
+          id: 13,
+          title: 'Fourth Panel',
+          name: '蔡沂',
+          position: '计算机学院副院长',
+          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
+          backgroundUrl: 'url(' + require('@img/teacher/tec4.jpg') + ')'
+        },
+        {
+          id: 14,
           title: 'Fifth Panel',
           name: '周小明',
           position: '计算机科学与技术教研室副主任，讲师',
@@ -250,7 +273,8 @@ export default {
           time: 'time',
           year: 'year'
         }
-      ]
+      ],
+      currTeacher: {}
     }
   },
   computed: {
@@ -270,204 +294,44 @@ export default {
     })
   },
   mounted () {
-    // campus-highlight
-    var $window = $(window)
-
-    $.fn.isVisible = function () {
-      var $this = $(this)
-      var Left = $this.offset().left
-      var visibleWidth = $window.width()
-
-      return Left < visibleWidth
-    }
-    var list = $('.portfolio-items')
-    var showVisibleItems = function () {
-      list.children('.item:not(.falldown)').each(function (el, i) {
-        var $this = $(this)
-        if ($this.isVisible()) {
-          $this.addClass('falldown')
-        }
-      })
-    }
-    // initially show all visible items before any scroll starts
-    showVisibleItems()
-
-    // then on scroll check for visible items and show them
-    list.scroll(function () {
-      showVisibleItems()
-    })
-    // image hover pan effect
-    list.on('mousemove', 'img', function (ev) {
-      var $this = $(this)
-      var posX = ev.pageX
-      var posY = ev.pageY
-      var data = $this.data('cache')
-      // cache necessary variables
-      if (!data) {
-        data = {}
-        data.marginTop = -parseInt($this.css('top'))
-        data.marginLeft = -parseInt($this.css('left'))
-        data.parent = $this.parent('.view')
-        $this.data('cache', data)
-      }
-
-      var originX = data.parent.offset().left
-      var originY = data.parent.offset().top
-
-      // move image
-      $this.css({
-        'left': -(posX - originX) / data.marginLeft,
-        'top': -(posY - originY) / data.marginTop
-      })
-    })
-    list.on('mouseleave', '.item', function (e) {
-      $(this).find('img').css({
-        'left': '0',
-        'top': '0'
-      })
-    })
-  },
-  watch: {
-    showBar (value) {
-      /* global */
-      if (value) {
-        $('body').on('touchmove', function (event) {}, false)
-      } else {
-        $('body').off('touchmove')
-      }
-    }
   },
   methods: {
-    testIndex: (index) => {
+    onTeacherCarouselChange (index) {
+      // 返回的是index 索引
+      this.currTeacher = this.teacherCarousel[index]
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '@css/main/campus-teacher.scss';
 
-section.campus-event-row {
+section{
   display: block;
-  width: 1200px;
+  min-width: 1200px;
   margin: 0 auto;
   padding: 30px 10px 0;
 }
-/*teacher*/
-section.campus-teacher{
-  display: block;
-  overflow-x: hidden;
-  padding: 45px 12px 0;
-  background-color: #e8e7e7;
-  margin-top: 20px;
-}
-.campus-teacher-inner{
-  position: relative;
+
+.campus-event-row {
   width: 1200px;
-  margin: 0 auto;
-}
-.campus-teacher-inner > div{
-  margin-left:-50px;
-  margin-bottom: 0;
-}
-.campus-teacher-inner > div > *{
-  padding-left: 48px;
-}
-.campus-teacher-inner > div > *{
-  float: left;
-}
-h3.smallTitle{
-  font-family: "soleil","Helvetica Neue",Helvetica,Arial,sans-serif;
-  margin: 0 0 20px;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 25px;
-  line-height: 48px;
-  color:#000;
-}
-h3.smallTitle span{
-  display:inline-block;
-  line-height:48px;
-  margin-left:5px;
-  border-bottom:4px solid rgb(51, 115, 231);
-  padding-right: 10px
-}
-h3.smallTitle > span.english{
-  font-size: 18px;
-  border: none;
-  margin-left: 15px;
-  padding-left: 10px;
-  color:#c4c4c4;
-  border-left: 1px solid #dfdfdf;
 }
 
-@media screen and (max-width: 650px) {
-  .campus-work-inner label {
-    font-size: 0;
+.campus-teacher {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  // background: url('../assets/img/background/dark_wall.png');
+  background: #f0f0f0;
+  .el-carousel__indicators--outside {
+    margin-top: 15px;
   }
-
-  .campus-work-inner label:before {
-    margin: 0;
-    font-size: 18px;
-  }
-}
-@media screen and (max-width: 400px) {
-  .campus-work-inner label {
-    padding: 15px;
-  }
-}
-@media (min-width: 1200px) and (max-width: 1366px) {
-  .campus-highlight{
-    width: 90%;
-  }
-  .campus-highlight .item{
-    margin:100px 20px 0;
-  }
-  .campus-highlight .item:nth-child(even){
-    margin-top: 50px;
-  }
-  .campus-highlight .portfolio-items{
-    height: 350px;
-  }
-  .campus-highlight .item{
-    width: 254px;
-  }
-  .campus-highlight .smallTitle img{
-    margin-left: 20px;
-    vertical-align: bottom;
-  }
-  section.campus-teacher{
-    padding: 30px 12px 0;
-  }
-  .campus-teacher-inner{
-    width: 1100px;
-  }
-  .majorSet{
-    width: 50%;
-  }
-  h3.smallTitle{
-    font-size: 21px;
-    margin: 0px 0 15px;
-  }
-  h3.smallTitle > span.english{
-    font-size: 18px;
-  }
-  .majorSetContent{
-    padding: 24px 40px 50px 0
-  }
-  .majorList li p{
-    font-size: 12px;
-  }
-  .majorSetContent > p{
-    font-size: 15px;
-  }
-  .el-carousel__container{
-    height: 380px;
-  }
-  .campus-teacher .el-carousel{
-    margin-top: 39px;
-  }
-  .split-line{
-    margin-top: 22px;
+  img.bg {
+    position: absolute;
+    right: 200px;
+    height: 500px;
+    display: none;
   }
 }
 </style>

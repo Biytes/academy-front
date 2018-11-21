@@ -40,47 +40,47 @@ export default {
       {
         menuItem: '学院简介',
         hasSubMenu: true,
-        path: '/about/brief',
+        path: '/coolegeIntro/brief',
         subMenuItem: [
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '学院简介',
-            path: '/about/brief',
+            path: '/coolegeIntro/brief',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '机构设置',
-            path: '/about/facility',
+            path: '/coolegeIntro/facility',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '师资建设',
-            path: '/about/teacher',
+            path: '/coolegeIntro/teacher',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '专业设置',
-            path: '/about/major',
+            path: '/coolegeIntro/major',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '实验中心',
-            path: '/about/lab',
+            path: '/coolegeIntro/lab',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           }
         ]
       },
       {
         menuItem: '教师队伍',
-        path: '/teacher'
+        path: '/teacherInfo'
       },
       {
         menuItem: '新闻中心',
-        path: '/news'
+        path: '/collegeNews'
       },
       {
         menuItem: '学院相册',
@@ -88,108 +88,108 @@ export default {
       },
       {
         menuItem: '教学管理',
-        path: '/educationManagement/index',
+        path: '/educationNews/index',
         subMenuItem: [
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '教学管理',
-            path: '/educationManagement/index',
+            path: '/educationNews/index',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '教学文件',
-            path: '/educationManagement/file',
+            path: '/educationNews/file',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '资源下载',
-            path: '/educationManagement/download',
+            path: '/educationNews/download',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '实验中心',
-            path: '/educationManagement/lab',
+            path: '/educationNews/lab',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           }
         ]
       },
       {
         menuItem: '学生工作',
-        path: '/studentWork/index',
+        path: '/studentNews/index',
         subMenuItem: [
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '学生工作',
-            path: '/studentWork/index',
+            path: '/studentNews/index',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '工作动态',
-            path: '/studentWork/condition',
+            path: '/studentNews/condition',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '班团风采',
-            path: '/studentWork/moment',
+            path: '/studentNews/moment',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '新生军训',
-            path: '/studentWork/militaryTraining',
+            path: '/studentNews/militaryTraining',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '实践创新',
-            path: '/studentWork/practice',
+            path: '/studentNews/practice',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '学风建设',
-            path: '/studentWork/motto',
+            path: '/studentNews/motto',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '学生荣誉',
-            path: '/studentWork/glory',
+            path: '/studentNews/glory',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           }
         ]
       },
       {
         menuItem: '党建工作',
-        path: '/communistWork/work',
+        path: '/partyNews/work',
         subMenuItem: [
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '党建工作',
-            path: '/communistWork/work',
+            path: '/partyNews/work',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '机构设置',
-            path: '/communistWork/facility',
+            path: '/partyNews/facility',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '组织生活',
-            path: '/communistWork/organization',
+            path: '/partyNews/organization',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '入党指导',
-            path: '/communistWork/instruction',
+            path: '/partyNews/instruction',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           }
         ]
@@ -226,24 +226,24 @@ export default {
       },
       {
         menuItem: '对外合作',
-        path: '/foreignCooperation/index',
+        path: '/cooperateInfo/index',
         subMenuItem: [
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '对外合作',
-            path: '/foreignCooperation/index',
+            path: '/cooperateInfo/index',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '国际合作',
-            path: '/foreignCooperation/international',
+            path: '/cooperateInfo/international',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/school/学院日落景.jpg'),
             menuItem: '校企合作',
-            path: '/foreignCooperation/enterprise',
+            path: '/cooperateInfo/enterprise',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           }
         ]
