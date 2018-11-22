@@ -76,6 +76,8 @@ export const scrollTo = id => {
 
 export const dateFormatter = (value, format) => {
   // 使用 {{ date | date 'yyyy-MM-dd hh:mm:ss' }}
+
+  value = new Date(value)
   var o = {
     'M+': value.getMonth() + 1, // 月份
     'd+': value.getDate(), // 日

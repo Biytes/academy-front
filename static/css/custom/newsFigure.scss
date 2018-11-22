@@ -1,116 +1,116 @@
 
 .news-container{
-    width: 1000px;
-    margin: 0 auto;
+  width: 1200px;
+  margin: 0 auto;
+  .figure-container {
+    padding-top: 15px;
+    .news-figure {
+
+      padding: 10px 40px;
+      width: 800px;
+      margin:0 auto;
+
+      &:hover {
+        box-shadow:0 0 8px rgba(0,0,0,0.4);
+      }
+      p {
+        margin: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .news-title {
+        margin: 10px 0;
+        a {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: #000;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .news-info {
+        line-height: 28px;
+        color: #a4a4a4;
+        span {
+          display: inline-block;
+        }
+        .news-type {
+          padding: 0 8px;
+          border-radius: 3px;
+          font-size: 16px;
+          margin-right: 18px;
+          color: #fff;
+          &.orange {
+            background: #e9614d;
+          }
+          &:hover {
+            a {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .news-date {
+          font-size: 16px;
+          margin-right: 14px;
+        }
+
+        .news-read {
+          position: relative;
+          padding-left: 25px;
+          font-size: 14px;
+          i {
+            vertical-align: bottom;
+            line-height: 30px;
+            font-size: 18px;
+          }
+        }
+      }
+
+      .news-img{
+        margin-top: 5px;
+        img {
+          height: 300px;
+        }
+      }
+
+      .simple-brief {
+        font-size: 14px;
+        margin: 0;
+        line-height: 24px;
+        font-weight: 400;
+        word-wrap: break-word;
+        margin-top: 5px;
+        color:#7e7e84;
+      }
+    }
+  }
 }
-.news-container .figure-container{
-  padding-top: 15px;
-}
-.news-figure p{
-  margin: 0;
-}
-.news-figure a{
-  text-decoration: none;
-}
-.news-figure{
-  padding: 10px 40px;
-  width: 800px;
-  margin:0 auto;
-}
-.news-figure:hover{
-  box-shadow:0 0 8px rgba(0,0,0,0.4);
-}
-.news-figure .news-title{
-  margin: 10px 0;
-}
-.news-figure .news-title a{
-  display: block;
-  position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #000;
-}
-.news-figure .news-title a:hover{
-  text-decoration: underline;
-}
-.news-figure .news-info{
-  line-height: 28px;
-  color: #a4a4a4;
-}
-.news-figure .news-info span{
-  display: inline-block;
-}
-.news-figure .news-info .news-type{
-  padding: 0 8px;
-  border-radius: 3px;
-  font-size: 16px;
-  margin-right: 18px;
-}
-.news-figure .news-info .news-type a{
-  color: #fff;
-}
-.news-figure .news-info .news-type:hover a{
-  text-decoration: underline;
-}
-.news-figure .news-info .news-type.orange{
-  background: #e9614d;
-}
-.news-figure .news-info .news-date{
-  font-size: 16px;
-  margin-right: 14px;
-}
-.news-figure .news-info .news-read{
-  position: relative;
-  padding-left: 25px;
-  font-size: 14px;
-}
-.news-figure .news-info .news-read i{
-  vertical-align: bottom;
-  line-height: 30px;
-  font-size: 18px;
-}
-.news-figure .news-img{
-  margin-top: 5px;
-}
-.news-img img{
-  height: 300px;
-}
-.news-figure .news-info .news-read .views-time{
+
+/* Extra Large Devices, Wide Screens */
+@media only screen and (max-width : 1400px) {
 
 }
-.news-figure .simple-brief{
-  font-size: 14px;
-  margin: 0;
-  line-height: 24px;
-  font-weight: 400;
-  word-wrap: break-word;
-  margin-top: 5px;
-  color:#7e7e84;
-}
-.clearfix{
-  zoom:1;
-}
 
-@media screen and (max-width: 1000px){
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
 
 }
-@media (min-width: 1200px) and (max-width: 1366px) {
-  .news-figure{
-    padding: 10px 20px;
-    width: 650px;
-  }
-  .news-img img{
-    width: 533.58px;
-    height: 213.435px;
-  }
-  .news-figure .news-title{
-    font-size: 17px;
-  }
-  .news-figure .news-info .news-type{
-    font-size: 14px;
-  }
-  .news-figure .simple-brief{
-    font-size: 13px;
-  }
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+ 
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+ 
 }

@@ -1,0 +1,33 @@
+.content-side-bar{
+  background-color: inherit;
+  position: absolute;
+  top: 26px;
+  padding: 10px 0;
+  & > li {
+    cursor: pointer;
+  }
+  a {
+    display: block;
+    line-height: 40px;
+    color: black;
+    border-right: 4px solid transparent;
+    cursor: pointer;
+    padding: 0 0 0 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 15px;
+
+    &.current {
+      background: rgba(9, 9, 9, 0.82);
+      border-right-color: #fdcc1c;
+      color: white;
+    }
+
+    &:hover{
+      background: rgba(9, 9, 9, 0.82);
+      border-right-color: #fdcc1c;
+      color: white;
+    }
+  }
+}

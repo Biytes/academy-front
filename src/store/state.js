@@ -40,36 +40,36 @@ export default {
       {
         menuItem: '学院简介',
         hasSubMenu: true,
-        path: '/coolegeIntro/brief',
+        path: '/collegeIntro/brief',
         subMenuItem: [
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '学院简介',
-            path: '/coolegeIntro/brief',
+            path: '/collegeIntro/brief',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '机构设置',
-            path: '/coolegeIntro/facility',
+            path: '/collegeIntro/facility',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '师资建设',
-            path: '/coolegeIntro/teacher',
+            path: '/collegeIntro/teacher',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '专业设置',
-            path: '/coolegeIntro/major',
+            path: '/collegeIntro/major',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           },
           {
             imgUrl: require('@img/220.jpg'),
             menuItem: '实验中心',
-            path: '/coolegeIntro/lab',
+            path: '/collegeIntro/lab',
             brief: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis adipisci consequuntur dolores impedit nam pariatur magni est quo cumque dignissimos.'
           }
         ]

@@ -8,10 +8,10 @@ export default [{
     path: '',
     component: _import('main')
   }, {
-    name: 'coolegeintro',
+    name: 'collegeintro',
     title: '学院简介',
-    path: 'coolegeIntro/:category',
-    component: _import('coolegeIntro')
+    path: 'collegeIntro/:category',
+    component: _import('collegeIntro')
   }, {
     name: 'teacherinfo',
     title: '教师队伍',

@@ -48,6 +48,8 @@ var wrapperHeader = new Vue({
 
 <style lang="scss">
 @import '@css/custom/newsFigure.scss';
+@import '@css/global.scss';
+@import '@css/custom/side-bar.scss';
 /*global*/
 #wrapper-content {
   height: auto;

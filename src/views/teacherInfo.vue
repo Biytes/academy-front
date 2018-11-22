@@ -61,6 +61,7 @@ export default {
 <style lang="scss" scoped>
 .teacher-container {
   width: 80%;
+  min-width: 900px;
   margin: 0 auto;
   .teacher-quotes {
     width: 60%;
@@ -91,6 +92,10 @@ export default {
         width: 200px;
         height: 200px;
         cursor: pointer;
+        transition: transform 0.33s;
+        &:hover {
+          transform: scale(1.2);
+        }
       }
     }
   }
