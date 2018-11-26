@@ -1,5 +1,5 @@
 <template lang="html">
-  <footer :style="{backgroundImage: 'url(' + footerBackgroundImg + ')'}" class="footer-container" @click="resetSelectForm">
+  <footer :style="{background: 'url(' + footerBackgroundImg + ') no-repeat top right'}" class="footer-container" @click="resetSelectForm">
     <div class="wrapper-footer">
       <div class="wrapper-footer-top">
         <div class="footer-top-left">

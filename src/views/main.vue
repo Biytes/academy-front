@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div class="main-page">
     <section class="campus-event-row">
       <el-row>
         <el-col :span="8">
@@ -84,7 +84,6 @@
     </section>
   </div>
 </template>
-#3559c6
 <script type="text/javascript">
 import '@css/main/majorSet.css'
 import '@css/main/teacherCarousel.css'
@@ -306,24 +305,21 @@ export default {
 
 <style lang="scss" scoped>
 @import '@css/main/campus-teacher.scss';
-
 section{
   display: block;
   min-width: 1200px;
   margin: 0 auto;
-  padding: 30px 10px 0;
+  padding: 30px 10px;
 }
 
-.campus-event-row {
+.campus-event-row > .el-row {
   width: 1200px;
+  margin: 0 auto;
 }
 
 .campus-teacher {
   width: 100%;
-  height: 500px;
   position: relative;
-  // background: url('../assets/img/background/dark_wall.png');
-  background: #f0f0f0;
   .el-carousel__indicators--outside {
     margin-top: 15px;
   }

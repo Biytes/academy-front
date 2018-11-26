@@ -6,6 +6,9 @@
         <scrollHeader></scrollHeader>
         <section id="wrapper-content">
           <router-view></router-view>
+          <img class="school-logo"
+               src="../../assets/img/logo/logo0.png"
+               alt="">
         </section>
         <FooterComponent></FooterComponent>
     </div>
@@ -55,7 +58,15 @@ var wrapperHeader = new Vue({
   height: auto;
   min-height: 1200px;
   width: 100%;
-  background: #f0f0f0;
+  position: relative;
+  img.school-logo {
+    position: absolute;
+    bottom: 200px;
+    right: 100px;
+    width: 600px;
+    opacity: 0.1;
+    z-index: -1;
+  }
 }
 /*button-animate*/
 </style>

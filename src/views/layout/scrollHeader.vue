@@ -1,13 +1,13 @@
 <template lang="html">
   <div :class="[isShowScrollHeader ? 'show-scroll-header' : '', 'scroll-header']">
-    <el-row>
-      <el-col :span="3" align="left" class="scroll-header-logo">
+    <el-row class="scroll-header-container">
+      <el-col :span="5" align="left" class="scroll-header-logo">
         <router-link to="/" tag="a"><img src="@img/logo/学院.png" alt=""></router-link>
       </el-col>
-      <el-col :span="21"
+      <el-col :span="19"
               align="right">
         <ul class="scroll-menu">
-          <li v-for="(item, scroll) in scrollHeaderData" :key="scroll"><a @click="switchNav(item.path)">{{item.menuItem}}</a></li>
+          <li v-for="(item, scroll) in scrollHeaderData" :key="scroll" :class="{ 'current-page': currentPageSup === scroll }"><a @click.stop="switchCurrentPageSup(item.path, scroll)">{{item.menuItem}}</a></li>
           <div class="scroll-sub-menu">
             <ul class="sub-menu">
               <li v-for="(parent, sup) in scrollHeaderData" :key="sup" class="sub-menu-list">
@@ -18,12 +18,15 @@
             </ul>
           </div>
         </ul>
+        <!-- TODO: menu按钮 -->
+        <!-- <i class="iconfont icon-menu"></i> -->
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
@@ -34,6 +37,9 @@ export default {
     }
   },
   computed: {
+    currentPageSup () {
+      return this.$store.state.page.currentPageSup
+    },
     scrollHeaderData () {
       return this.$store.state.testData.headerMenuItem
     }
@@ -43,6 +49,10 @@ export default {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       let targetScrollTop = 0.95 * document.documentElement.clientHeight - 10
       this.isShowScrollHeader = scrollTop >= targetScrollTop
+    },
+    switchCurrentPageSup (routerLink, index) {
+      this.$store.state.page.currentPageSup = index
+      this.$router.push({ path: routerLink })
     },
     switchNav (routerLink, sub) {
       this.$store.state.page.currentNav = 0
@@ -71,7 +81,7 @@ export default {
   width: 100%;
   min-width: 992px;
   height:65px;
-  background: rgb(53, 89, 198);
+  background: rgba(53, 89, 198, 1);
   transition: transform 0.66s;
   transform: rotateX(90deg);
   transform-origin: 0% 0%;
@@ -92,6 +102,10 @@ export default {
     box-sizing: inherit;
   }
 
+  .scroll-header-container {
+    margin: 0 auto;
+    width: 1200px;
+  }
   .scroll-header-logo {
     a {
       display: block;
@@ -103,11 +117,10 @@ export default {
     }
   }
 
-   .scroll-menu {
+  .scroll-menu {
     position: relative;
     padding: 10px;
     height: 65px;
-    margin-right: 60px;
     list-style: none;
 
     &:hover {
@@ -135,12 +148,18 @@ export default {
         }
       }
       & > a {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: bold;
         color: #e4e0dc;
         text-decoration: none;
         -webkit-transition: all 0.45s;
         transition: all 0.45s;
+      }
+    }
+
+    & > li.current-page {
+      & > a {
+        color: #dea066;
       }
     }
 
@@ -153,7 +172,7 @@ export default {
       width: auto;
       padding: 10px;
       height:255px;
-      background-color: rgba(53, 89, 198, 0.95);
+      background-color: rgba(53, 89, 198, 1);
       .sub-menu{
         width:100%;
         height:100%;
@@ -172,7 +191,7 @@ export default {
               /* transition: background 1s; */
 
               &:hover {
-                background-color: rgb(55, 103, 249);
+                background-color: rgba(53, 89, 198, 1);
               }
               a {
                 font-size: 17px;

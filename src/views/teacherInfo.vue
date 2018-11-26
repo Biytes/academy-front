@@ -8,11 +8,11 @@
       <div class="teacher"
            v-for="(teacher, index) in showTeachers"
            :key="index">
-
-        <img class="teacher-image"
-             :src="teacher.imgUrl"
-             alt=""
-             @click="showDialog(index)">
+           <div class="teacher-image">
+              <img :src="teacher.imgUrl"
+                  alt=""
+                  @click="showDialog(index)">
+           </div>
         <span class="teacher-name">{{ teacher.name }}</span>
       </div>
     </div>
@@ -92,9 +92,14 @@ export default {
         width: 200px;
         height: 200px;
         cursor: pointer;
-        transition: transform 0.33s;
-        &:hover {
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          transition: transform 0.33s;
+          &:hover {
           transform: scale(1.2);
+        }
         }
       }
     }

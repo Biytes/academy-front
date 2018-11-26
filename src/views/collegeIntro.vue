@@ -2,22 +2,16 @@
   <div>
     <div class="about-content page-container">
       <aside class="content-side-bar">
-        <a v-for="(nav, navIndex) in navBarTitles" 
-           :class="{current:navIndex === current}" 
-           @click="navSwitch(navIndex, nav.routerLink)" 
-           :key="navIndex">
-          {{nav.linkTitle}}</a>
-        <!-- <router-link to="/about" tag="a" class="current">home</router-link>
-        <router-link to="/about" tag="a">users</router-link>
-        <router-link to="/about" tag="a">sechdule</router-link>
-        <router-link to="/about" tag="a">info</router-link> -->
+        <a v-for="(nav, navIndex) in navBarTitles"
+           :class="{current:navIndex === current}"
+           @click="navSwitch(navIndex, nav.routerLink)"
+           :key="navIndex"><i class="iconfont icon-triangle-arrow-r"></i>{{nav.linkTitle}}</a>
       </aside>
       <div class="news-container">
         <div class="figure-container">
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
             <h3 class="news-title"><a href="">{{news.title}}</a></h3>
             <p class="news-info clearfix">
-              <span class="news-type orange"><a href="">{{ title }}</a></span>
               <span class="news-date">{{ news.publicTime | formatDate }}</span>
               <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">12900</em></span>
             </p>
