@@ -1,11 +1,12 @@
 <template lang="html">
-  <div class="img-page" v-show="imgPage">
-    <img :src="currentImg" alt="">
-    <div class="block" @click="hideImgPage()"></div>
+  <div class="img-page" v-show="imagePage.isShow">
+    <img :src="imagePage.currentImg" alt="">
+    <div class="block" @click="hideImagePage"></div>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -13,17 +14,14 @@ export default {
     }
   },
   computed: {
-    currentImg () {
-      return this.$store.state.imgPage.currentImg
-    },
-    imgPage () {
-      return this.$store.state.imgPage.isShow
-    }
+    ...mapState([
+      'imagePage'
+    ])
   },
   methods: {
-    hideImgPage () {
-      this.$store.state.imgPage.isShow = false
-    }
+    ...mapMutations([
+      'hideImagePage'
+    ])
   }
 }
 </script>
@@ -41,8 +39,9 @@ export default {
   width:450px;
   margin: 0 auto;
   position: fixed;
+  left: 50%;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
 }
 .img-page .block{
   z-index: -1;

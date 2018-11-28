@@ -18,7 +18,7 @@
     </div>
 
     <el-dialog
-      title="提示"
+      :title="teacherName"
       :visible.sync="isDialogDisplay"
       width="30%">
       <div v-html="dialogContent"></div>
@@ -30,25 +30,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  created () {
+  mounted () {
+    this.section = this.$route.name
   },
   data () {
     return {
       isDialogDisplay: false,
-      dialogContent: '暂无信息',
-      currTeacher: {
-
-      }
+      dialogContent: '',
+      currTeacher: {},
+      teacherName: ''
     }
   },
   computed: {
-    headmasters () {
-      return this.$store.state.testData.teachers.slice(0, 4)
-    },
-    showTeachers () {
-      return this.$store.state.testData.teachers.slice(3)
-    }
+    ...mapState({
+      headermasters: state => state.teacehrs.slice(0, 4),
+      showTeachers: state => state.testData.teachers.slice(3)
+    })
   },
   methods: {
     showDialog (index) {

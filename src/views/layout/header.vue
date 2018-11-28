@@ -26,27 +26,30 @@
               <li><i class="iconfont icon-scan"></i><img src="@img/scan/scan-code.jpg"  alt=""></li>
               <li><a href="#" target="_blank"><i class="iconfont icon-email"></i></a></li>
               <li><a href="http://10.5.1.246:8080/clock/" target="_blank"><i class="iconfont icon-alarm"></i></a></li>
-              <li><i class="iconfont icon-search" @click="showSearch"></i></li>
+              <li><i class="iconfont icon-search" @click="searchBar = true"></i></li>
             </ul>
           </div>
           <div class="main-menu-bottom">
             <ul>
-              <li v-for="(item, supIndex) in headerMenuItem" :key="supIndex" @click="changeTab(supIndex)" :class="{'current-page': currentPageSup == supIndex}">
-                <router-link :to="item.path" tag="a">{{item.menuItem}}<i v-if="item.subMenuItem" class="iconfont icon-down"></i></router-link>
-                <div class="second-nav-menu" v-if="item.subMenuItem">
-                  <div class="second-nav-menu-left">
+              <li v-for="(sectionItem, sectionIndex) in headerMenuItem"
+                  :key="sectionIndex" @click.stop="changePage(sectionIndex)"
+                  :class="{'current-page': currentSection.index === sectionIndex}">
+                <router-link :to="sectionItem.path" tag="a">{{ sectionItem.menuItem }}<i v-if="sectionItem.subMenuItem" class="iconfont icon-down"></i></router-link>
+                <div class="second-nav-menu" v-if="sectionItem.subMenuItem">
+                  <!-- <div class="second-nav-menu-left">
                     <img src="@img/220.jpg" alt="">
                     <div>
                       <h3>链接简介</h3>
                       <p></p>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="second-nav-menu-right">
-                    <h3>Program</h3>
+                    <!-- <h3>{{ item.menuItem }}</h3> -->
                     <ul>
-                      <li v-for="(subItem, subIndex) in item.subMenuItem" :key="subIndex" @click="changeTab(supIndex, subIndex)">
-                        <router-link :to="subItem.path" tag="a">{{subItem.menuItem}}</router-link><i class="iconfont icon-search"></i>
-                        <p>{{subItem.brief}}</p>
+                      <li v-for="(categoryItem, categoryIndex) in sectionItem.subMenuItem"
+                          :key="categoryIndex" @click.stop="changePage(sectionIndex, categoryIndex)">
+                        <router-link :to="categoryItem.path" tag="a">{{ categoryItem.menuItem }}</router-link><i class="iconfont icon-search"></i>
+                        <!-- <p>{{ categoryItem.brief }}</p> -->
                       </li>
                     </ul>
                   </div>
@@ -78,6 +81,7 @@
           </el-col>
           <el-col :span="10" align="center" class="quotes-content-button">
             <button @click="readMore">Read more <i class="iconfont icon-cloud"></i> </button>
+            <!-- TODO: 重写滑动function -->
           </el-col>
         </el-row>
       </article>
@@ -86,7 +90,7 @@
 </template>
 
 <script>
-
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -94,60 +98,64 @@ export default {
       searchKey: ''
     }
   },
-  computed: {
-    errands () {
-      return this.$store.state.testData.errands
-    },
-    headerMenuItem () {
-      return this.$store.state.testData.headerMenuItem
-    },
-    currentPageSup () {
-      return this.$store.state.page.currentPageSup
-    }
-  },
+  computed: mapState({
+    errands: state => state.testData.errands,
+    headerMenuItem: state => state.testData.headerMenuItem,
+    currentSection: state => state.currentSection,
+    currentCategory: state => state.currentCategory,
+    currentArticle: state => state.currentArticle
+  }),
   mounted () {
-    $('.second-nav-menu-right ul li').on('mouseover', function () {
-      let hoverText = $(this).find('p').text()
-      $(this).parents('.second-nav-menu').children('.second-nav-menu-left').find('p').text(hoverText)
-      if (event.stopPropagation) {
-        // 针对 Mozilla 和 Opera
-        event.stopPropagation()
-      } else if (window.event) {
-        // 针对 IE
-        window.event.cancelBubble = true
-      }
-    })
+    // $('.second-nav-menu-right ul li').on('mouseover', function () {
+    //   let hoverText = $(this).find('p').text()
+    //   $(this).parents('.second-nav-menu').children('.second-nav-menu-left').find('p').text(hoverText)
+    //   if (event.stopPropagation) {
+    //     // 针对 Mozilla 和 Opera
+    //     event.stopPropagation()
+    //   } else if (window.event) {
+    //     // 针对 IE
+    //     window.event.cancelBubble = true
+    //   }
+    // })
   },
   methods: {
 
     // 改变菜单中 当前页面的tab的样式
-    changeTab (supIndex, subIndex) {
-      this.$store.state.page.currentPageSup = supIndex
-      this.$store.state.page.currentNav = 0
-      console.log(subIndex)
-      if (subIndex !== undefined) {
-        this.$store.state.page.currentNav = subIndex
+    changePage (sectionIndex = '', categoryIndex = 0) {
+      let section = ''
+      let category = ''
+      if (sectionIndex >= 0) {
+        section = {
+          index: sectionIndex,
+          title: this.headerMenuItem[sectionIndex].menuItem,
+          path: this.headerMenuItem[sectionIndex].path
+        }
+        console.log('section:', section)
+        this.switchSection(section)
       }
-      if (event.stopPropagation) {
-        // 针对 Mozilla 和 Opera
-        event.stopPropagation()
-      } else if (window.event) {
-        // 针对 IE
-        window.event.cancelBubble = true
+      if (categoryIndex >= 0 && this.headerMenuItem[sectionIndex].subMenuItem) {
+        category = {
+          index: categoryIndex,
+          title: this.headerMenuItem[sectionIndex].subMenuItem[categoryIndex].menuItem,
+          path: this.headerMenuItem[sectionIndex].subMenuItem[categoryIndex].path
+        }
+        this.switchCategory(category)
+        console.log('category:', category)
+      } else {
+        this.switchCategory()
       }
-    },
-    menuChangeText (e) {
     },
     readMore () {
       console.log(document.documentElement.clientHeight)
       $('html, body').animate({scrollTop: 0.95 * document.documentElement.clientHeight}, 800)
     },
-    showSearch () {
-      this.searchBar = true
-    },
     search () {
       return 'do something'
-    }
+    },
+    ...mapMutations([
+      'switchSection',
+      'switchCategory'
+    ])
   }
 }
 </script>

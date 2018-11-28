@@ -7,12 +7,23 @@
       <el-col :span="19"
               align="right">
         <ul class="scroll-menu">
-          <li v-for="(item, scroll) in scrollHeaderData" :key="scroll" :class="{ 'current-page': currentPageSup === scroll }"><a @click.stop="switchCurrentPageSup(item.path, scroll)">{{item.menuItem}}</a></li>
+          <li v-for="(sectionItem, sectionIndex) in scrollHeaderItem"
+              :key="sectionIndex"
+              :class="{ 'current-page': currentSection.index === sectionIndex }"
+              @click="changePage(sectionIndex)">
+              <router-link tag="a" :to="sectionItem.path">{{ sectionItem.menuItem }}</router-link>
+          </li>
           <div class="scroll-sub-menu">
             <ul class="sub-menu">
-              <li v-for="(parent, sup) in scrollHeaderData" :key="sup" class="sub-menu-list">
+              <li v-for="(sectionItem, sectionIndex) in scrollHeaderItem"
+                  :key="sectionIndex"
+                  class="sub-menu-list">
                 <ul>
-                  <li v-for="(subItem, sub) in parent.subMenuItem" :key="sub"><a @click="switchNav(subItem.path, sub)">{{subItem.menuItem}}</a></li>
+                  <li v-for="(categoryItem, categoryIndex) in sectionItem.subMenuItem"
+                      :key="categoryIndex"
+                      @click="changePage(sectionIndex, categoryIndex)">
+                      <router-link :to="categoryItem.path" tag="a">{{ categoryItem.menuItem }}</router-link>
+                  </li>
                 </ul>
               </li>
             </ul>
@@ -26,7 +37,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
@@ -37,12 +48,12 @@ export default {
     }
   },
   computed: {
-    currentPageSup () {
-      return this.$store.state.page.currentPageSup
-    },
-    scrollHeaderData () {
-      return this.$store.state.testData.headerMenuItem
-    }
+    ...mapState({
+      scrollHeaderItem: state => state.testData.headerMenuItem,
+      currentSection: state => state.currentSection,
+      currentCategory: state => state.currentCategory,
+      currentArticle: state => state.currentArticle
+    })
   },
   methods: {
     handleScroll () {
@@ -50,24 +61,35 @@ export default {
       let targetScrollTop = 0.95 * document.documentElement.clientHeight - 10
       this.isShowScrollHeader = scrollTop >= targetScrollTop
     },
-    switchCurrentPageSup (routerLink, index) {
-      this.$store.state.page.currentPageSup = index
-      this.$router.push({ path: routerLink })
+    // 改变菜单中 当前页面的tab的样式
+    changePage (sectionIndex = '', categoryIndex = 0) {
+      let section = ''
+      let category = ''
+      if (sectionIndex >= 0) {
+        section = {
+          index: sectionIndex,
+          title: this.scrollHeaderItem[sectionIndex].menuItem,
+          path: this.scrollHeaderItem[sectionIndex].path
+        }
+        console.log('section:', section)
+        this.switchSection(section)
+      }
+      if (categoryIndex >= 0 && this.scrollHeaderItem[sectionIndex].subMenuItem) {
+        category = {
+          index: categoryIndex,
+          title: this.scrollHeaderItem[sectionIndex].subMenuItem[categoryIndex].menuItem,
+          path: this.scrollHeaderItem[sectionIndex].subMenuItem[categoryIndex].path
+        }
+        this.switchCategory(category)
+        console.log('category:', category)
+      } else {
+        this.switchCategory()
+      }
     },
-    switchNav (routerLink, sub) {
-      this.$store.state.page.currentNav = 0
-      if (sub !== undefined) { // 判断sub是否存在
-        this.$store.state.page.currentNav = sub
-      }
-      if (event.stopPropagation) {
-        // 针对 Mozilla 和 Opera
-        event.stopPropagation()
-      } else if (window.event) {
-        // 针对 IE
-        window.event.cancelBubble = true
-      }
-      this.$router.push({ path: routerLink })
-    }
+    ...mapMutations([
+      'switchSection',
+      'switchCategory'
+    ])
   }
 }
 </script>
@@ -192,6 +214,9 @@ export default {
 
               &:hover {
                 background-color: rgba(53, 89, 198, 1);
+                a {
+                  color: #dea066;
+                }
               }
               a {
                 font-size: 17px;

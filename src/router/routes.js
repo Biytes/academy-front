@@ -5,6 +5,7 @@ export default [{
   path: '/',
   component: _import('layout/official'),
   children: [{
+    name: 'main',
     path: '',
     component: _import('main')
   }, {
@@ -52,5 +53,10 @@ export default [{
     title: '对外合作',
     path: 'cooperateInfo/:category',
     component: _import('cooperateInfo')
+  }, {
+    name: 'articleShowCase',
+    title: '对外合作',
+    path: ':section/:category/:id',
+    component: _import('articleShowCase')
   }]
 }]

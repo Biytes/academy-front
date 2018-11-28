@@ -1,12 +1,6 @@
 <template lang="html">
   <div>
     <div class="about-content page-container">
-      <aside class="content-side-bar">
-        <a v-for="(nav, navIndex) in navBarTitles"
-           :class="{current:navIndex === current}"
-           @click="navSwitch(navIndex, nav.routerLink)"
-           :key="navIndex"><i class="iconfont icon-triangle-arrow-r"></i>{{nav.linkTitle}}</a>
-      </aside>
       <div class="news-container">
         <div class="figure-container">
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
@@ -16,7 +10,7 @@
               <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">12900</em></span>
             </p>
             <div class="news-img" v-if="news.imgUrl">
-              <img :src="news.imgUrl" alt="">
+              <img :src="news.imgUrl" alt="" @click="showImagePage(news.imgUrl)">
             </div>
             <p class="simple-brief">{{news.content}}</p>
           </div>
@@ -35,6 +29,7 @@
 
 <script>
 import { dateFormatter } from '@utils/index'
+import { mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -81,9 +76,8 @@ export default {
       pageData: []
     }
   },
-  created () {
-    var date = new Date()
-    console.log(date)
+  mounted () {
+    this.section = this.$route.name
   },
   methods: {
     getPageData () {
@@ -92,7 +86,10 @@ export default {
     getNewsInfo (id) {
       let path = ''
       this.$router.push({ path })
-    }
+    },
+    ...mapMutations([
+      'showImagePage'
+    ])
   },
   filters: {
     formatDate: function (date) { // 时间转变格式

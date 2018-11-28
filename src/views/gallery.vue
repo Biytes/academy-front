@@ -34,7 +34,7 @@
         <ul class="shelf-inner">
           <li v-for="(item, itemIndex) in shelf.Items" :key="itemIndex"  class="shelf-item">
             <div class="shelf-item-info">
-              <img class="item-img" :src="item.imgUrl" @click="showImg(item.imgUrl)" alt="">
+              <img class="item-img" :src="item.imgUrl" @click="showImagePage(item.imgUrl)" alt="">
               <p class="item-name">
                 {{item.name}}
               </p>
@@ -56,7 +56,11 @@
 
 <script>
 import { dateFormatter } from '@utils/index'
+import { mapMutations } from 'vuex'
 export default {
+  mounted () {
+    this.section = this.$route.name
+  },
   data () {
     return {
       // editShelfItem: {
@@ -192,27 +196,13 @@ export default {
     }
   },
   filters: {
-    formatDate: function (value) { // 时间转变格式
-      var date = new Date(value)
-      var year = date.getFullYear()
-      var month = date.getMonth() + 1
-      var day = date.getDate()
-      month = month < 10 ? '0' + month : month
-      day = day < 10 ? '0' + day : day
-      // var hours = this.padDate(date.getHours())
-      // var minutes = this.padDate(date.getMinutes())
-      // var seconds = this.padDate(date.getSeconds())
-      // 将整理好的数据传出去
-      return year + '-' + month + '-' + day
+    formatDate: function (date) { // 时间转变格式
+      return dateFormatter(date, 'yyyy-M-d')
     }
   },
   methods: {
     changeShelf (index) {
       this.currentShelf = index
-    },
-    showImg (url) {
-      this.$store.state.imgPage.currentImg = url
-      this.$store.state.imgPage.isShow = true
     },
     showDescription (item) {
       const h = this.$createElement
@@ -229,7 +219,10 @@ export default {
     },
     contains (arr, obj) {
       return arr.some(item => item === obj)
-    }
+    },
+    ...mapMutations([
+      'showImagePage'
+    ])
   }
 }
 </script>
@@ -323,9 +316,6 @@ export default {
 .shelf-mode-active{
   background: rgb(230, 121, 52);
   color:#fff;
-}
-.shelf-inner{
-
 }
 .shelf-item{
   display: inline-block;

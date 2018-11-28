@@ -2,7 +2,6 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import store from '@store'
 
 Vue.use(VueAxios, axios)
 
@@ -23,20 +22,20 @@ const stringify = function (url, params) {
 Vue.prototype.$axios = axios
 
 // 给所有请求头部加上token
-axios.interceptors.request.use(
-  config => {
-    // 在所有请求头部添加token值
-    const token = 'Token ' + store.state.userInfo.token
-    if (token) {
-      config.headers.Authorization = token
-    }
+// axios.interceptors.request.use(
+//   config => {
+//     // 在所有请求头部添加token值
+//     const token = 'Token ' + store.state.userInfo.token
+//     if (token) {
+//       config.headers.Authorization = token
+//     }
 
-    return config
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
+//     return config
+//   },
+//   error => {
+//     return Promise.reject(error)
+//   }
+// )
 
 export const http = (type, url, params = {}) => Promise
   .resolve()

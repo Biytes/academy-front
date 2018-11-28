@@ -3,8 +3,8 @@
     <div class="about-content page-container">
       <aside class="content-side-bar">
         <a v-for="(nav, navIndex) in navBarTitles"
-           :class="{current:navIndex === current}"
-           @click="navSwitch(navIndex, nav.routerLink)"
+           :class="{ current: navIndex === currentCategory.index }"
+           @click="navSwitch(navIndex, nav)"
            :key="navIndex"><i class="iconfont icon-triangle-arrow-r"></i>{{nav.linkTitle}}</a>
       </aside>
       <div class="news-container">
@@ -12,7 +12,6 @@
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
             <h3 class="news-title"><a href="">{{news.title}}</a></h3>
             <p class="news-info clearfix">
-              <span class="news-type orange"><a href="">学院简介</a></span>
               <span class="news-date">{{ news.publicTime | formatDate }}</span>
               <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">12900</em></span>
             </p>
@@ -36,15 +35,11 @@
 
 <script>
 import { dateFormatter } from '@utils/index'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
       navBarTitles: [
-        {
-          linkTitle: '对外合作',
-          id: '',
-          routerLink: '/cooperateInfo/index'
-        },
         {
           linkTitle: '国际合作',
           id: '',
@@ -98,25 +93,36 @@ export default {
       ]
     }
   },
-  created () {
-    var date = new Date()
-    console.log(date)
+  computed: {
+    ...mapState([
+      'currentCategory'
+    ])
+  },
+  watch: {
+    '$route': 'onRouteChange'
+  },
+  mounted () {
+    this.section = this.$route.name
+    this.category = this.$route.params.category
   },
   methods: {
-    // padDate (val) { // 小于10的时间 在前面加个 0
-    //   return val < 10 ? '0' + val : val
-    // },
-    navSwitch (index, routerLink) {
-      console.log(index)
-      this.$store.state.page.currentNav = index
-      this.$router.push({ path: routerLink })
+    navSwitch (index, nav) {
       // Swtich Data
-    }
-  },
-  computed: {
-    current () {
-      return this.$store.state.page.currentNav
-    }
+      let category = {
+        index,
+        title: nav.linkTitle,
+        path: nav.routerLink
+      }
+      this.switchCategory(category)
+      this.$router.push({ path: nav.routerLink })
+    },
+    onRouteChange () {
+
+    },
+    ...mapMutations([
+      'showImagePage',
+      'switchCategory'
+    ])
   },
   filters: {
     formatDate: function (date) { // 时间转变格式
