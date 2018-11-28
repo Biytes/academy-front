@@ -7,10 +7,10 @@
         <section id="wrapper-content">
           <el-breadcrumb separator="/" class="bread-crumb" v-if="routeName !== 'main'">
             <el-breadcrumb-item :to="{ path: '/' }" @click.native="goToMain"><i class="iconfont icon-home"></i></el-breadcrumb-item>
-            <el-breadcrumb-item v-if="currentSection.path"
-                                :to="{ path: currentSection.path }">{{ currentSection.title }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="currentSection.path">{{ currentSection.title }}</el-breadcrumb-item>
             <el-breadcrumb-item v-if="currentCategory.path"
-                                :to="{ path: currentCategory.path }">{{ currentCategory.title }}</el-breadcrumb-item>
+                                :to="{ path: currentCategory.path }"
+                                @click.native="goToCategory">{{ currentCategory.title }}</el-breadcrumb-item>
             <el-breadcrumb-item v-if="currentArticle.path"
                                 :to="{ path: currentArticle.path }">{{ currentArticle.title }}</el-breadcrumb-item>
           </el-breadcrumb>
@@ -59,6 +59,9 @@ export default {
     goToMain () {
       this.switchSection()
       this.switchCategory()
+      this.switchArticle()
+    },
+    goToCategory () {
       this.switchArticle()
     },
     onRouteChange () {

@@ -22,7 +22,9 @@
                   <li v-for="(categoryItem, categoryIndex) in sectionItem.subMenuItem"
                       :key="categoryIndex"
                       @click="changePage(sectionIndex, categoryIndex)">
-                      <router-link :to="categoryItem.path" tag="a">{{ categoryItem.menuItem }}</router-link>
+                      <router-link :to="categoryItem.path"
+                                    tag="a"
+                                    :class="{ 'current-page': currentCategory.index === categoryIndex && currentSection.index === sectionIndex }">{{ categoryItem.menuItem }}</router-link>
                   </li>
                 </ul>
               </li>
@@ -71,7 +73,6 @@ export default {
           title: this.scrollHeaderItem[sectionIndex].menuItem,
           path: this.scrollHeaderItem[sectionIndex].path
         }
-        console.log('section:', section)
         this.switchSection(section)
       }
       if (categoryIndex >= 0 && this.scrollHeaderItem[sectionIndex].subMenuItem) {
@@ -81,7 +82,6 @@ export default {
           path: this.scrollHeaderItem[sectionIndex].subMenuItem[categoryIndex].path
         }
         this.switchCategory(category)
-        console.log('category:', category)
       } else {
         this.switchCategory()
       }
@@ -222,6 +222,9 @@ export default {
                 font-size: 17px;
                 color: #fff;
                 transition: all 1s;
+                &.current-page {
+                  color: #dea066;
+                }
               }
             }
           }

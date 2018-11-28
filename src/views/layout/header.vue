@@ -130,7 +130,6 @@ export default {
           title: this.headerMenuItem[sectionIndex].menuItem,
           path: this.headerMenuItem[sectionIndex].path
         }
-        console.log('section:', section)
         this.switchSection(section)
       }
       if (categoryIndex >= 0 && this.headerMenuItem[sectionIndex].subMenuItem) {
@@ -140,7 +139,6 @@ export default {
           path: this.headerMenuItem[sectionIndex].subMenuItem[categoryIndex].path
         }
         this.switchCategory(category)
-        console.log('category:', category)
       } else {
         this.switchCategory()
       }

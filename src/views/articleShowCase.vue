@@ -7,6 +7,7 @@
 
 <script>
 import { editAcademyData } from '@api/index'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -28,6 +29,12 @@ export default {
       .then(res => {
         if (res.status === 200) {
           this.article = res.data
+          let article = {
+            id: this.id,
+            title: this.article.title,
+            path: this.$route.fullPath
+          }
+          this.switchArticle(article)
         }
         this.isLoading = false
       })
@@ -38,6 +45,11 @@ export default {
           this.$router.go(-1)
         }
       })
+  },
+  methods: {
+    ...mapMutations([
+      'switchArticle'
+    ])
   }
 }
 </script>
