@@ -7,7 +7,7 @@
 
 <script>
 import { editAcademyData } from '@api/index'
-import { mapState, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
   data () {
     return {

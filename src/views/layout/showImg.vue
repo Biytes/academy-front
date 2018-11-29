@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="img-page" v-show="imagePage.isShow">
-    <img :src="imagePage.currentImg" alt="">
+    <img :src="imagePage.currentImage" alt="">
     <div class="block" @click="hideImagePage"></div>
   </div>
 </template>

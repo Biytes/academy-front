@@ -10,7 +10,7 @@
       <div class="news-container">
         <div class="figure-container">
           <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
-            <h3 class="news-title"><a href="">{{news.title}}</a></h3>
+            <h3 class="news-title"><router-link :to="news.href" tag="a">{{ news.title }}</router-link></h3>
             <p class="news-info clearfix">
               <span class="news-date">{{ news.publicTime | formatDate }}</span>
               <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">12900</em></span>
