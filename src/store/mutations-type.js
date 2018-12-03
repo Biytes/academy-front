@@ -8,3 +8,5 @@ export const SWITCH_SECTION = 'switchSection'
 export const SWITCH_CATEGORY = 'switchCategory'
 
 export const SWITCH_ARTICLE = 'switchArticle'
+
+export const SAVE_MENU = 'saveMenu'

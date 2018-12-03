@@ -97,7 +97,7 @@ export default {
 <style lang="scss" scoped>
 
 .scroll-header {
-  z-index: 10;
+  z-index: 9999;
   position: fixed;
   top: 0;
   width: 100%;

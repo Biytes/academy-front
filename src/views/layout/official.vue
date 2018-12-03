@@ -7,7 +7,9 @@
         <section id="wrapper-content">
           <el-breadcrumb separator="/" class="bread-crumb" v-if="routeName !== 'main'">
             <el-breadcrumb-item :to="{ path: '/' }" @click.native="goToMain"><i class="iconfont icon-home"></i></el-breadcrumb-item>
-            <el-breadcrumb-item v-if="currentSection.path">{{ currentSection.title }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="currentSection.path"
+                                :to="{ path: currentSection.path }"
+                                @click.native="goToCategory">{{ currentSection.title }}</el-breadcrumb-item>
             <el-breadcrumb-item v-if="currentCategory.path"
                                 :to="{ path: currentCategory.path }"
                                 @click.native="goToCategory">{{ currentCategory.title }}</el-breadcrumb-item>
@@ -78,24 +80,6 @@ export default {
   }
 }
 
-/*
-
-var wrapperHeader = new Vue({
-  el: '#wrapper-header',
-  data () {
-    return {
-      a: 1,
-      errands: [
-        { title: 'First Panel', introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione' },
-        { title: 'Second Panel', introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione' },
-        { title: 'Third Panel', introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione' },
-        { title: 'Fourth Panel', introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione' },
-        { title: 'Fifth Panel', introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione' }
-      ]
-    }
-  }
-})
-*/
 </script>
 
 <style lang="scss">
@@ -105,23 +89,18 @@ var wrapperHeader = new Vue({
 /*global*/
 #wrapper-content {
   height: auto;
-  min-height: 1200px;
+  min-height: 80vh;
   width: 100%;
   position: relative;
-  // img.school-logo {
-  //   position: absolute;
-  //   bottom: 200px;
-  //   right: 200px;
-  //   width: 600px;
-  //   opacity: 0.1;
-  //   z-index: -1;
-  // }
   .bread-crumb {
     width: 65%;
-    margin: 5px auto;
-    padding: 10px;
+    margin: 0 auto;
+    padding: 15px;
     min-width: 1000px;
     box-sizing: border-box;
+    .el-breadcrumb__item {
+      cursor: pointer;
+    }
   }
 }
 /*button-animate*/

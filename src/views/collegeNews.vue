@@ -1,26 +1,36 @@
 <template lang="html">
   <div>
     <div class="about-content page-container">
-      <div class="news-container">
-        <div class="figure-container">
-          <div v-for="(news, newsIndex) in items" class="news-figure" :key="newsIndex">
-            <h3 class="news-title"><router-link :to="news.href" tag="a">{{ news.title }}</router-link></h3>
+      <div class="news-container" v-loading="isLoading">
+        <div class="figure-container" v-if="pageItems.length">
+          <div v-for="news in pageItems"
+               class="news-figure"
+               :key="news.id">
+            <h3 class="news-title"><router-link :to="news.path" tag="a">{{ news.title }}</router-link></h3>
             <p class="news-info clearfix">
-              <span class="news-date">{{ news.publicTime | formatDate }}</span>
-              <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">12900</em></span>
+              <span class="news-date">{{ news.created_time | formatDate }}</span>
+              <span class="news-read"><i class="iconfont icon-eye"></i><em class="views-time">{{ news.ctr }}</em></span>
             </p>
-            <div class="news-img" v-if="news.imgUrl">
-              <img :src="news.imgUrl" alt="" @click="showImagePage(news.imgUrl)">
+            <div class="news-img" v-if="news.imageUrl">
+              <img :src="news.imageUrl" alt="" @click="showImagePage(news.imageUrl)">
             </div>
-            <p class="simple-brief">{{news.content}}</p>
+            <p class="simple-brief">{{ news.preview }}</p>
           </div>
         </div>
+        <div v-else
+             style="text-align:center;color: #6e6e6e;"
+             class="figure-container">
+          暂无文章
+        </div>
       </div>
-      <div style="text-align:center;font-size:18px;margin-top:15px;">
+      <div style="text-align:center;font-size:18px;margin-top:15px;" v-if="pageItems.length">
         <el-pagination
           background
           layout="prev, pager, next"
-          :total="1000">
+          :current-page.sync="currentPage"
+          :total="total"
+          :page-size="pageSize"
+          @current-change="getPageData">
         </el-pagination>
       </div>
     </div>
@@ -29,70 +39,82 @@
 
 <script>
 import { dateFormatter } from '@utils/index'
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
+import { getAcademyData } from '@api/index'
 export default {
   data () {
     return {
-      items: [
-        {
-          publicTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          title: '延安新区党政代表团到访我校',
-          imgUrl: '',
-          content: '2017年9月2日，延安新区党工委副书记、延安市新区管委会主任薛鹏春一行到访我校，俞峰院长在南大殿会见来访，双方就开展交流合作事宜进行了商谈。',
-          href: ''
-        },
-        {
-          publicTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          title: '延安新区党政代表团到访我校',
-          imgUrl: require('@img/school/学院日落景.jpg'),
-          content: '2017年9月2日，延安新区党工委副书记、延安市新区管委会主任薛鹏春一行到访我校，俞峰院长在南大殿会见来访，双方就开展交流合作事宜进行了商谈。',
-          href: ''
-        },
-        {
-          publicTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          title: '延安新区党政代表团到访我校',
-          content: '2017年9月2日，延安新区党工委副书记、延安市新区管委会主任薛鹏春一行到访我校，俞峰院长在南大殿会见来访，双方就开展交流合作事宜进行了商谈。',
-          href: ''
-        },
-        {
-          publicTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          title: '延安新区党政代表团到访我校',
-          content: '2017年9月2日，延安新区党工委副书记、延安市新区管委会主任薛鹏春一行到访我校，俞峰院长在南大殿会见来访，双方就开展交流合作事宜进行了商谈。',
-          href: ''
-        },
-        {
-          publicTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          title: '延安新区党政代表团到访我校',
-          content: '2017年9月2日，延安新区党工委副书记、延安市新区管委会主任薛鹏春一行到访我校，俞峰院长在南大殿会见来访，双方就开展交流合作事宜进行了商谈。',
-          href: ''
-        },
-        {
-          publicTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          title: '延安新区党政代表团到访我校',
-          content: '2017年9月2日，延安新区党工委副书记、延安市新区管委会主任薛鹏春一行到访我校，俞峰院长在南大殿会见来访，双方就开展交流合作事宜进行了商谈。',
-          href: ''
-        }
-      ],
-      pageData: []
+      isLoading: false,
+      title: '',
+      pageItems: [],
+      sectionMenuItem: null,
+      currentPage: 1,
+      total: 0,
+      pageSize: 10
     }
   },
+  watch: {
+    '$route': 'onRouteChange'
+  },
+  computed: {
+    ...mapState([
+      'currentCategory',
+      'headerMenuItem'
+    ])
+  },
   mounted () {
+    // 利用section 和category来锁定当前的菜单
     this.section = this.$route.name
+    let sectionMenuItem = this.headerMenuItem[this.headerMenuItem.findIndex(item => item.name === this.section)]
+    this.title = sectionMenuItem.title
+    this.sectionMenuItem = sectionMenuItem
+    this.getPageData()
   },
   methods: {
     getPageData () {
-      console.log(this.pageData)
+      // 获取页面数据
+      let params = {
+        page: this.currentPage
+      }
+
+      return Promise
+        .resolve()
+        .then(_ => {
+          this.isLoading = true
+          return getAcademyData(this.section, params)
+        })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            let data = res.data
+            this.pageItems = data.results.map(item => this.processData(item))
+            console.log(this.pageItems)
+            this.total = data.count
+            this.pageSize = this.total < 10 ? this.total : 10
+          }
+          this.isLoading = false
+        })
+        .catch(error => this.showError(error))
     },
-    getNewsInfo (id) {
-      let path = ''
-      this.$router.push({ path })
+    processData (item) {
+      return {
+        id: item.id || null,
+        preview: item.preview || null,
+        title: item.title || null,
+        imageUrl: item.image_url || null,
+        created_time: item.created_time || null,
+        updated_time: item.updated_time || null,
+        ctr: item.ctr || null, // 请求次数
+        path: `/${this.section}/${this.category}/${item.id}` || '/'
+      }
     },
     ...mapMutations([
-      'showImagePage'
+      'showImagePage',
+      'switchCategory'
     ])
   },
   filters: {
-    formatDate: function (date) { // 时间转变格式
+    formatDate: date => { // 时间转变格式
       return dateFormatter(date, 'yyyy-M-d')
     }
   }
@@ -100,5 +122,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+/* External CSS */
 </style>

@@ -1,5 +1,5 @@
 <template lang="html">
-  <footer :style="{background: 'url(' + footerBackgroundImg + ') no-repeat top right'}" class="footer-container" @click="resetSelectForm">
+  <footer class="footer-container" @click="resetSelectForm">
     <div class="wrapper-footer">
       <div class="wrapper-footer-top">
         <div class="footer-top-left">
@@ -64,8 +64,7 @@ export default {
           isClass: false
         }
       ],
-      currSelectForm: null,
-      footerBackgroundImg: require('@img/background/footerBackground.jpg')
+      currSelectForm: null
     }
   },
   mounted () {
@@ -83,6 +82,7 @@ export default {
 
 <style lang="scss">
 .footer-container {
+  background: url('../../assets/img/background/footerBackground.jpg') no-repeat top right;
   background-size: cover;
   color: #D4D2D2;
   height: 200px;

@@ -57,7 +57,7 @@ export default {
 <style lang="scss" scoped>
 .article-container {
   width: 900px;
-  height: 60vh;
+  min-height: 80vh;
   margin: 0 auto;
   article {
     &-title {

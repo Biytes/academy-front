@@ -3,7 +3,8 @@ import {
   HIDE_IMAGE_PAGE,
   SWITCH_SECTION,
   SWITCH_CATEGORY,
-  SWITCH_ARTICLE
+  SWITCH_ARTICLE,
+  SAVE_MENU
 } from './mutations-type'
 
 export default {
@@ -32,5 +33,10 @@ export default {
   // 切换文章
   [SWITCH_ARTICLE] (state, article = '') {
     state.currentArticle = article
+  },
+
+  // 保存菜单
+  [SAVE_MENU] (state, headerMenuItem) {
+    state.headerMenuItem = headerMenuItem
   }
 }

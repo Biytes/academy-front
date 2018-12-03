@@ -14,17 +14,17 @@
 }
 /*responsive*/
 /*content-scroll*/
-.material-dialog::-webkit-scrollbar {
+.material-dialog-content::-webkit-scrollbar {
     width: 3px;
     height: 8px;
     background-color: #655d5d;
 }
-.material-dialog::-webkit-scrollbar-track {
+.material-dialog-content::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     background-color: #f4f4f4;
 }
-.material-dialog::-webkit-scrollbar-thumb {
+.material-dialog-content::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #655d5d;
@@ -33,12 +33,11 @@
   font-family: "Raleway";
   font-size: 16px;
   font-weight: 500;
-  line-height: 15;
   color: rgba(0, 0, 0, 0.87);
   -webkit-font-smoothing: antialiased;
   -webkit-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
-  top: 10%;
+  top: 15%;
   position: fixed;
   left: 0;
   right: 0;
@@ -50,7 +49,7 @@
   box-sizing: border-box;
   width: 40%;
   z-index: 12;
-  /* transition: all 400ms; */
+  transition: all 400ms;
   transform: scale(0);
 }
 .material-dialog.material-dialog-fixed-footer{
@@ -67,9 +66,9 @@
 }
 .material-dialog-content h4 {
   margin-top: 0;
-  font-size: 2.28rem;
+  font-size: 2rem;
   line-height: 110%;
-  margin: 1.14rem 0 .912rem 0;
+  margin: 0;
   font-weight: 400;
   box-sizing: inherit;
   display: block;
