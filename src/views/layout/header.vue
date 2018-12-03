@@ -154,7 +154,7 @@ export default {
           title: item.title,
           name: item.name,
           path: subMenuItem.length ? `${subMenuItem[0].path}` : `/${item.name}`,
-          subMenuItem: subMenuItem.length && item.id !== 8 ? subMenuItem : null
+          subMenuItem: subMenuItem.length ? subMenuItem : null
         }
       })
       this.saveMenu(complishedMenu)

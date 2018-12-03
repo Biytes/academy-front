@@ -1,198 +1,78 @@
 <template lang="html">
   <div id="gallery-container">
-    <section class="gallery-nav">
-      <div class="nav-bar">
-        <ul>
-          <li v-for="(shelf, shelfNav) in shelves" :key="shelfNav" :class="{visible: shelfNav == currentShelf }">
-            <a :href="'#'+shelf.shelfName" @click="changeShelf(shelfNav)">{{shelf.shelfName}}</a>
-          </li>
-          <!-- <li><a href="#intro">Intro</a></li>
-          <li class="visible">
-            <a href="#dev">Developer Mode</a>
-            <ul>
-              <li><a href="#dev-edit-html">Edit HTML</a></li>
-              <li><a href="#dev-element-classes">Element Classes</a></li>
-              <li><a href="#dev-slide-classes">Slide Classes</a></li>
-              <li><a href="#dev-export-html">Export HTML</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#css">CSS Editor</a>
-            <ul>
-              <li><a href="#css-fonts">Custom Fonts</a></li>
-              <li><a href="#css-developer-mode">Developer Mode</a></li>
-              <li><a href="#css-examples">Examples</a></li>
-            </ul>
-          </li> -->
-        </ul>
-      </div>
-    </section>
-    <div id="shelves">
-      <div v-for="(shelf, shelfIndex) in shelves" :key="shelfIndex" class="shelf" :id="shelf.shelfName">
-        <h3 class="shelf-name clearfloat">{{shelf.shelfName}}
+    <aside class="content-side-bar" style="margin-top: 40px;">
+      <a v-for="(nav, navIndex) in navBarTitles"
+          :class="{ current: navIndex === currentCategory.index }"
+          @click="navSwitch(navIndex, nav)"
+          v-if="navBarTitles"
+          :key="nav.id"><i class="iconfont icon-triangle-arrow-r"></i>{{ nav.title }}</a>
+    </aside>
+    <div id="shelves" v-loading="isLoading">
+      <div class="shelf">
+        <h3 class="shelf-name clearfloat">{{ title }}
         </h3>
         <ul class="shelf-inner">
-          <li v-for="(item, itemIndex) in shelf.Items" :key="itemIndex"  class="shelf-item">
+          <li v-for="item in pageItems" :key="item.id"  class="shelf-item">
             <div class="shelf-item-info">
-              <img class="item-img" :src="item.imgUrl" @click="showImagePage(item.imgUrl)" alt="">
+              <img class="item-img" :src="item.imageUrl" @click="showImagePage(item.imgUrl)" alt="">
               <p class="item-name">
                 {{item.name}}
               </p>
               <p class="item-owner clearfloat" style="color:#c4c4c4">
-                {{ item.awardTime | formatDate }}
+                {{ item.createdTime | formatDate }}
                 <i class="iconfont icon-detail item-detail-icon" title="详情" @click="showDescription(item)"></i>
-                <a :href="item.imgUrl" download><i class="iconfont icon-download item-download-icon" title="下载"></i></a>
+                <a :href="item.imageUrl" download><i class="iconfont icon-download item-download-icon" title="下载"></i></a>
               </p>
-              <div class="item-tags">                             <!--明天改-->
-                <span v-for="(tag, tagIndex) in tagsColor" v-show="contains(item.tags, tag.name)" :key="tagIndex" :style="tag.style" class="item-tag">{{tag.name}}</span>
-              </div>
+              <!-- <div class="item-tags">
+                <span v-for="(tag, tagIndex) in tags" v-show="contains(item.tags, tag.name)" :key="tagIndex" :style="tag.style" class="item-tag">{{tag.name}}</span>
+              </div> -->
             </div>
           </li>
         </ul>
       </div>
+    </div>
+    <div style="text-align:center;font-size:18px;margin-top:15px;" v-if="pageItems.length">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :current-page.sync="currentPage"
+        :total="total"
+        :page-size="pageSize"
+        @current-change="getPageData">
+      </el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 import { dateFormatter } from '@utils/index'
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
+import { getAcademyData } from '@api/index'
 export default {
   mounted () {
+    this.category = this.$route.params.category
     this.section = this.$route.name
+    let sectionMenuItem = this.headerMenuItem[this.headerMenuItem.findIndex(item => item.name === this.section)]
+    this.title = this.currentCategory.title
+    this.sectionMenuItem = sectionMenuItem
+    this.navBarTitles = sectionMenuItem.subMenuItem
+    this.getPageData()
+  },
+  watch: {
+    '$route': 'onRouteChange'
   },
   data () {
     return {
-      // editShelfItem: {
-      //   Items: {
-      //     name: '',
-      //     owner: '',
-      //     awardTime: '',
-      //     imgUrl: require(+'../assets/img/testImage/1.jpg'),
-      //     tags: {
-      //       ACM: false,
-      //       LQB: true
-      //     }
-      //   }
-      // },
-      currentShelf: 0,
-      tags: ['LQB', 'ACM', '广州', '深圳'], // getTags Type
-      tagsColor: [{
-        name: 'ACM',
-        style: {
-          background: 'rgb(231, 172, 251)'
-        }
-      }, {
-        name: 'LQB',
-        style: {
-          background: 'rgb(65, 179, 244)'
-        }
-      }, {
-        name: '深圳',
-        style: {
-          background: 'rgb(87, 119, 209)'
-        }
-      }, {
-        name: '广州',
-        style: {
-          background: 'rgb(207, 90, 48)'
-        }
-      }],
-      shelves: [{
-        id: 0,
-        shelfName: 'Credential',
-        editShelfMode: false,
-        Items: [{
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/1.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi tempora quasi hic, voluptate iure incidunt modi aut. Beatae quod sapiente reprehenderit molestiae deleniti temporibus facilis nemo illum voluptates architecto provident accusantium hic in qui itaque et, inventore. Provident recusandae dolore laboriosam sit, esse incidunt quibusdam doloribus praesentium deleniti numquam. Facilis.'
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/2.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: 'dddddddddddddddd'
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/3.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: 'ddddddddddddddd'
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/4.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: ''
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/5.jpg'),
-          tags: ['ACM', '广州'],
-          description: ''
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/6.jpg'),
-          tags: ['ACM', '深圳'],
-          description: ''
-        }]
-      }, {
-        id: 1,
-        shelfName: '蓝桥杯',
-        editShelfMode: false,
-        Items: [{
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/1.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi tempora quasi hic, voluptate iure incidunt modi aut. Beatae quod sapiente reprehenderit molestiae deleniti temporibus facilis nemo illum voluptates architecto provident accusantium hic in qui itaque et, inventore. Provident recusandae dolore laboriosam sit, esse incidunt quibusdam doloribus praesentium deleniti numquam. Facilis.'
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/2.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: 'dddddddddddddddd'
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/3.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: 'ddddddddddddddd'
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/4.jpg'),
-          tags: ['ACM', 'LQB'],
-          description: ''
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/5.jpg'),
-          tags: ['ACM', '广州'],
-          description: ''
-        }, {
-          name: 'ACM 二等奖',
-          owner: '黎启浚',
-          awardTime: 'Mon Jul 02 2018 10:40:35 GMT+0800 (台北标准时间)',
-          imgUrl: require('@img/assc/6.jpg'),
-          tags: ['ACM', '深圳'],
-          description: ''
-        }]
-      }]
+      isLoading: false,
+      category: '',
+      section: '',
+      title: '',
+      navBarTitles: [],
+      pageItems: [],
+      sectionMenuItem: null,
+      currentPage: 1,
+      total: 0,
+      pageSize: 10
     }
   },
   filters: {
@@ -200,7 +80,37 @@ export default {
       return dateFormatter(date, 'yyyy-M-d')
     }
   },
+  computed: {
+    ...mapState([
+      'currentCategory',
+      'headerMenuItem'
+    ])
+  },
   methods: {
+    getPageData () {
+      let params = {
+        pege: this.currPage,
+        category: this.category
+      }
+      return Promise
+        .resolve()
+        .then(_ => {
+          this.isLoading = true
+          return getAcademyData(this.section, params)
+        })
+        .then(res => {
+          console.log(res)
+          if (res.status === 200) {
+            let data = res.data
+            this.pageItems = data.results.map(item => this.processData(item))
+            console.log(this.pageItems)
+            this.total = data.count
+            this.pageSize = this.total < 10 ? this.total : 10
+          }
+          this.isLoading = false
+        })
+        .catch(error => this.showError(error))
+    },
     changeShelf (index) {
       this.currentShelf = index
     },
@@ -217,11 +127,32 @@ export default {
         confirmButtonText: '确定'
       })
     },
+    processData (item) {
+      return {
+        id: item.id,
+        image: item.image || null,
+        imageUrl: `https://schooltest.zunway.pw/media/${item.image_url}` || null,
+        name: item.name || null,
+        description: item.desc || null,
+        createdTime: item.created_time || null,
+        owner: item.owner || null,
+        grade: item.grade || null,
+        major: item.major || null,
+        stuClass: item.stu_class || null
+      }
+    },
     contains (arr, obj) {
       return arr.some(item => item === obj)
     },
+    // 当路由发生变化
+    onRouteChange () {
+      this.category = this.$route.params.category
+      this.currentPage = 1
+      this.getPageData()
+    },
     ...mapMutations([
-      'showImagePage'
+      'showImagePage',
+      'switchCategory'
     ])
   }
 }
@@ -278,14 +209,15 @@ export default {
 }
 #shelves{
   text-align: left;
-  display: inline-block;
-  width: 80%;
+  margin: 0 auto;
+  width: 76%;
+  min-width: 1200px;
 }
 .shelf{
   font-family: "Microsoft Yahei";
   font-size: 16px;
   padding: 10px;
-}
+  min-height: 600px;}
 .shelf ul{
   list-style:none;
   margin: 0;
@@ -344,7 +276,6 @@ export default {
   font-weight: bold;
 }
 .item-detail-icon{
-  display: inline-block;
   font-size: 20px;
   vertical-align: bottom;
   cursor: pointer;
@@ -352,7 +283,6 @@ export default {
   color:rgb(81, 119, 235);
 }
 .item-download-icon{
-  display: inline-block;
   font-size: 20px;
   vertical-align: bottom;
   cursor: pointer;
@@ -360,7 +290,6 @@ export default {
   color:rgb(212, 95, 46);
 }
 .item-edit-icon{
-  display: inline-block;
   font-size: 20px;
   vertical-align: bottom;
   cursor: pointer;
@@ -368,7 +297,6 @@ export default {
   color:rgb(18, 111, 235);
 }
 .item-delete-icon{
-  display: inline-block;
   font-size: 20px;
   vertical-align: bottom;
   cursor: pointer;

@@ -26,7 +26,7 @@ export default [{
   }, {
     name: 'gallery',
     title: '学院相册',
-    path: '/gallery',
+    path: '/gallery/:category',
     component: _import('gallery')
   }, {
     name: 'educationnews',

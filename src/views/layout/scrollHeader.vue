@@ -8,15 +8,15 @@
               align="right">
         <ul class="scroll-menu">
           <li v-for="(sectionItem, sectionIndex) in scrollHeaderItem"
-              :key="sectionIndex"
+              :key="sectionItem.id"
               :class="{ 'current-page': currentSection.index === sectionIndex }"
               @click="changePage(sectionIndex)">
-              <router-link tag="a" :to="sectionItem.path">{{ sectionItem.menuItem }}</router-link>
+              <router-link tag="a" :to="sectionItem.path">{{ sectionItem.title }}</router-link>
           </li>
           <div class="scroll-sub-menu">
             <ul class="sub-menu">
               <li v-for="(sectionItem, sectionIndex) in scrollHeaderItem"
-                  :key="sectionIndex"
+                  :key="sectionIndex.id"
                   class="sub-menu-list">
                 <ul>
                   <li v-for="(categoryItem, categoryIndex) in sectionItem.subMenuItem"
@@ -24,7 +24,7 @@
                       @click="changePage(sectionIndex, categoryIndex)">
                       <router-link :to="categoryItem.path"
                                     tag="a"
-                                    :class="{ 'current-page': currentCategory.index === categoryIndex && currentSection.index === sectionIndex }">{{ categoryItem.menuItem }}</router-link>
+                                    :class="{ 'current-page': currentCategory.index === categoryIndex && currentSection.index === sectionIndex }">{{ categoryItem.title }}</router-link>
                   </li>
                 </ul>
               </li>
@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     ...mapState({
-      scrollHeaderItem: state => state.testData.headerMenuItem,
+      scrollHeaderItem: state => state.headerMenuItem,
       currentSection: state => state.currentSection,
       currentCategory: state => state.currentCategory,
       currentArticle: state => state.currentArticle
