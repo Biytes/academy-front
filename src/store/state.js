@@ -18,7 +18,7 @@ export default {
     title: '',
     path: ''
   },
-  headerMenuItem: [],
+  headerMenuItem: '',
   headerMenuItemOrder: [1, 10, 11, 8, 5, 6, 7, 14, 33], // 菜单顺序
   testData: {
     errands: [

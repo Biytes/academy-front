@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="gallery-container">
+  <div class="gallery-container">
     <aside class="content-side-bar" style="margin-top: 40px;">
       <a v-for="(nav, navIndex) in navBarTitles"
           :class="{ current: navIndex === currentCategory.index }"
@@ -7,21 +7,21 @@
           v-if="navBarTitles"
           :key="nav.id"><i class="iconfont icon-triangle-arrow-r"></i>{{ nav.title }}</a>
     </aside>
-    <div id="shelves" v-loading="isLoading">
+    <div v-loading="isLoading">
       <div class="shelf">
         <h3 class="shelf-name clearfloat">{{ title }}
         </h3>
         <ul class="shelf-inner">
           <li v-for="item in pageItems" :key="item.id"  class="shelf-item">
             <div class="shelf-item-info">
-              <img class="item-img" :src="item.imageUrl" @click="showImagePage(item.imgUrl)" alt="">
+              <img class="item-img" :src="item.imageUrl" @click="showImagePage(item.imageUrl)" alt="">
               <p class="item-name">
-                {{item.name}}
+                {{item.title}}
               </p>
               <p class="item-owner clearfloat" style="color:#c4c4c4">
                 {{ item.createdTime | formatDate }}
-                <i class="iconfont icon-detail item-detail-icon" title="详情" @click="showDescription(item)"></i>
-                <a :href="item.imageUrl" download><i class="iconfont icon-download item-download-icon" title="下载"></i></a>
+                <i class="iconfont icon-detail item-icon-detail" title="详情" @click="showDescription(item)"></i>
+                <a :href="item.imageUrl" target="_blank" download><i class="iconfont icon-download item-icon-download" title="下载"></i></a>
               </p>
               <!-- <div class="item-tags">
                 <span v-for="(tag, tagIndex) in tags" v-show="contains(item.tags, tag.name)" :key="tagIndex" :style="tag.style" class="item-tag">{{tag.name}}</span>
@@ -89,7 +89,7 @@ export default {
   methods: {
     getPageData () {
       let params = {
-        pege: this.currPage,
+        page: this.currentPage,
         category: this.category
       }
       return Promise
@@ -117,7 +117,7 @@ export default {
     showDescription (item) {
       const h = this.$createElement
       this.$msgbox({
-        title: item.name + '   ' + item.owner,
+        title: item.title,
         message: h('p', null, item.description),
         // [
         //   h('span', null, '内容可以是 '),
@@ -132,7 +132,7 @@ export default {
         id: item.id,
         image: item.image || null,
         imageUrl: `https://schooltest.zunway.pw/media/${item.image_url}` || null,
-        name: item.name || null,
+        title: item.title || null,
         description: item.desc || null,
         createdTime: item.created_time || null,
         owner: item.owner || null,
@@ -147,8 +147,19 @@ export default {
     // 当路由发生变化
     onRouteChange () {
       this.category = this.$route.params.category
+      this.title = this.navBarTitles[this.navBarTitles.findIndex(item => item.name === this.category)].title
       this.currentPage = 1
       this.getPageData()
+    },
+    navSwitch (index, nav) {
+      // Swtich Data
+      let category = {
+        index,
+        title: nav.title,
+        path: nav.path
+      }
+      this.switchCategory(category)
+      this.$router.push({ path: nav.path })
     },
     ...mapMutations([
       'showImagePage',
@@ -158,284 +169,290 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-#gallery-container{
+<style lang="scss" scoped>
+.gallery-container{
   width: 85%;
   margin: auto;
-}
-.gallery-nav *{
-  box-sizing: border-box;
-}
-.gallery-nav{
-  overflow: auto;
-  display: inline-block;
-}
+  .shelf {
+    font-family: "Microsoft Yahei";
+    font-size: 16px;
+    margin: 0 0 0 150px;
+    width: 90%;
 
-.gallery-nav{
-  font-size: 16px;
-  line-height: 1.6;
-  font-family: 'Roboto', sans-serif;
-  vertical-align: top;
-}
+    &-inner {
+      min-height: 328px;
+    }
 
-.gallery-nav .nav-bar {
-  padding: 1em;
-  width: 14em;
-  margin-top: 5px;
-  margin-top: 50px;
-  line-height: 2;
-}
-.gallery-nav .nav-bar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.gallery-nav .nav-bar ul ul {
-  padding-left: 2em;
-}
-.gallery-nav .nav-bar li a {
-  display: inline-block;
-  color: #aaa;
-  padding-left: 5px;
-  text-decoration: none;
-}
+    &-name {
+      margin: 10px 0;
+      font-size: 24px;
+      padding:5px;
+      border-bottom: 3px solid rgb(230, 121, 52);
+    }
 
-.gallery-nav .nav-bar li.visible > a {
-  border-left: 2px solid #111;
-  color: #111;
-}
-.gallery-nav a.current{
-  color: #111
-}
-#shelves{
-  text-align: left;
-  margin: 0 auto;
-  width: 76%;
-  min-width: 1200px;
-}
-.shelf{
-  font-family: "Microsoft Yahei";
-  font-size: 16px;
-  padding: 10px;
-  min-height: 600px;}
-.shelf ul{
-  list-style:none;
-  margin: 0;
-  padding:0;
-  text-align: left;
-}
-.shelf a{
-  text-decoration: none;
-}
-.shelf-name{
-  font-size: 24px;
-  padding:5px;
-  border-bottom: 3px solid rgb(230, 121, 52);
-}
-.shelf-mode-change{
-  float: right;
-}
-.shelf-mode-change span{
-  display: inline-block;
-  margin: 0 3px;
-  padding: 2px;
-  cursor: pointer;
-}
-.shelf-mode-change span:hover{
-  background: rgb(230, 121, 52);
-  color:#fff;
-}
-.shelf-mode-active{
-  background: rgb(230, 121, 52);
-  color:#fff;
-}
-.shelf-item{
-  display: inline-block;
-  vertical-align: top;
-}
-.shelf-item:hover .shelf-item-info{
-  box-shadow: 0 2px 50px rgba(0, 0, 0, 0.25);
-}
-.shelf-item-info{
-  height:auto;
-  padding: 15px 17px 5px;
-}
-.shelf-item-info .item-img{
-  height:200px;
-  width:auto;
-}
-.shelf-item-info p{
-  margin:0;
-}
-.shelf-item-info .item-owner{
-    font-size: 15px;
-}
-.shelf-item-info .item-name{
-  text-align: left;
-  margin: 5px 0;
-  font-weight: bold;
-}
-.item-detail-icon{
-  font-size: 20px;
-  vertical-align: bottom;
-  cursor: pointer;
-  float: right;
-  color:rgb(81, 119, 235);
-}
-.item-download-icon{
-  font-size: 20px;
-  vertical-align: bottom;
-  cursor: pointer;
-  float: right;
-  color:rgb(212, 95, 46);
-}
-.item-edit-icon{
-  font-size: 20px;
-  vertical-align: bottom;
-  cursor: pointer;
-  float: right;
-  color:rgb(18, 111, 235);
-}
-.item-delete-icon{
-  font-size: 20px;
-  vertical-align: bottom;
-  cursor: pointer;
-  float: right;
-  color:rgb(252, 11, 11);
-}
-.item-time{
-  width: 100%;
-  font-size: 14px;
-  color:rgb(159, 159, 158)
-}
-.item-time span{
-  float: right;
-}
-.item-tags{
-  padding: 6px 0;
-  text-align: right;
-}
-.item-tag{
-  font-size: 11px;
-  display: inline-block;
-  padding: 0 6px;
-  border-radius: 8px;
-}
-#shelf-add-item{
-  cursor: pointer;
-  padding: 132px 88px;
-  display: inline-block;
-  font-size: 45px;
-  color: rgb(194, 194, 194);
-  text-align: center;
-  border: 2px dashed rgb(194, 194, 194);
-}
-#shelf-add-item:hover{
-  border: 2px dashed #000;
-  color: #000;
-}
-.clearfloat:after {
-  display: block;
-  clear: both;
-  content: "";
-  visibility: hidden;
-  height: 0
-}
-.clearfloat {
-  zoom: 1
-}
-#add-page {
-  text-align: left;
-  padding-left: 55px;
-}
-#add-page > div{
-  margin: 15px auto;
-  width: 80%;
-}
-#add-page > div > label{
-  margin-right: 15px;
-  letter-spacing: 2px;
-  font-weight: bold;
-  font-size: 18px;
-}
-.img-container{
-  width: calc(80% - 55px);
-  padding-left: 55px;
-  text-align: left;
-}
-.item-description-text + .custom__input{
-  height:150px;
-}
-#add-page .custom__input{
-  width: 80%;
-  box-shadow: 0px 6px 10px 7px rgba(0, 0, 0, 0.1);
-}
-input[type="file"]#imgUrl{
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-#showImg{
-  display: inline-block;
-  vertical-align: bottom;
-  width: 300px;
-  height:300px;
-}
-.image-upload-text,.item-description-text{
-  vertical-align: top;
-}
-.image-upload{
-  display: inline-block;
-  border:2px dashed grey;
-  color: grey;
-  vertical-align: bottom;
-  position: relative;
-  cursor: pointer;
-}
-.image-upload:after {
-  content: 'add';
-  font-family: 'Material Icons';
-  position: absolute;
-  font-size: 2.5rem;
-  color: grey;
-  top: calc(50% - 1.7rem);
-  left: calc(50% - 1.25rem);
-  z-index: -1;
-}
-.image-upload:hover{
-  border:2px dashed #000;
-  color: #000;
-}
-#addTags{
-  vertical-align: -webkit-baseline-middle;
-  cursor: pointer;
-  color:rgb(121, 124, 123);
-}
-#addTags:hover{
-  color:rgb(37, 36, 36);
-}
-.description-dialog{
+    &-mode {
+      &-control {
+        float: right;
 
-}
-.el-message-box__message p{
+        span {
+          display: inline-block;
+          margin: 0 3px;
+          padding: 2px;
+          cursor: pointer;
 
-}
-@media (min-width: 1200px) and (max-width: 1366px) {
-  .shelf-item-info .item-img{
-    height: 142.29px;
+          &:hover {
+            background: rgb(230, 121, 52);
+            color:#fff;
+          }
+        }
+      }
+
+      &-active {
+        background: rgb(230, 121, 52);
+        color:#fff;
+      }
+    }
+
+    &-item {
+      display: inline-block;
+      vertical-align: top;
+
+      &:hover {
+        .shelf-item-info {
+          box-shadow: 0 2px 50px rgba(0, 0, 0, 0.25);
+        }
+      }
+
+      &-info {
+        height:auto;
+        padding: 15px 17px 5px;
+
+        .item-img {
+          height:250px;
+          width:auto;
+        }
+
+        p {
+          margin:0;
+        }
+
+        .item-owner {
+          font-size: 15px;
+          .iconfont {
+            padding: 0 5px;
+          }
+        }
+
+        .item-name {
+          text-align: left;
+          margin: 5px 0;
+          font-weight: bold;
+        }
+
+        .item-icon {
+          &-detail {
+            font-size: 20px;
+            vertical-align: bottom;
+            cursor: pointer;
+            float: right;
+            color:rgb(81, 119, 235);
+          }
+
+          &-download {
+            font-size: 20px;
+            vertical-align: bottom;
+            cursor: pointer;
+            float: right;
+            color:rgb(212, 95, 46);
+          }
+
+          &-edit {
+            font-size: 20px;
+            vertical-align: bottom;
+            cursor: pointer;
+            float: right;
+            color:rgb(18, 111, 235);
+          }
+
+          &-delete {
+            font-size: 20px;
+            vertical-align: bottom;
+            cursor: pointer;
+            float: right;
+            color:rgb(252, 11, 11);
+          }
+        }
+
+        .item-time {
+          width: 100%;
+          font-size: 14px;
+          color:rgb(159, 159, 158)
+
+          span {
+            float: right;
+          }
+        }
+
+        .item-tags{
+          padding: 6px 0;
+          text-align: right;
+          .item-tag{
+            font-size: 11px;
+            display: inline-block;
+            padding: 0 6px;
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+
+    &-add-item{
+      cursor: pointer;
+      padding: 132px 88px;
+      display: inline-block;
+      font-size: 45px;
+      color: rgb(194, 194, 194);
+      text-align: center;
+      border: 2px dashed rgb(194, 194, 194);
+
+      &:hover{
+        border: 2px dashed #000;
+        color: #000;
+      }
+    }
   }
-  .shelf-item-info .item-name{
-    font-size: 15px;
+}
+
+/* Extra Large Devices, Wide Screens */
+@media only screen and (max-width : 1400px) {
+  .gallery-container{
+    width: 90%;
+    margin: auto;
+    .shelf {
+      &-item {
+        display: inline-block;
+        vertical-align: top;
+
+        &:hover {
+          .shelf-item-info {
+            box-shadow: 0 2px 50px rgba(0, 0, 0, 0.25);
+          }
+        }
+
+        &-info {
+          height:auto;
+          padding: 15px 17px 5px;
+
+          .item-img {
+            height:250px;
+            width:auto;
+          }
+
+          p {
+            margin:0;
+          }
+
+          .item-owner {
+            font-size: 15px;
+            .iconfont {
+              padding: 0 5px;
+            }
+          }
+
+          .item-name {
+            text-align: left;
+            margin: 5px 0;
+            font-weight: bold;
+          }
+
+          .item-icon {
+            &-detail {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(81, 119, 235);
+            }
+
+            &-download {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(212, 95, 46);
+            }
+
+            &-edit {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(18, 111, 235);
+            }
+
+            &-delete {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(252, 11, 11);
+            }
+          }
+
+          .item-time {
+            width: 100%;
+            font-size: 14px;
+            color:rgb(159, 159, 158)
+
+            span {
+              float: right;
+            }
+          }
+
+          .item-tags{
+            padding: 6px 0;
+            text-align: right;
+            .item-tag{
+              font-size: 11px;
+              display: inline-block;
+              padding: 0 6px;
+              border-radius: 8px;
+            }
+          }
+        }
+      }
+
+      &-add-item{
+        cursor: pointer;
+        padding: 132px 88px;
+        display: inline-block;
+        font-size: 45px;
+        color: rgb(194, 194, 194);
+        text-align: center;
+        border: 2px dashed rgb(194, 194, 194);
+
+        &:hover{
+          border: 2px dashed #000;
+          color: #000;
+        }
+      }
+    }
   }
-  .shelf-item-info .item-owner{
-    font-size: 14px;
-  }
-  .gallery-nav .nav-bar{
-    width: 11em;
-  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
 
 }
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+
+}
+
 </style>

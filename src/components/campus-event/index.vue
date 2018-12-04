@@ -7,6 +7,11 @@
           {{ title }}
           <small>{{ subTitle }}</small>
         </span>
+        <div class="activity-hints">
+          <span class="pick-up-hint">正在进行</span>
+          <span class="end-hint">已经结束</span>
+          <span class="arrival-hint">准备开始</span>
+        </div>
       </div>
       <div class="campus-events-content">
         <article v-for="(item, index) in events" :key="index"  :class="[ isEnd(item.endTime) ? 'end-event':(isStart(item.startTime) ? 'pickup-appointment':'on-hold-arrival')]">
@@ -83,7 +88,7 @@ export default {
     }
 
     .panel-header{
-      padding: 10px 15px 15px;
+      padding: 2px 15px 3px;
       border: 0;
 
       img {
@@ -99,11 +104,47 @@ export default {
       font-size: 20px;
       font-weight: bold;
       color: #000;
-
       small {
         font-size: 16px;
         font-weight: normal;
         color: #c4c4c4;
+      }
+    }
+
+    .activity-hints {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 65px;
+      span {
+        display: block;
+        font-size: 10px;
+        color: #a8a0a0;
+        position: relative;
+        margin-left: 15px;
+        vertical-align: top;
+        &:before {
+          position: absolute;
+          content: '';
+          width: 10px;
+          height: 8px;
+          left: -15px;
+          top: 4px;
+        }
+        &.pick-up-hint {
+          &:before {
+            background: #fda84b;
+          }
+        }
+        &.end-hint {
+          &:before {
+            background: grey;
+          }
+        }
+        &.arrival-hint {
+          &:before {
+            background: #67c;
+          }
+        }
       }
     }
 
@@ -136,10 +177,10 @@ export default {
         border-left: 5px solid grey;
       }
       article.on-hold-arrival{
-        border-left: 5px solid #fda84b;
+        border-left: 5px solid #67c;
       }
       article.pickup-appointment{
-        border-left: 5px solid #67c;
+        border-left: 5px solid #fda84b;
       }
       article:hover{
         box-shadow:0 0 4px rgba(0,0,0,0.4);

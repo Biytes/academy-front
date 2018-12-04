@@ -97,24 +97,19 @@ export default {
     return {
       searchBar: false,
       searchKey: '',
-      allCategory: [],
       errands: []
     }
   },
-  computed: mapState({
-    headerMenuItemOrder: state => state.headerMenuItemOrder,
+  computed: mapState([
     // errands: state => state.testData.errands,
-    headerMenuItem: state => state.headerMenuItem,
-    currentSection: state => state.currentSection,
-    currentCategory: state => state.currentCategory,
-    currentArticle: state => state.currentArticle
-  }),
+    'headerMenuItem',
+    'currentSection',
+    'currentCategory',
+    'currentArticle'
+  ]),
   mounted () {
-    let requests = []
-    requests.push(getAcademyData('banners'))
-    requests.push(getAcademyData('category'))
-    Promise.all(requests)
-      .then(([errands, allCategory]) => {
+    getAcademyData('banners')
+      .then(errands => {
         errands = errands.data.results
         this.errands = errands.map(item => {
           return {
@@ -123,43 +118,9 @@ export default {
             introduction: item.brief
           }
         })
-        console.log(allCategory)
-        this.createMenu(allCategory.data)
       })
   },
   methods: {
-    createMenu (allCategory) {
-      let headerMenuItemOrder = this.headerMenuItemOrder
-      let filteredMenu = allCategory.filter(item => headerMenuItemOrder.indexOf(item.id) >= 0)
-      let orderedMenu = []
-      for (let i of headerMenuItemOrder) {
-        let index = filteredMenu.findIndex(item => item.id === i)
-        orderedMenu.push(filteredMenu[index])
-      }
-      let complishedMenu = orderedMenu.map(item => {
-        let section = item.name
-        let subMenuItem = allCategory.filter(category => category.section === section)
-        if (subMenuItem.length) {
-          subMenuItem = subMenuItem.map(menuItem => {
-            return {
-              id: menuItem.id,
-              title: menuItem.title,
-              name: menuItem.name,
-              path: `/${section}/${menuItem.name}`
-            }
-          })
-        }
-        return {
-          id: item.id,
-          title: item.title,
-          name: item.name,
-          path: subMenuItem.length ? `${subMenuItem[0].path}` : `/${item.name}`,
-          subMenuItem: subMenuItem.length ? subMenuItem : null
-        }
-      })
-      this.saveMenu(complishedMenu)
-      console.log(complishedMenu)
-    },
     // 改变菜单中 当前页面的tab的样式
     changePage (sectionIndex = '', categoryIndex = 0) {
       let section = ''
@@ -182,6 +143,7 @@ export default {
       } else {
         this.switchCategory()
       }
+      this.switchArticle()
     },
     readMore () {
       console.log(document.documentElement.clientHeight)
@@ -194,6 +156,7 @@ export default {
     ...mapMutations([
       'switchSection',
       'switchCategory',
+      'switchArticle',
       'saveMenu'
     ])
   }

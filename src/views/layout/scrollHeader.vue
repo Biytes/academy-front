@@ -60,17 +60,18 @@ export default {
   methods: {
     handleScroll () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      let targetScrollTop = 0.95 * document.documentElement.clientHeight - 10
+      let targetScrollTop = document.documentElement.clientHeight - 10
       this.isShowScrollHeader = scrollTop >= targetScrollTop
     },
     // 改变菜单中 当前页面的tab的样式
     changePage (sectionIndex = '', categoryIndex = 0) {
       let section = ''
       let category = ''
+      console.log(sectionIndex, categoryIndex)
       if (sectionIndex >= 0) {
         section = {
           index: sectionIndex,
-          title: this.scrollHeaderItem[sectionIndex].menuItem,
+          title: this.scrollHeaderItem[sectionIndex].title,
           path: this.scrollHeaderItem[sectionIndex].path
         }
         this.switchSection(section)
@@ -78,17 +79,19 @@ export default {
       if (categoryIndex >= 0 && this.scrollHeaderItem[sectionIndex].subMenuItem) {
         category = {
           index: categoryIndex,
-          title: this.scrollHeaderItem[sectionIndex].subMenuItem[categoryIndex].menuItem,
+          title: this.scrollHeaderItem[sectionIndex].subMenuItem[categoryIndex].title,
           path: this.scrollHeaderItem[sectionIndex].subMenuItem[categoryIndex].path
         }
         this.switchCategory(category)
       } else {
         this.switchCategory()
       }
+      this.switchArticle()
     },
     ...mapMutations([
       'switchSection',
-      'switchCategory'
+      'switchCategory',
+      'switchArticle'
     ])
   }
 }
