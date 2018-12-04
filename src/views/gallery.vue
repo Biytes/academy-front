@@ -16,7 +16,7 @@
             <div class="shelf-item-info">
               <img class="item-img" :src="item.imageUrl" @click="showImagePage(item.imageUrl)" alt="">
               <p class="item-name">
-                {{item.title}}
+                {{ item.title }}
               </p>
               <p class="item-owner clearfloat" style="color:#c4c4c4">
                 {{ item.createdTime | formatDate }}
@@ -109,7 +109,7 @@ export default {
           }
           this.isLoading = false
         })
-        .catch(error => this.showError(error))
+        .catch(error => console.log(error.response))
     },
     changeShelf (index) {
       this.currentShelf = index

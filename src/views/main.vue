@@ -4,21 +4,24 @@
       <el-row>
         <el-col :span="8">
           <campus-news type="important"
-                      title="学院要闻"
+                      title="学院新闻"
                       subTitle="Top News"
                       routeLink="sss"
-                      :newsData="topNews"></campus-news>
+                      v-if="collegenews"
+                      :newsData="collegenews"></campus-news>
         </el-col>
         <el-col :span="8">
           <campus-news type="comprehensive"
-                      title="综合新闻"
-                      subTitle="Academy News"
+                      title="招生就业"
+                      subTitle="Recruit"
                       routeLink="sss"
-                      :newsData="news"></campus-news>
+                      v-if="recruit"
+                      :newsData="recruit"></campus-news>
         </el-col>
         <el-col :span="8">
-          <campus-event :events="events"
+          <campus-event :events="activity"
                         title="最近活动"
+                        v-if="activity"
                         subTitle="events"></campus-event>
         </el-col>
       </el-row>
@@ -30,21 +33,24 @@
                        title="教学管理"
                        subTitle="Education"
                        routeLink="sss"
-                       :newsData="educationManagement"></campus-news>
+                       v-if="educationnews"
+                       :newsData="educationnews"></campus-news>
         </el-col>
         <el-col :span="8">
           <campus-news type="comprehensive"
                        title="学生工作"
                        subTitle="Student Work"
                        routeLink="sss"
-                       :newsData="studentWork"></campus-news>
+                       v-if="studentnews"
+                       :newsData="studentnews"></campus-news>
         </el-col>
         <el-col :span="8">
           <campus-news type=""
-                       title="招生就业"
-                       subTitle="Recruit"
+                       title="对外合作"
+                       subTitle="Cooperate"
                        routeLink="sss"
-                       :newsData="recruitInfo"></campus-news>
+                       v-if="cooperateinfo"
+                       :newsData="cooperateinfo"></campus-news>
         </el-col>
       </el-row>
     </section>
@@ -57,9 +63,9 @@
                           height="350px"
                           indicator-position="outside"
                           trigger="click" @change="onTeacherCarouselChange">
-              <el-carousel-item v-for="teacher in teacherCarousel"
+              <el-carousel-item v-for="teacher in teacherinfo"
                                 :key="teacher.id"
-                                :style="{backgroundImage: teacher.backgroundUrl}">
+                                :style="{ backgroundImage: 'url(' + teacher.imageUrl + ')' }">
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -77,7 +83,7 @@
             <span class="spliter"></span>
             <span class="teacher-name">{{ currTeacher.name }}</span>
             <span class="teacher-position"> {{ currTeacher.position }}</span>
-            <p class="teacher-introduction"> {{ currTeacher.introduction }} </p>
+            <p class="teacher-introduction"> {{ currTeacher.brief }} </p>
           </div>
         </el-col>
       </el-row>
@@ -88,141 +94,10 @@
 import '@css/main/majorSet.css'
 import '@css/main/teacherCarousel.css'
 import { mapState } from 'vuex' // 引入mapState
+import { getAcademyData } from '@api/index'
 export default {
   data () {
     return {
-      teacherCarousel: [
-        {
-          id: 1,
-          title: 'First Panel',
-          name: '李仲麟',
-          position: '计算机学院顾问',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec1.jpg') + ')'
-        },
-        {
-          id: 2,
-          title: 'Second Panel',
-          name: '邓春晖',
-          position: '计算机学院院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec2.jpg') + ')'
-        },
-        {
-          id: 3,
-          title: 'Third Panel',
-          name: '岑有文',
-          position: '计算机学院副院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec3.jpg') + ')'
-        },
-        {
-          id: 4,
-          title: 'Fourth Panel',
-          name: '蔡沂',
-          position: '计算机学院副院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec4.jpg') + ')'
-        },
-        {
-          id: 5,
-          title: 'Fifth Panel',
-          name: '周小明',
-          position: '计算机科学与技术教研室副主任，讲师',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec5.jpg') + ' )'
-        },
-        {
-          id: 6,
-          title: 'Second Panel',
-          name: '邓春晖',
-          position: '计算机学院院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec2.jpg') + ')'
-        },
-        {
-          id: 7,
-          title: 'Third Panel',
-          name: '岑有文',
-          position: '计算机学院副院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec3.jpg') + ')'
-        },
-        {
-          id: 8,
-          title: 'Fourth Panel',
-          name: '蔡沂',
-          position: '计算机学院副院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec4.jpg') + ')'
-        },
-        {
-          id: 9,
-          title: 'Fifth Panel',
-          name: '周小明',
-          position: '计算机科学与技术教研室副主任，讲师',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec5.jpg') + ' )'
-        },
-        {
-          id: 10,
-          title: 'Fifth Panel',
-          name: '周小明',
-          position: '计算机科学与技术教研室副主任，讲师',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec5.jpg') + ' )'
-        },
-        {
-          id: 11,
-          title: 'Second Panel',
-          name: '邓春晖',
-          position: '计算机学院院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec2.jpg') + ')'
-        },
-        {
-          id: 12,
-          title: 'Third Panel',
-          name: '岑有文',
-          position: '计算机学院副院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec3.jpg') + ')'
-        },
-        {
-          id: 13,
-          title: 'Fourth Panel',
-          name: '蔡沂',
-          position: '计算机学院副院长',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec4.jpg') + ')'
-        },
-        {
-          id: 14,
-          title: 'Fifth Panel',
-          name: '周小明',
-          position: '计算机科学与技术教研室副主任，讲师',
-          introduction: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem aspernatur id, fuga quaerat laboriosam architecto maxime autem pariatur. Recusandae dolores iusto tempora cum libero, fugit inventore reiciendis laborum quo et officia quis voluptatibus non enim, exercitatione',
-          backgroundUrl: 'url(' + require('@img/teacher/tec5.jpg') + ' )'
-        }
-      ],
-      majorList: [
-        {
-          name: '软件工程',
-          brief: 'C程序设计基础、数据结构、计算机组成原理、用、Java面向对象程序设计、人机交互'
-        },
-        {
-          name: '计算机科学与技术',
-          brief: 'Unieke concepten &amp; (web)ontwerpen'
-        },
-        {
-          name: '网络工程',
-          brief: 'Unieke concepten &amp; (web)ontwerpen'
-        },
-        {
-          name: '数学/信息与计算科学',
-          brief: 'Unieke concepten &amp; (web)ontwerpen'
-        }
-      ],
       highlights: [
         {
           imgUrl: require('@img/appearance/2016.jpg'),
@@ -273,7 +148,23 @@ export default {
           year: 'year'
         }
       ],
-      currTeacher: {}
+      currTeacher: {},
+      sections: [
+        'collegenews', // 学院新闻
+        'recruit', // 招生信息
+        'activity', // 活动
+        'educationnews', // 教育信息
+        'studentnews', // 学生工作
+        'cooperateinfo', // 对外合作
+        'teacherinfo' // 教师
+      ],
+      collegenews: [],
+      recruit: [],
+      activity: [],
+      educationnews: [],
+      studentnews: [],
+      cooperateinfo: [],
+      teacherinfo: []
     }
   },
   computed: {
@@ -283,21 +174,60 @@ export default {
       return a
     },
     ...mapState({
-      item: state => state.testData.article,
-      topNews: state => state.testData.topNews.slice(0, 6),
-      news: state => state.testData.news.slice(0, 9),
-      events: state => state.testData.events,
-      educationManagement: state => state.testData.educationManagement.slice(0, 6),
-      studentWork: state => state.testData.studentWork.slice(0, 9),
-      recruitInfo: state => state.testData.recruitInfo.slice(0, 9)
     })
   },
   mounted () {
+    let requests = []
+    for (let i of this.sections) {
+      requests.push(getAcademyData(i).catch(error => error))
+    }
+    Promise.all(requests)
+      .then(values => {
+        console.log(values)
+        this.collegenews = values[0].data.results.slice(0, 6).map(item => this.processArticleData(item, 0))
+        this.recruit = values[1].data.results.slice(0, 9).map(item => this.processArticleData(item, 1))
+        this.activity = values[2].data.results.map(item => this.processEventData(item, 2))
+        this.educationnews = values[3].data.results.slice(0, 6).map(item => this.processArticleData(item, 3))
+        this.studentnews = values[4].data.results.slice(0, 9).map(item => this.processArticleData(item, 4))
+        this.cooperateinfo = values[5].data.results.slice(0, 9).map(item => this.processArticleData(item, 5))
+        this.teacherinfo = values[6].data.map(item => this.processTeacherData(item, 6))
+      })
   },
   methods: {
     onTeacherCarouselChange (index) {
       // 返回的是index 索引
-      this.currTeacher = this.teacherCarousel[index]
+      this.currTeacher = this.teacherinfo[index]
+    },
+    processArticleData (item, index) {
+      return {
+        id: item.id,
+        path: `/${this.sections[index]}/${item.category}/${item.id}`,
+        brief: item.preview,
+        title: item.title,
+        imageUrl: `https://schooltest.zunway.pw/media/${item.image_url}` || null,
+        time: item.created_time
+      }
+    },
+    processTeacherData (item, index) {
+      return {
+        id: item.id || null,
+        imageUrl: `https://schooltest.zunway.pw/media/${item.image_url}` || null,
+        image: item.image || null,
+        name: item.name || null,
+        brief: item.brief || null,
+        position: item.position || null,
+        email: item.email || null,
+        content: item.content || null
+      }
+    },
+    processEventData (item, index) {
+      return {
+        id: item.id || null,
+        title: item.title || null,
+        brief: item.desc || null,
+        endTime: item.end_date || null,
+        startTime: item.start_date || null
+      }
     }
   }
 }

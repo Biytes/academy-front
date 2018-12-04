@@ -105,7 +105,7 @@ export default {
           }
           this.isLoading = false
         })
-        .catch(error => this.showError(error))
+        .catch(error => console.log(error.response))
     },
     processData (item) {
       return {

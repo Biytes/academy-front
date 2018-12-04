@@ -10,10 +10,10 @@
       </div>
       <div class="campus-news-content">
         <a class="img-news clearfloat" v-for="(item, index) in newsData" :key="index" v-if="index === 0 && type === 'important'">
-          <img v-if="item.imgUrl" :src="item.imgUrl" alt="">
+          <img v-if="item.imageUrl" :src="item.imageUrl" alt="">
           <span class="img-title"><a href="">{{ item.title }}</a></span>
           <span class="img-describe">{{ item.brief }}</span>
-          <span class="img-news-date">{{ item.time }}</span>
+          <span class="img-news-date">{{ item.time | formatDate }}</span>
         </a>
         <ul>
           <el-tooltip v-for="(item, index) in newsData"
@@ -28,7 +28,7 @@
                   <a :href="item.path" >{{ item.title }}</a>
                 </el-col>
                 <el-col :span="4">
-                  <span class="campus-news-content-date">{{ item.time }}</span>
+                  <span class="campus-news-content-date">{{ item.time | formatDate}}</span>
                 </el-col>
               </el-row>
             </li>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { dateFormatter } from '@utils/index'
 export default {
   name: 'campus-news',
   props: ['title', 'subTitle', 'type', 'newsData', 'routeLink'],
@@ -51,6 +52,11 @@ export default {
   computed: {
     className () {
       return 'campus-news ' + this.type
+    }
+  },
+  filters: {
+    formatDate: date => { // 时间转变格式
+      return dateFormatter(date, 'M月d日')
     }
   }
 }
@@ -181,7 +187,7 @@ export default {
             text-align: right;
             display: inline-block;
             height: 20px;
-            font-size: 13px;
+            font-size: 12px;
             color: #a8a0a0;
             vertical-align: bottom;
           }

@@ -69,14 +69,14 @@ export default {
           console.log(res)
           if (res.status === 200) {
             let data = res.data
-            this.pageItems = data.results.map(item => this.processData(item))
+            this.pageItems = data.map(item => this.processData(item))
             console.log(this.pageItems)
             this.total = data.count
             this.pageSize = this.total < 10 ? this.total : 10
           }
           this.isLoading = false
         })
-        .catch(error => this.showError(error))
+        .catch(error => console.log(error))
     },
     processData (item) {
       return {
