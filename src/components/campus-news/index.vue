@@ -25,7 +25,7 @@
             <li :id="item.id">
               <el-row>
                 <el-col :span="20">
-                  <a :href="item.path" >{{ item.title }}</a>
+                  <router-link tag="a" :to="item.path" >{{ item.title }}</router-link>
                 </el-col>
                 <el-col :span="4">
                   <span class="campus-news-content-date">{{ item.time | formatDate}}</span>
