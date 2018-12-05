@@ -73,10 +73,11 @@ export default {
     },
     goToCategory () {
       this.switchArticle()
+      let item = this.headerMenuItem[this.currentSection.index].subMenuItem
       this.switchCategory({
         index: 0,
-        title: this.headerMenuItem[this.currentSection.index].subMenuItem[0].title,
-        path: this.headerMenuItem[this.currentSection.index].subMenuItem[0].path
+        title:  item ? item[0].title : '',
+        path: item ? item[0].path : '',
       })
     },
     onRouteChange () {

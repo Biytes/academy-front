@@ -10,6 +10,14 @@
       </aside>
       <div class="news-container" v-loading="isLoading">
         <div class="figure-container" v-if="pageItems.length">
+          <el-row class="search-bar">
+            <el-col>
+              <el-input placeholder="请输入要搜索的关键字"
+                        v-model="searchKey"
+                        size="mini"
+                        @keyup.enter.native="getPageData"></el-input>
+            </el-col>
+          </el-row>
           <div v-for="news in pageItems"
                class="news-figure"
                :key="news.id">
@@ -58,7 +66,8 @@ export default {
       sectionMenuItem: null,
       currentPage: 1,
       total: 0,
-      pageSize: 10
+      pageSize: 10,
+      searchKey: ''
     }
   },
   watch: {
@@ -85,7 +94,8 @@ export default {
       // 获取页面数据
       let params = {
         category: this.category,
-        page: this.currentPage
+        page: this.currentPage,
+        search: this.searchKey
       }
 
       return Promise

@@ -5,6 +5,14 @@
   margin: 0 auto;
   .figure-container {
     padding-top: 15px;
+    .search-bar {
+      width: 800px;
+      margin: 10px auto;
+      .el-col {
+        width: 300px;
+        float: right;
+      }
+    }
     .news-figure {
 
       padding: 10px 40px;
@@ -103,6 +111,9 @@
     width: 1000px;
     .figure-container {
       padding-top: 15px;
+      .search-bar {
+        width: 600px;
+      }
       .news-figure {
         width: 600px;
         padding: 10px 20px;
