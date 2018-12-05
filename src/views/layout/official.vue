@@ -76,8 +76,8 @@ export default {
       let item = this.headerMenuItem[this.currentSection.index].subMenuItem
       this.switchCategory({
         index: 0,
-        title:  item ? item[0].title : '',
-        path: item ? item[0].path : '',
+        title: item ? item[0].title : '',
+        path: item ? item[0].path : ''
       })
     },
     onRouteChange () {
