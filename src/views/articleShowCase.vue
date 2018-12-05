@@ -1,7 +1,15 @@
 <template lang="html">
   <div v-if="article" v-loading="isLoading" class="article-container">
-    <h3 class="article-title">{{  article.title }}</h3>
+    <h3 class="article-title">{{ article.title }}</h3>
     <div v-html="article.content" class="article-content"></div>
+    <div class="attached-file" v-if="article.file_detail">
+      <h3 v-if="article.file_detail.length">附件:</h3>
+      <a v-for="file in article.file_detail"
+         :href="file.file"
+         download
+         :key="file.id"
+         target="_blank"><i class="iconfont icon-file" style="padding: 0 5px 0 0;"></i>{{ file.name }}</a>
+    </div>
   </div>
 </template>
 
@@ -59,7 +67,7 @@ export default {
   width: 900px;
   min-height: 80vh;
   margin: 0 auto;
-  article {
+  .article {
     &-title {
       text-align: center;
     }
@@ -68,6 +76,20 @@ export default {
       img {
         width: 90%;
         margin: 0 auto;
+      }
+    }
+  }
+
+  .attached-file {
+    margin: 30px 0 0;
+    h3 {
+      margin: 10px 0;
+    }
+    a {
+      display: block;
+      padding: 5px;
+      &:hover {
+        color: rgb(20, 115, 223);
       }
     }
   }

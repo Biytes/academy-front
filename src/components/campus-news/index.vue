@@ -21,7 +21,8 @@
                       class="item"
                       effect="dark"
                       :content="item.brief"
-                      placement="top-end">
+                      placement="top-end"
+                      :disabled="!item.brief">
             <li :id="item.id">
               <el-row>
                 <el-col :span="20">

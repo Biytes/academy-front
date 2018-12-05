@@ -211,7 +211,7 @@ export default {
             height:100%;
             li {
               padding: 6px 7px;
-              text-align: center;
+              text-align: left;
               cursor: pointer;
               /* transition: background 1s; */
 
