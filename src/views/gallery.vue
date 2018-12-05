@@ -180,7 +180,7 @@ export default {
     width: 90%;
 
     &-inner {
-      min-height: 328px;
+      min-height: 60vh;
     }
 
     &-name {
@@ -344,7 +344,7 @@ export default {
           padding: 15px 17px 5px;
 
           .item-img {
-            height:250px;
+            height:200px;
             width:auto;
           }
 
@@ -442,7 +442,119 @@ export default {
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
+  .gallery-container{
+    width: 90%;
+    margin: auto;
+    .shelf {
+      &-item {
+        display: inline-block;
+        vertical-align: top;
 
+        &:hover {
+          .shelf-item-info {
+            box-shadow: 0 2px 50px rgba(0, 0, 0, 0.25);
+          }
+        }
+
+        &-info {
+          height:auto;
+          padding: 15px 17px 5px;
+
+          .item-img {
+            height:150px;
+            width:auto;
+          }
+
+          p {
+            margin:0;
+          }
+
+          .item-owner {
+            font-size: 15px;
+            .iconfont {
+              padding: 0 5px;
+            }
+          }
+
+          .item-name {
+            text-align: left;
+            margin: 5px 0;
+            font-weight: bold;
+          }
+
+          .item-icon {
+            &-detail {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(81, 119, 235);
+            }
+
+            &-download {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(212, 95, 46);
+            }
+
+            &-edit {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(18, 111, 235);
+            }
+
+            &-delete {
+              font-size: 20px;
+              vertical-align: bottom;
+              cursor: pointer;
+              float: right;
+              color:rgb(252, 11, 11);
+            }
+          }
+
+          .item-time {
+            width: 100%;
+            font-size: 14px;
+            color:rgb(159, 159, 158)
+
+            span {
+              float: right;
+            }
+          }
+
+          .item-tags{
+            padding: 6px 0;
+            text-align: right;
+            .item-tag{
+              font-size: 11px;
+              display: inline-block;
+              padding: 0 6px;
+              border-radius: 8px;
+            }
+          }
+        }
+      }
+
+      &-add-item{
+        cursor: pointer;
+        padding: 132px 88px;
+        display: inline-block;
+        font-size: 45px;
+        color: rgb(194, 194, 194);
+        text-align: center;
+        border: 2px dashed rgb(194, 194, 194);
+
+        &:hover{
+          border: 2px dashed #000;
+          color: #000;
+        }
+      }
+    }
+  }
 }
 
 /* Medium Devices, Desktops */
