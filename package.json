@@ -5,18 +5,22 @@
   "author": "computer-association-GCU",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --open",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
-    "cropper": "^4.0.0-beta",
     "element-ui": "^2.0.11",
-    "jquery": "^2.0.1",
-    "material-design-icons": "^3.0.1",
+    "jquery": "^3.3.1",
     "vue": "^2.5.2",
+    "vue-axios": "^2.1.3",
+    "http-proxy-middleware": "^0.19.0",
+    "es6-promise": "^4.2.5",
+    "sass-loader": "^7.1.0",
+    "node-sass": "^4.10.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

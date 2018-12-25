@@ -1,0 +1,84 @@
+.campus-teacher {
+
+  .campus-teacher-container {
+    width: 1200px;
+    margin: 0 auto;
+
+    .campus-teacher-carousel {
+      margin: 30px 0;
+      .el-carousel__item {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+    
+      .el-carousel__indicators{
+        margin-top: 10px;
+        display: none;
+      }
+    }
+    
+    .campus-teacher-info {
+      height: 400px;
+      box-sizing: border-box;
+      padding: 30px 60px 30px 20px;
+
+      .teacher-info-box {
+        color: #333;
+        overflow: hidden;
+        span {
+          display: block;
+        }
+
+        .teacher-header{
+          padding: 10px 15px 15px;
+          border: 0;
+          img {
+            width:22px;
+            height: 22px;
+            position: relative;
+            top: 3px;
+            left:0px;
+          }
+
+          .mytitle {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+
+            small {
+              font-size: 16px;
+              font-weight: normal;
+              color: #c4c4c4;
+            }
+          }
+        }
+
+        .spliter {
+          height: 3px;
+          width: 100%;
+          background: #3559c6;
+          margin-bottom: 20px;
+        }
+        .teacher {
+          &-name {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+          }
+  
+          &-position {
+            padding: 8px 15px;
+          }
+  
+          &-introduction {
+            padding: 15px;
+            line-height: 1.5;
+            border-left: 6px solid #f0f0f0;
+          }
+        }
+      }
+    }
+  }
+}
