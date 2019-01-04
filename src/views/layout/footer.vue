@@ -19,7 +19,7 @@
       <div class="wrapper-footer-bottom">
         <el-row>
           <el-col :span="12" align="left" class="footer-bottom-left">
-            <h4>Copyright <a href="../../Backstage/dist/index.html">@</a> 2018华南理工大学广州学院 计算机工程学院</h4>
+            <h4>Copyright <a href="/back">@</a> 2018华南理工大学广州学院 计算机工程学院</h4>
           </el-col>
           <el-col :span="12" align="right" class="footer-bottom-right">
             <ul>

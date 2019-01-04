@@ -5,9 +5,16 @@ import routes from './routes'
 Vue.use(Router)
 
 const router = new Router({
-  // mode: 'history',
+  mode: 'history',
   base: __dirname,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
 })
 
 export default router

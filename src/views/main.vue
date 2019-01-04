@@ -6,7 +6,7 @@
           <campus-news type="important"
                       title="学院新闻"
                       subTitle="Top News"
-                      routeLink="sss"
+                      routeLink="collegenews"
                       v-if="collegenews"
                       :newsData="collegenews"></campus-news>
         </el-col>
@@ -14,7 +14,7 @@
           <campus-news type="comprehensive"
                       title="招生就业"
                       subTitle="Recruit"
-                      routeLink="sss"
+                      routeLink="recruit/recruitInfo"
                       v-if="recruit"
                       :newsData="recruit"></campus-news>
         </el-col>
@@ -32,7 +32,7 @@
           <campus-news type="important"
                        title="教学管理"
                        subTitle="Education"
-                       routeLink="sss"
+                       routeLink="educationnews/file"
                        v-if="educationnews"
                        :newsData="educationnews"></campus-news>
         </el-col>
@@ -40,7 +40,7 @@
           <campus-news type="comprehensive"
                        title="学生工作"
                        subTitle="Student Work"
-                       routeLink="sss"
+                       routeLink="studentnews/condition"
                        v-if="studentnews"
                        :newsData="studentnews"></campus-news>
         </el-col>
@@ -48,7 +48,7 @@
           <campus-news type=""
                        title="对外合作"
                        subTitle="Cooperate"
-                       routeLink="sss"
+                       routeLink="cooperateinfo/international"
                        v-if="cooperateinfo"
                        :newsData="cooperateinfo"></campus-news>
         </el-col>
@@ -98,56 +98,6 @@ import { getAcademyData } from '@api/index'
 export default {
   data () {
     return {
-      highlights: [
-        {
-          imgUrl: require('@img/appearance/2016.jpg'),
-          detail: '计算机工程学院学生工作大会',
-          time: '2016年**月**日',
-          year: '2016'
-        },
-        {
-          imgUrl: require('@img/appearance/2015.jpg'),
-          detail: '第八届中国大学生计算机设计大赛',
-          time: '2015年**月**日',
-          year: '2015'
-        },
-        {
-          imgUrl: require('@img/appearance/8.jpg'),
-          detail: '粤港澳大学生移动互联网创新设计大赛',
-          time: '2014年**月**日',
-          year: '2014'
-        },
-        {
-          imgUrl: require('@img/appearance/4.jpg'),
-          detail: 'detail',
-          time: 'time',
-          year: 'year'
-        },
-        {
-          imgUrl: require('@img/appearance/5.jpg'),
-          detail: 'detail',
-          time: 'time',
-          year: 'year'
-        },
-        {
-          imgUrl: require('@img/appearance/6.jpg'),
-          detail: 'detail',
-          time: 'time',
-          year: 'year'
-        },
-        {
-          imgUrl: require('@img/appearance/3.jpg'),
-          detail: 'detail',
-          time: 'time',
-          year: 'year'
-        },
-        {
-          imgUrl: require('@img/appearance/7.jpg'),
-          detail: 'detail',
-          time: 'time',
-          year: 'year'
-        }
-      ],
       currTeacher: {},
       sections: [
         'collegenews', // 学院新闻

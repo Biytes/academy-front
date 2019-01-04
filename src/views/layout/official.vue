@@ -74,6 +74,7 @@ export default {
     goToCategory () {
       this.switchArticle()
       let item = this.headerMenuItem[this.currentSection.index].subMenuItem
+      console.log(item)
       this.switchCategory({
         index: 0,
         title: item ? item[0].title : '',
@@ -88,9 +89,12 @@ export default {
     },
     locateCategory () {
       // 当headerMenuItem 加载完才执行
-      let section = this.$route.name || ''
+      let section = this.$route.name === 'articleShowCase' ? this.$route.params.section : this.$route.name
       let category = this.$route.params.category || ''
       let sectionIndex = this.headerMenuItem.findIndex(item => item.name === section)
+      console.log(section)
+      console.log(this.headerMenuItem)
+      console.log(sectionIndex)
       // 预加载加载当前section
       section = {
         index: sectionIndex,
@@ -99,7 +103,7 @@ export default {
       }
       this.switchSection(section)
       // 如果有category 预加载当前category
-      if (category) {
+      if (category !== 'undefined') {
         let subMenuItem = this.headerMenuItem[sectionIndex].subMenuItem
         let categoryIndex = subMenuItem.findIndex(item => item.name === category)
         category = {

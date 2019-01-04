@@ -15,7 +15,7 @@
 
 <script>
 import { editAcademyData } from '@api/index'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -27,11 +27,17 @@ export default {
       isLoading: true
     }
   },
+  computed: {
+    ...mapState([
+      'headerMenuItem'
+    ])
+  },
   mounted () {
     console.log(this.$route)
     this.section = this.$route.params.section
     this.category = this.$route.params.category
     this.id = this.$route.params.id
+    this.locateCategory()
 
     editAcademyData(this.section, this.id)
       .then(res => {
@@ -43,6 +49,7 @@ export default {
             path: this.$route.fullPath
           }
           this.switchArticle(article)
+          document.title = this.article.title
         }
         this.isLoading = false
       })
@@ -55,7 +62,34 @@ export default {
       })
   },
   methods: {
+    locateCategory () {
+      // 当headerMenuItem 加载完才执行
+      let section = this.$route.name === 'articleShowCase' ? this.$route.params.section : this.$route.params.name
+      let category = this.$route.params.category || ''
+      let sectionIndex = this.headerMenuItem.findIndex(item => item.name === section)
+      // 预加载加载当前section
+      section = {
+        index: sectionIndex,
+        title: this.headerMenuItem[sectionIndex].title,
+        path: this.headerMenuItem[sectionIndex].path
+      }
+      this.switchSection(section)
+      // 如果有category 预加载当前category
+      if (category !== 'undefined') {
+        let subMenuItem = this.headerMenuItem[sectionIndex].subMenuItem
+        let categoryIndex = subMenuItem.findIndex(item => item.name === category)
+        category = {
+          index: categoryIndex,
+          title: subMenuItem[categoryIndex].title,
+          path: subMenuItem[categoryIndex].path
+        }
+        this.switchCategory(category)
+      }
+      this.isCategoryLocated = true
+    },
     ...mapMutations([
+      'switchSection',
+      'switchCategory',
       'switchArticle'
     ])
   }

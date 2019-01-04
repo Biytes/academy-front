@@ -25,7 +25,7 @@
             <li><i class="iconfont icon-scan"></i><img src="@img/scan/scan-code.jpg"  alt=""></li>
             <li><a href="#" target="_blank"><i class="iconfont icon-email"></i></a></li>
             <li><a href="http://10.5.1.246:8080/clock/" target="_blank"><i class="iconfont icon-alarm"></i></a></li>
-            <li><i class="iconfont icon-search" @click="searchBar = true"></i></li>
+            <!-- <li><i class="iconfont icon-search" @click="searchBar = true"></i></li> -->
           </ul>
         </div>
         <div class="main-menu-bottom">
@@ -66,8 +66,9 @@
                   :interval="10000">
       <el-carousel-item v-for="(errand,index) in errands"
                         :key="index"
-                        :style="{backgroundImage: 'url(' + errand.imageUrl + ')'}">
-          <div class="errands-introduction">
+                        :style="{backgroundImage: 'url(' + errand.imageUrl + ')'}"
+                        @click="jumpToArticle(errand.link)">
+          <div class="errands-introduction" @>
             <h3>{{errand.title}}</h3>
             <p>{{errand.introduction}}</p>
           </div>
@@ -148,6 +149,11 @@ export default {
     readMore () {
       console.log(document.documentElement.clientHeight)
       $('html, body').animate({scrollTop: 0.95 * document.documentElement.clientHeight}, 800)
+    },
+    jumpToArticle (path) {
+      if (path) {
+        window.open(path)
+      }
     },
     search () {
       return 'do something'
