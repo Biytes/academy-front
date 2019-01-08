@@ -77,13 +77,15 @@ export default {
       // 如果有category 预加载当前category
       if (category !== 'undefined') {
         let subMenuItem = this.headerMenuItem[sectionIndex].subMenuItem
-        let categoryIndex = subMenuItem.findIndex(item => item.name === category)
-        category = {
-          index: categoryIndex,
-          title: subMenuItem[categoryIndex].title,
-          path: subMenuItem[categoryIndex].path
+        if (subMenuItem) {
+          let categoryIndex = subMenuItem.findIndex(item => item.name === category)
+          category = {
+            index: categoryIndex,
+            title: subMenuItem[categoryIndex].title,
+            path: subMenuItem[categoryIndex].path
+          }
+          this.switchCategory(category)
         }
-        this.switchCategory(category)
       }
       this.isCategoryLocated = true
     },

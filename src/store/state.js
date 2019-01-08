@@ -19,7 +19,7 @@ export default {
     path: ''
   },
   headerMenuItem: '',
-  headerMenuItemOrder: [1, 10, 11, 8, 5, 6, 7, 14, 33] // 菜单顺序
+  headerMenuItemOrder: [1, 10, 14, 5, 3, 2, 4, 7, 8] // 菜单顺序
 }
 
 // id: 1  学院简介

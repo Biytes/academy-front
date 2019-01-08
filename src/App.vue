@@ -17,9 +17,7 @@ export default {
   ]),
   mounted () {
     getAcademyData('category')
-      .then(res => {
-        this.createMenu(res.data)
-      })
+      .then(res => this.createMenu(res.data))
       .catch(error => console.log(error.response))
   },
   methods: {
