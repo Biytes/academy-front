@@ -66,9 +66,11 @@
                   :interval="10000">
       <el-carousel-item v-for="(errand,index) in errands"
                         :key="index"
-                        :style="{backgroundImage: 'url(' + errand.imageUrl + ')'}"
-                        @click="jumpToArticle(errand.link)">
-          <div class="errands-introduction" @>
+                        :style="{backgroundImage: 'url(' + errand.imageUrl + ')'}">
+          <div
+            @click="jumpToArticle(errand.link)"
+            class="errands-introduction"
+          >
             <h3>{{errand.title}}</h3>
             <p>{{errand.introduction}}</p>
           </div>
@@ -116,7 +118,8 @@ export default {
           return {
             title: item.title,
             imageUrl: `https://schooltest.zunway.pw/media/${item.image_url}` || null,
-            introduction: item.brief
+            introduction: item.brief,
+            link: item.link
           }
         })
       })
@@ -152,7 +155,11 @@ export default {
     },
     jumpToArticle (path) {
       if (path) {
-        window.open(path)
+        let l = document.createElement('a')
+        l.href = path
+        this.$router.push({
+          path: l.pathname
+        })
       }
     },
     search () {
