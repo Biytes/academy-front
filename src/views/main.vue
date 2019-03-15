@@ -83,7 +83,10 @@
             <span class="spliter"></span>
             <span class="teacher-name">{{ currTeacher.name }}</span>
             <span class="teacher-position"> {{ currTeacher.position }}</span>
-            <p class="teacher-introduction"> {{ currTeacher.brief }} </p>
+            <p
+              class="teacher-introduction"
+              v-html="currTeacher.brief"
+            />
           </div>
         </el-col>
       </el-row>
