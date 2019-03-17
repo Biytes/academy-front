@@ -54,7 +54,7 @@ export default {
         this.isLoading = false
       })
       .catch(error => {
-        console.log(error.response)
+        console.log(JSON.stringify(error))
         if (error.response.status === 404) {
           this.$message.error('该文章不存在')
           this.$router.go(-1)

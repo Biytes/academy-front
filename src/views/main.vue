@@ -132,7 +132,7 @@ export default {
   mounted () {
     let requests = []
     for (let i of this.sections) {
-      requests.push(getAcademyData(i).catch(error => error))
+      requests.push(getAcademyData(i).catch(error => console.log(JSON.stringify(error))))
     }
     Promise.all(requests)
       .then(values => {

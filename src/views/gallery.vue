@@ -109,7 +109,7 @@ export default {
           }
           this.isLoading = false
         })
-        .catch(error => console.log(error.response))
+        .catch(error => console.log(JSON.stringify(error)))
     },
     changeShelf (index) {
       this.currentShelf = index
