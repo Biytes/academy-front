@@ -35,6 +35,7 @@ import imgShowcase from '@views/layout/showImg.vue'
 export default {
   mounted () {
     this.onRouteChange()
+    console.log('official')
     console.log(this.$route)
     if (this.$route.path !== '/') {
       this.locateCategory()
@@ -89,6 +90,7 @@ export default {
     },
     locateCategory () {
       // 当headerMenuItem 加载完才执行
+      console.log('locateCategory')
       let section = this.$route.name === 'articleShowCase' ? this.$route.params.section : this.$route.name
       let category = this.$route.params.category || ''
       let sectionIndex = this.headerMenuItem.findIndex(item => item.name === section)
@@ -103,8 +105,9 @@ export default {
       }
       this.switchSection(section)
       // 如果有category 预加载当前category
-      if (category !== 'undefined') {
+      if (category !== '') {
         let subMenuItem = this.headerMenuItem[sectionIndex].subMenuItem
+        console.log(subMenuItem, category)
         let categoryIndex = subMenuItem.findIndex(item => item.name === category)
         category = {
           index: categoryIndex,

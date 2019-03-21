@@ -24,7 +24,7 @@
           <ul>
             <li><i class="iconfont icon-scan"></i><img src="@img/scan/scan-code.jpg"  alt=""></li>
             <li><a href="#" target="_blank"><i class="iconfont icon-email"></i></a></li>
-            <li><a href="http://10.5.1.246:8080/clock/" target="_blank"><i class="iconfont icon-alarm"></i></a></li>
+            <!-- <li><a href="http://10.5.1.246:8080/clock/" target="_blank"><i class="iconfont icon-alarm"></i></a></li> -->
             <!-- <li><i class="iconfont icon-search" @click="searchBar = true"></i></li> -->
           </ul>
         </div>
@@ -56,6 +56,7 @@
                 </div>
               </div>
             </li>
+            <li><a href="http://10.5.1.246:8080/clock/" target="_blank_">考试时钟</a></li>
           </ul>
         </div>
       </div>
@@ -127,6 +128,7 @@ export default {
   methods: {
     // 改变菜单中 当前页面的tab的样式
     changePage (sectionIndex = '', categoryIndex = 0) {
+      $('html, body').animate({scrollTop: document.documentElement.clientHeight}, 800)
       let section = ''
       let category = ''
       if (sectionIndex >= 0) {
@@ -151,7 +153,7 @@ export default {
     },
     readMore () {
       console.log(document.documentElement.clientHeight)
-      $('html, body').animate({scrollTop: 0.95 * document.documentElement.clientHeight}, 800)
+      $('html, body').animate({scrollTop: document.documentElement.clientHeight}, 800)
     },
     jumpToArticle (path) {
       if (path) {

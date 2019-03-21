@@ -1,5 +1,5 @@
 <template lang="html">
-  <router-view v-if="headerMenuItem"></router-view>
+  <router-view v-if="isHeaderMenuItemReady"></router-view>
 </template>
 
 <script>
@@ -9,6 +9,7 @@ import { getAcademyData } from '@api/index'
 export default {
   data () {
     return {
+      isHeaderMenuItemReady: false
     }
   },
   computed: mapState([
@@ -51,6 +52,7 @@ export default {
         }
       })
       this.saveMenu(complishedMenu)
+      this.isHeaderMenuItemReady = true
       console.log(complishedMenu)
     },
     ...mapMutations([

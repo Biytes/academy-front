@@ -129,7 +129,9 @@
       & > li {
         float: left;
         height: 100%;
-        font-size: 16px;
+        font-size: 15px;
+        box-sizing: border-box;
+        width: 10%;
         position: relative;
         transition: all 0.33s;
 
@@ -152,15 +154,16 @@
         & > a {
           display: block;
           color: white;
-          height: calc(100% - 2px);
-          padding: 0 11.5px;
+          text-align: center;
+          height: 100%;
+          box-sizing: border-box;
+          padding: 0 5.5px;
           text-decoration: none;
 
           & > i {
             font-size: 14px;
             color: #bbb;
             transition: opacity 0.5s;
-            margin-left: 3px;
           }
         }
 
@@ -219,7 +222,7 @@
               li {
                 display: block;
                 width: 100%;
-                text-indent: 20px;
+                text-indent: 10px;
                 position: relative;
                 transition: background 0.33s;
 
@@ -227,6 +230,7 @@
                   background-color: rgb(55, 103, 249);
                   /*待定*/
                   a {
+                    display: block;
                     color: rgb(241, 181, 64);
                     /*待定*/
                   }
@@ -248,6 +252,7 @@
                 }
 
                 i {
+                  top: 0;
                   position: absolute;
                   right: 0px;
                   font-size: 22px;
@@ -330,10 +335,10 @@
       & > ul {
         line-height: 65px;
         & > li {
-          font-size: 14px;
+          font-size: 13px;
 
           & > a {
-            padding: 0 6.5px;
+            padding: 0 3.5px;
           }
 
           .second-nav-menu {
@@ -377,10 +382,15 @@
     margin-left: -450px;
 
     &-logo {
+      width: 18%;
       img {
-        width: 153px;
-        height: 44.6247px;
+        width: 137.7px;
+        height: 42.2px;
       }
+    }
+
+    &-bar {
+      width: 82%;
     }
     /* main-menu-top */
     &-top {
@@ -420,7 +430,7 @@
           font-size: 13px;
   
           & > a {
-            padding: 0 5.5px;
+            padding: 0 1.5px;
             & > i {
               font-size: 13px;
             }

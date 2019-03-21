@@ -8,8 +8,7 @@
       margin: 30px 0;
       .el-carousel__item {
         background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+        background-size: 100% 100%;
       }
     
       .el-carousel__indicators{
