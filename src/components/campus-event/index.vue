@@ -14,6 +14,13 @@
         </div>
       </div>
       <div class="campus-events-content">
+      <el-tooltip
+          v-for="(item, index) in events"
+          :key="index"
+          effect="dark"
+          :content="item.brief"
+          placement="top-end"
+          :disabled="!item.brief">
         <article v-for="(item, index) in events" :key="index"  :class="[ isEnd(item.endTime) ? 'end-event':(isStart(item.startTime) ? 'pickup-appointment':'on-hold-arrival')]">
           <p>
             <span class="event-day">{{item.startTime | getDay}}</span>
@@ -21,10 +28,11 @@
             <span class="event-month">{{item.startTime | getMonthEnglish}}</span>
           </p>
           <p>
-            <span class="event-name">{{item.title}}</span>
-            <span class="event-describe">{{item.brief}}</span>
+            <span class="event-name">{{ item.title }}</span>
+            <span class="event-describe">{{ item.brief }}</span>
           </p>
         </article>
+      </el-tooltip>
       </div>
     </div>
   </div>
@@ -78,6 +86,7 @@ export default {
 <style lang="scss" scoped>
 .campus-event-container {
   display: inline-block;
+
   .campus-events {
     margin: 0 10px;
     vertical-align: top;

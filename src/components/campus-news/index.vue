@@ -66,6 +66,7 @@ export default {
 <style lang="scss" scoped>
 .campus-news-container {
   display: inline-block;
+
   .campus-news {
     margin: 0 10px;
     vertical-align: top;

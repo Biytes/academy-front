@@ -23,7 +23,7 @@
           </div>
           <ul>
             <li><i class="iconfont icon-scan"></i><img src="@img/scan/scan-code.jpg"  alt=""></li>
-            <li><a href="#" target="_blank"><i class="iconfont icon-email"></i></a></li>
+            <li><a href="https://dep-cst@gcu.edu.cn" target="_blank"><i class="iconfont icon-email"></i></a></li>
             <!-- <li><a href="http://10.5.1.246:8080/clock/" target="_blank"><i class="iconfont icon-alarm"></i></a></li> -->
             <!-- <li><i class="iconfont icon-search" @click="searchBar = true"></i></li> -->
           </ul>
