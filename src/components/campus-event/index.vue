@@ -21,11 +21,11 @@
           :content="item.brief"
           placement="top-end"
           :disabled="!item.brief">
-        <article v-for="(item, index) in events" :key="index"  :class="[ isEnd(item.endTime) ? 'end-event':(isStart(item.startTime) ? 'pickup-appointment':'on-hold-arrival')]">
+        <article :class="[ isEnd(item.endTime) ? 'end-event':(isStart(item.startTime) ? 'pickup-appointment':'on-hold-arrival')]">
           <p>
-            <span class="event-day">{{item.startTime | getDay}}</span>
+            <span class="event-day">{{ item.startTime | getDay }}</span>
             <br>
-            <span class="event-month">{{item.startTime | getMonthEnglish}}</span>
+            <span class="event-month">{{ item.startTime | getMonthEnglish }}</span>
           </p>
           <p>
             <span class="event-name">{{ item.title }}</span>
@@ -168,8 +168,8 @@ export default {
 
       &::-webkit-scrollbar {
         width: 3px;
-        height: 8px;
-        background-color: #655d5d;
+        height: 0.5px;
+        background-color: #67c;
       }
 
       &::-webkit-scrollbar-track {

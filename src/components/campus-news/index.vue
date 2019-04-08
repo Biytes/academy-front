@@ -9,12 +9,16 @@
         </span>
       </div>
       <div class="campus-news-content">
-        <a class="img-news clearfloat" v-for="(item, index) in newsData" :key="index" v-if="index === 0 && type === 'important'">
-          <img v-if="item.imageUrl" :src="item.imageUrl" alt="">
-          <span class="img-title"><a href="">{{ item.title }}</a></span>
-          <span class="img-describe">{{ item.brief }}</span>
-          <span class="img-news-date">{{ item.time | formatDate }}</span>
-        </a>
+        <router-link class="img-news clearfloat"
+                     v-if="type === 'important'"
+                     tag="a"
+                     :to="newsData[0].path"
+                     >
+          <img v-if="newsData[0].imageUrl" :src="newsData[0].imageUrl" alt="">
+          <span class="img-title"><a href="">{{ newsData[0].title }}</a></span>
+          <span class="img-describe">{{ newsData[0].brief }}</span>
+          <span class="img-news-date">{{ newsData[0].time | formatDate }}</span>
+        </router-link>
         <ul>
           <el-tooltip v-for="(item, index) in newsData"
                       :key="index" v-if="type !== 'important' || index !== 0"
