@@ -36,7 +36,6 @@ export default {
   mounted () {
     this.onRouteChange()
     console.log('official')
-    console.log(this.$route)
     if (this.$route.path !== '/') {
       this.locateCategory()
     } else {
@@ -151,5 +150,26 @@ export default {
     }
   }
 }
+@media only screen and (max-width : 1200px) {
+  .header-carousel {
+    /*errands-introduction*/
+    min-width: 900px;
+  }
+}
+// @media only screen and (max-width : 480px) {
+//   #wrapper-content {
+//   .bread-crumb {
+//     margin: 0 auto;
+//     padding: 15px 10px;
+//     line-height: 1.5;
+//     min-width: unset;
+//     width: 100%;
+//     box-sizing: border-box;
+//     .el-breadcrumb__item {
+//       cursor: pointer;
+//     }
+//   }
+// }
+// }
 /*button-animate*/
 </style>

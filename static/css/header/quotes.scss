@@ -78,6 +78,7 @@
 @media only screen and (max-width : 1200px) {
   .quotes {
     line-height: 18px;
+    min-width: 1200px;
     .quotes-content {
       .quotes-content-container {
       }
@@ -106,3 +107,25 @@
 @media only screen and (max-width : 768px) {
  
 }
+
+/* Small Devices, Tablets */
+// @media only screen and (max-width : 480px) {
+//   .quotes {
+//     height: 13vh;
+//     min-height: 13vh;
+//     display: block;
+//     min-height: 82px;
+//     max-width: 100%;
+//     width: 100%;
+//     line-height: 20px;
+//     background-color: #293D91;
+//     .quotes-content {
+//       width: 80%;
+//       min-width: unset;
+//       margin: 0 auto;
+//       .quotes-content-container {
+//         padding: 1.4vh 0 ;
+//       }
+//     }
+//   }
+// }

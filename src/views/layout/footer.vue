@@ -469,6 +469,9 @@ export default {
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
+  .footer-container {
+    min-width: 1200px;
+  }
 }
 
 /* Medium Devices, Desktops */

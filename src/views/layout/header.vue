@@ -179,6 +179,12 @@ export default {
 </script>
 
 <style lang="scss">
+
+@media only screen and (max-width : 1200px) {
+  .wrapper-header {
+    position: relative;
+  }
+}
 @import '@css/header/quotes.scss';
 @import '@css/header/main-menu.scss';
 @import '@css/header/header-carousel.scss';

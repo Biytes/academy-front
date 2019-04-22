@@ -42,7 +42,12 @@ export default {
     editAcademyData(this.section, this.id)
       .then(res => {
         if (res.status === 200) {
+          // 将文本里的图片 改成自适应
+          res.data.content = res.data.content.replace(/(<img[\s\S]+?)(>)/g, function (_, p1, p2) {
+            return `${p1} style="width: 100%; height: auto;" ${p2}`
+          })
           this.article = res.data
+
           let article = {
             id: this.id,
             title: this.article.title,
@@ -133,4 +138,15 @@ export default {
     }
   }
 }
+
+// @media only screen and (max-width : 480px) {
+// .article-container {
+//   width: 100%;
+//   box-sizing: border-box;
+//   padding: 10px;
+//   min-height: 80vh;
+//   margin: 0 auto;
+// }
+
+// }
 </style>

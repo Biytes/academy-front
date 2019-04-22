@@ -357,4 +357,8 @@ export default {
 
 }
 
+// @media only screen and (max-width : 480px) {
+
+// }
+
 </style>

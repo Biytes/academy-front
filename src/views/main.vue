@@ -111,13 +111,13 @@ export default {
         'cooperateinfo', // 对外合作
         'teacherinfo' // 教师
       ],
-      collegenews: [],
-      recruit: [],
-      activity: [],
-      educationnews: [],
-      studentnews: [],
-      cooperateinfo: [],
-      teacherinfo: []
+      collegenews: null,
+      recruit: null,
+      activity: null,
+      educationnews: null,
+      studentnews: null,
+      cooperateinfo: null,
+      teacherinfo: null
     }
   },
   computed: {
@@ -192,6 +192,7 @@ section{
   display: block;
   min-width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
   padding: 30px 10px;
 }
 
@@ -213,4 +214,18 @@ section{
     display: none;
   }
 }
+
+// @media only screen and (max-width : 480px) {
+//   section{
+//     display: block;
+//     min-width: unset;
+//     max-width: 100%;
+//     width: 100%;
+//     margin: 0 auto;
+//     padding: 30px 10px;
+//   }
+//   .campus-event-row > .el-row {
+//     width: 100%;
+//   }
+// }
 </style>

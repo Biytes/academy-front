@@ -83,6 +83,7 @@
 @media only screen and (max-width : 1200px) {
   .header-carousel {
     /*errands-introduction*/
+    min-width: 1200px;
   
     // 介绍那一栏的位置
     .errands-introduction {
@@ -113,3 +114,64 @@
 @media only screen and (max-width : 768px) {
  
 }
+
+/* Small Devices, Tablets */
+// @media only screen and (max-width : 480px) {
+ 
+// .header-carousel {
+//   .el-carousel__container {
+//     height: auto;
+//     min-height: auto;
+//     height: 130px;
+//     min-width: 100%;
+//   }
+
+//   // carousel 导航的位置
+//   .el-carousel__indicators {
+//     transform: translateX(-50%);
+//     line-height: 20px
+//   }
+
+//   .el-carousel__item{
+//     -moz-background-size: 100% 100%;
+//     background-size: 100% 100%
+//   }
+
+
+//   /*errands-introduction*/
+
+//   // 介绍那一栏的位置
+//   .errands-introduction {
+//     position: absolute;
+//     display: none;
+//     bottom: 100px;
+//     left: 100px;
+//     line-height: 25px;
+//     padding: 6px;
+//     min-width: 500px;
+//     max-width: 34%;
+//     border-left: 4px solid rgba(255, 255, 255, 0.7);
+//     background-color:  rgba(0, 0, 0, 0.4);
+//     transition: all 0.33s;
+
+//     &:hover {
+//       background-color: rgba(26, 65, 133, 0.62);
+//     }    
+
+//     h3 {
+//       margin: 10px;
+//       color: white;
+//     }
+
+//     p {
+//       margin: 10px;
+//       padding: 5px;
+//       text-indent: 20px;
+//       word-break: keep-all;
+//       white-space: normal;
+//       color: white
+//     }
+//   }
+// }
+
+// }
