@@ -92,7 +92,7 @@ export default {
       // 当headerMenuItem 加载完才执行
       console.log('locateCategory')
       let section = this.$route.name === 'articleShowCase' ? this.$route.params.section : this.$route.name
-      let category = this.$route.params.category || ''
+      let category = this.$route.params.category || '1'
       let sectionIndex = this.headerMenuItem.findIndex(item => item.name === section)
       console.log(section)
       console.log(this.headerMenuItem)
@@ -105,16 +105,18 @@ export default {
       }
       this.switchSection(section)
       // 如果有category 预加载当前category
-      if (category !== '') {
+      if (category !== 'undefined') {
         let subMenuItem = this.headerMenuItem[sectionIndex].subMenuItem
         console.log(subMenuItem, category)
-        let categoryIndex = subMenuItem.findIndex(item => item.name === category)
-        category = {
-          index: categoryIndex,
-          title: subMenuItem[categoryIndex].title,
-          path: subMenuItem[categoryIndex].path
+        if (subMenuItem) {
+          let categoryIndex = subMenuItem.findIndex(item => item.name === category)
+          category = {
+            index: categoryIndex,
+            title: subMenuItem[categoryIndex].title,
+            path: subMenuItem[categoryIndex].path
+          }
+          this.switchCategory(category)
         }
-        this.switchCategory(category)
       }
       this.isCategoryLocated = true
     },
