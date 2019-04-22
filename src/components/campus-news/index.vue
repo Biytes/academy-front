@@ -10,7 +10,7 @@
       </div>
       <div class="campus-news-content">
         <router-link class="img-news clearfloat"
-                     v-if="type === 'important'"
+                     v-if="type === 'important' && newsData[0].imageUrl"
                      tag="a"
                      :to="newsData[0].path"
                      >
@@ -21,7 +21,7 @@
         </router-link>
         <ul>
           <el-tooltip v-for="(item, index) in newsData"
-                      :key="index" v-if="type !== 'important' || index !== 0"
+                      :key="index" v-if="type !== 'important' || !newsData[0].imageUrl || index !== 0"
                       class="item"
                       effect="dark"
                       :content="item.brief"

@@ -54,7 +54,7 @@
         </el-col>
       </el-row>
     </section>
-    <section class="campus-teacher">
+    <section class="campus-teacher" v-if="teacherinfo">
       <img class="bg" src="@assets/img/background/logo3.jpg" alt="">
       <el-row class="campus-teacher-container">
         <el-col :span="12" class="campus-teacher-carousel">
@@ -137,10 +137,10 @@ export default {
     Promise.all(requests)
       .then(values => {
         console.log(values)
-        this.collegenews = values[0].data.results.slice(0, 6).map(item => this.processArticleData(item, 0))
+        this.collegenews = values[0].data.results.slice(0, values[0].data.results[0].image_url ? 6 : 9).map(item => this.processArticleData(item, 0))
         this.recruit = values[1].data.results.slice(0, 9).map(item => this.processArticleData(item, 1))
         this.activity = values[2].data.results.map(item => this.processEventData(item, 2))
-        this.educationnews = values[3].data.results.slice(0, 6).map(item => this.processArticleData(item, 3))
+        this.educationnews = values[3].data.results.slice(0, values[3].data.results[0].image_url ? 6 : 9).map(item => this.processArticleData(item, 3))
         this.studentnews = values[4].data.results.slice(0, 9).map(item => this.processArticleData(item, 4))
         this.cooperateinfo = values[5].data.results.slice(0, 9).map(item => this.processArticleData(item, 5))
         this.teacherinfo = values[6].data.map(item => this.processTeacherData(item, 6))
@@ -157,7 +157,7 @@ export default {
         path: `/${this.sections[index]}/${item.category}/${item.id}`,
         brief: item.preview,
         title: item.title,
-        imageUrl: `https://schooltest.zunway.pw/media/${item.image_url}` || null,
+        imageUrl: item.image_url ? `https://schooltest.zunway.pw/media/${item.image_url}` : null,
         time: item.created_time
       }
     },
