@@ -294,7 +294,7 @@ export default {
 
     .footer-bottom {
       &-left {
-        padding: 0 20px;
+        padding: 30px 20px;
         h4 {
           margin:9px 5px;
           font-size: 14px;

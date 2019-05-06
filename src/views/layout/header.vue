@@ -80,7 +80,7 @@
     <article class="quotes">
       <el-row class="quotes-content">
         <el-col :span="14" align="left" class="quotes-content-container">
-            <span class="quotes-content__cn">“计算机天生就是用来解决以前没有过的问题的。”</span>
+            <!-- <span class="quotes-content__cn">“计算机天生就是用来解决以前没有过的问题的。”</span> -->
             <span class="quotes-content__en">Computers are designed to solve problems that have never been before.</span>
             <span class="quotes-content__writer">-比尔盖茨（Bill Gates）</span>
         </el-col>

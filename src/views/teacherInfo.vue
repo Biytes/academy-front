@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="teacher-container">
-    <p class="teacher-quotes">
+    <!-- <p class="teacher-quotes">
       Project Build Trust is made up of a team of people committed to meet our
       mandate with a clear vision and mission, supported by common values.
-    </p>
+    </p> -->
     <div class="teachers">
       <div class="teacher"
            v-for="teacher in pageItems"
