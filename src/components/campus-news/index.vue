@@ -39,7 +39,10 @@
             </li>
           </el-tooltip>
         </ul>
-        <p class="campus-news-more"><router-link :to="routeLink" tag="a">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></router-link></p>
+        <p
+          class="campus-news-more"
+          v-if="newsData && newsData.length"
+        ><router-link :to="routeLink" tag="a">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></router-link></p>
       </div>
     </div>
   </div>

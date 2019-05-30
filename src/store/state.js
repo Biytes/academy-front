@@ -19,7 +19,7 @@ export default {
     path: ''
   },
   headerMenuItem: '',
-  headerMenuItemOrder: [1, 10, 14, 5, 3, 2, 4, 7, 8] // 菜单顺序
+  headerMenuItemOrder: [1, 10, 14, 3, 2, 4, 7, 8, 42] // 菜单顺序
 }
 
 // id: 1  学院简介
@@ -31,3 +31,4 @@ export default {
 // id: 7 党建工作
 // id: 14 招生就业
 // id: 33 对外合作
+// id 42 IEET认证

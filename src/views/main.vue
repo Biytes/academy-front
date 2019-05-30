@@ -46,15 +46,15 @@
         </el-col>
         <el-col :span="8">
           <campus-news type=""
-                       title="对外合作"
-                       subTitle="Cooperate"
-                       routeLink="cooperateinfo/international"
-                       v-if="cooperateinfo"
-                       :newsData="cooperateinfo"></campus-news>
+                       title="IEET认证"
+                       subTitle="ieet"
+                       routeLink="ieet"
+                       v-if="ieet"
+                       :newsData="ieet"></campus-news>
         </el-col>
       </el-row>
     </section>
-    <section class="campus-teacher" v-if="teacherinfo">
+    <section class="campus-teacher" v-if="false && teacherinfo">
       <img class="bg" src="@assets/img/background/logo3.jpg" alt="">
       <el-row class="campus-teacher-container">
         <el-col :span="12" class="campus-teacher-carousel">
@@ -71,7 +71,10 @@
           </div>
 
         </el-col>
-        <el-col :span="12" class="campus-teacher-info">
+        <el-col
+          :span="12"
+          class="campus-teacher-info"
+        >
           <div class="teacher-info-box">
             <div class="teacher-header">
               <img src="@assets/icons/events.png">
@@ -108,6 +111,7 @@ export default {
         'activity', // 活动
         'educationnews', // 教育信息
         'studentnews', // 学生工作
+        'ieet', // ieet认证
         'cooperateinfo', // 对外合作
         'teacherinfo' // 教师
       ],
@@ -116,6 +120,7 @@ export default {
       activity: null,
       educationnews: null,
       studentnews: null,
+      ieet: null,
       cooperateinfo: null,
       teacherinfo: null
     }
@@ -142,8 +147,9 @@ export default {
         this.activity = values[2].data.results.map(item => this.processEventData(item, 2))
         this.educationnews = values[3].data.results.slice(0, values[3].data.results[0].image_url ? 6 : 9).map(item => this.processArticleData(item, 3))
         this.studentnews = values[4].data.results.slice(0, 9).map(item => this.processArticleData(item, 4))
-        this.cooperateinfo = values[5].data.results.slice(0, 9).map(item => this.processArticleData(item, 5))
-        this.teacherinfo = values[6].data.map(item => this.processTeacherData(item, 6))
+        this.ieet = values[5].data.results.slice(0, 9).map(item => this.processArticleData(item, 5))
+        this.cooperateinfo = values[6].data.results.slice(0, 9).map(item => this.processArticleData(item, 5))
+        this.teacherinfo = values[7].data.map(item => this.processTeacherData(item, 6))
       })
   },
   methods: {

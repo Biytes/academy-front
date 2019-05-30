@@ -75,6 +75,20 @@ export default [{
     path: '/cooperateinfo/:category',
     component: _import('cooperateInfo')
   }, {
+    name: 'ieet',
+    meta: {
+      title: 'IEET认证'
+    },
+    path: '/ieet',
+    component: _import('ieet')
+  }, {
+    name: 'ieet',
+    meta: {
+      title: 'IEET认证'
+    },
+    path: '/ieet/:category',
+    component: _import('ieet')
+  }, {
     name: 'articleShowCase',
     meta: {
       title: '文章'

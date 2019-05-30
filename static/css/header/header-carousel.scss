@@ -84,6 +84,11 @@
   .header-carousel {
     /*errands-introduction*/
     min-width: 1200px;
+    .el-carousel__container {
+      height: 87vh;
+      min-height: 545px;
+      min-width: 900px;
+    }
   
     // 介绍那一栏的位置
     .errands-introduction {
@@ -112,13 +117,21 @@
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
+  .header-carousel {
+    .el-carousel__container {
+      height: auto;
+      min-height: 545px;
+      min-width: 900px;
+    }
+  }
  
 }
 
 @media only screen and (max-width : 480px) {
   .header-carousel {
     .el-carousel__container {
-      height: 50vh;
+      height: auto;
+      // height: 50vh;
       min-height: unset;
       min-width: 900px;
     }
