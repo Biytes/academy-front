@@ -238,7 +238,7 @@ export default {
 
 <style lang="scss">
 .footer-container {
-  background: url('../../assets/img/background/footerBackground.jpg') no-repeat top right;
+  background: url('../../assets/img/background/footerBackground1.jpg') no-repeat top right;
   background-size: cover;
   color: #D4D2D2;
   height: 200px;

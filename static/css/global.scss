@@ -54,7 +54,11 @@ a {
 .clearfloat {
   zoom: 1
 }
-
+.pc-device {
+  .page-container {
+    min-width: 1100px;
+  }
+}
 .page-container {
   min-width: 1000px;
   position: relative;
