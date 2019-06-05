@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="wrapper-header">
+  <div :class="['wrapper-header', isPC ? '' : 'mobile']">
     <div id="searchPage" v-show="searchBar">
       <div class="block" @click="searchBar = false">
 
@@ -99,6 +99,7 @@ import { getAcademyData } from '@api/index'
 export default {
   data () {
     return {
+      isPC: false,
       searchBar: false,
       searchKey: '',
       errands: []
@@ -112,6 +113,8 @@ export default {
     'currentArticle'
   ]),
   mounted () {
+    this.deviceHeight = window.screen.height
+    this.isPC = this.isDevicePC()
     getAcademyData('banners')
       .then(errands => {
         errands = errands.data.results
@@ -126,6 +129,15 @@ export default {
       })
   },
   methods: {
+    isDevicePC () {
+      var userAgentInfo = navigator.userAgent.toLowerCase()
+      var Agents = ['android', 'iphone', 'symbianOS', 'windows phone', 'ipad', 'ipod']
+      var flag = true
+      for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break }
+      }
+      return flag
+    },
     // 改变菜单中 当前页面的tab的样式
     changePage (sectionIndex = '', categoryIndex = 0) {
       $('html, body').animate({scrollTop: document.documentElement.clientHeight}, 800)

@@ -106,7 +106,7 @@ export default {
   width: 100%;
   min-width: 992px;
   height:65px;
-  background: rgba(53, 89, 198, 1);
+  background: rgba(26, 65, 133, 0.8);
   transition: transform 0.66s;
   transform: rotateX(90deg);
   transform-origin: 0% 0%;
@@ -197,7 +197,7 @@ export default {
       width: auto;
       padding: 10px;
       height:255px;
-      background-color: rgba(53, 89, 198, 1);
+      background-color: rgba(26, 65, 133, 0.7);
       .sub-menu{
         width:100%;
         height:100%;
@@ -212,6 +212,7 @@ export default {
             li {
               padding: 6px 7px;
               text-align: left;
+              text-indent: 4px;
               cursor: pointer;
               /* transition: background 1s; */
 

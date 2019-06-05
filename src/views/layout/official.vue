@@ -4,7 +4,10 @@
         <imgShowcase></imgShowcase>
         <HeaderComponent></HeaderComponent>
         <scrollHeader></scrollHeader>
-        <section id="wrapper-content">
+        <section
+          :class="[isPC ? '' : 'pc-device']"
+          id="wrapper-content"
+        >
           <el-breadcrumb separator="/" class="bread-crumb" v-if="routeName !== 'main' && isCategoryLocated">
             <el-breadcrumb-item :to="{ path: '/' }" @click.native="goToMain"><i class="iconfont icon-home"></i></el-breadcrumb-item>
             <el-breadcrumb-item v-if="currentSection.path"
@@ -35,6 +38,7 @@ import imgShowcase from '@views/layout/showImg.vue'
 export default {
   mounted () {
     this.onRouteChange()
+    this.isPC = this.isDevicePC()
     console.log('official')
     if (this.$route.path !== '/') {
       this.locateCategory()
@@ -44,6 +48,7 @@ export default {
   },
   data () {
     return {
+      isPC: '',
       routeName: '',
       isCategoryLocated: false
     }
@@ -66,6 +71,15 @@ export default {
     imgShowcase
   },
   methods: {
+    isDevicePC () {
+      var userAgentInfo = navigator.userAgent.toLowerCase()
+      var Agents = ['android', 'iphone', 'symbianOS', 'windows phone', 'ipad', 'ipod']
+      var flag = true
+      for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) { flag = false; break }
+      }
+      return flag
+    },
     goToMain () {
       this.switchSection()
       this.switchCategory()

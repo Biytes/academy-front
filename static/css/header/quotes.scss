@@ -1,3 +1,28 @@
+.mobile {
+  .quotes {
+    height: 4vh;
+    min-height: unset;
+    line-height: 10px;
+    .quotes-content-button {
+      line-height: 4vh;
+    }
+
+    .quotes-content {
+      width: 80%;
+      min-width: 930px;
+      margin: 0 auto;
+      height: 100%;
+      span {
+        height: 0.5vh;
+      }
+      .quotes-content-container {
+        padding: 0.2vh 0 ;
+      }
+    }
+  }
+
+}
+
 .quotes {
   height: 13vh;
   min-height: 13vh;
