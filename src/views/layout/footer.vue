@@ -136,7 +136,7 @@ export default {
             },
             {
               name: '管理学院',
-              href: 'http://jg.gcu.edu.cn/'
+              href: 'http://gl.gcu.edu.cn/'
             },
             {
               name: '汽车工程学院',

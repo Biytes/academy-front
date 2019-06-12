@@ -12,24 +12,21 @@
               :class="{ 'current-page': currentSection.index === sectionIndex }"
               @click="changePage(sectionIndex)">
               <router-link tag="a" :to="sectionItem.path">{{ sectionItem.title }}</router-link>
+
+              <div
+                v-if="sectionItem.subMenuItem"
+                class="scroll-sub-menu"
+              >
+                <li v-for="(categoryItem, categoryIndex) in sectionItem.subMenuItem"
+                    :key="categoryIndex"
+                    @click="changePage(sectionIndex, categoryIndex)">
+                    <router-link :to="categoryItem.path"
+                                  tag="a"
+                                  :class="{ 'current-page': currentCategory.index === categoryIndex && currentSection.index === sectionIndex }">{{ categoryItem.title }}</router-link>
+                </li>
+              </div>
           </li>
-          <div class="scroll-sub-menu">
-            <ul class="sub-menu">
-              <li v-for="(sectionItem, sectionIndex) in scrollHeaderItem"
-                  :key="sectionIndex.id"
-                  class="sub-menu-list">
-                <ul>
-                  <li v-for="(categoryItem, categoryIndex) in sectionItem.subMenuItem"
-                      :key="categoryIndex"
-                      @click="changePage(sectionIndex, categoryIndex)">
-                      <router-link :to="categoryItem.path"
-                                    tag="a"
-                                    :class="{ 'current-page': currentCategory.index === categoryIndex && currentSection.index === sectionIndex }">{{ categoryItem.title }}</router-link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+
         </ul>
         <!-- TODO: menu按钮 -->
         <!-- <i class="iconfont icon-menu"></i> -->
@@ -143,33 +140,30 @@ export default {
   }
 
   .scroll-menu {
-    position: relative;
-    padding: 10px;
     height: 65px;
     list-style: none;
-
-    &:hover {
-      .scroll-sub-menu{
-        display: block;
-      }
-    }
 
     & > li {
       display: inline-block;
       width: 100px;
+      padding: 10px 0;
       height: 100%;
       line-height: 40px;
+      position: relative;
       cursor: pointer;
       text-align: center;
       -webkit-transition: background-position-x 0.9s linear;
       transition: background-position-x 0.9s linear;
 
       &:hover {
-        background: url("../../assets/img/scrollMenu.svg");
         // -webkit-animation: line 1s;
         //         animation: line 1s;
         & > a {
           color: #dea066;
+        }
+
+        & > a + .scroll-sub-menu{
+          display: block;
         }
       }
       & > a {
@@ -180,6 +174,7 @@ export default {
         -webkit-transition: all 0.45s;
         transition: all 0.45s;
       }
+
     }
 
     & > li.current-page {
@@ -192,45 +187,32 @@ export default {
       z-index: 10;
       position: absolute;
       right: 0px;
+      left: -15px;
       top:65px;
       display: none;
-      width: auto;
+      width: 130px;
       padding: 10px;
-      height:255px;
+      box-sizing: border-box;
       background-color: rgba(26, 65, 133, 0.7);
-      .sub-menu{
-        width:100%;
-        height:100%;
-        .sub-menu-list{
-          display: inline-block;
-          height: 210px;
-          width: 100px;
-          vertical-align:top;
-          ul {
-            width: 100%;
-            height:100%;
-            li {
-              padding: 6px 7px;
-              text-align: left;
-              text-indent: 4px;
-              cursor: pointer;
-              /* transition: background 1s; */
+      li {
+        padding: 4px 0px;
+        text-align: center;
+        text-indent: 4px;
+        cursor: pointer;
+        /* transition: background 1s; */
 
-              &:hover {
-                background-color: rgba(53, 89, 198, 1);
-                a {
-                  color: #dea066;
-                }
-              }
-              a {
-                font-size: 17px;
-                color: #fff;
-                transition: all 1s;
-                &.current-page {
-                  color: #dea066;
-                }
-              }
-            }
+        &:hover {
+          background-color: rgba(53, 89, 198, 1);
+          a {
+            color: #dea066;
+          }
+        }
+        a {
+          font-size: 17px;
+          color: #fff;
+          transition: all 1s;
+          &.current-page {
+            color: #dea066;
           }
         }
       }

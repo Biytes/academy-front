@@ -8,9 +8,9 @@
           <small>{{ subTitle }}</small>
         </span>
         <div class="activity-hints">
+          <span class="arrival-hint">准备开始</span>
           <span class="pick-up-hint">正在进行</span>
           <span class="end-hint">已经结束</span>
-          <span class="arrival-hint">准备开始</span>
         </div>
       </div>
       <div class="campus-events-content">
