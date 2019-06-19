@@ -103,7 +103,7 @@ export default {
   width: 100%;
   min-width: 992px;
   height:65px;
-  background: rgba(26, 65, 133, 0.8);
+  background: rgba(41, 62, 145, 1);
   transition: transform 0.66s;
   transform: rotateX(90deg);
   transform-origin: 0% 0%;
