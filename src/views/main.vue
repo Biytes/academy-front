@@ -2,58 +2,67 @@
   <div class="main-page">
     <section class="campus-event-row">
       <el-row>
+
         <el-col :span="8">
           <campus-news type="important"
                       title="学院新闻"
                       subTitle="Top News"
                       routeLink="collegenews"
                       v-if="collegenews"
-                      :newsData="collegenews"></campus-news>
+                      :newsData="collegenews" />
         </el-col>
+
         <el-col :span="8">
           <campus-news type="comprehensive"
                       title="招生就业"
                       subTitle="Recruit"
                       routeLink="recruit/recruitInfo"
                       v-if="recruit"
-                      :newsData="recruit"></campus-news>
+                      :newsData="recruit" />
         </el-col>
+
         <el-col :span="8">
           <campus-event :events="activity"
                         title="最近活动"
                         v-if="activity"
-                        subTitle="events"></campus-event>
+                        subTitle="events" />
         </el-col>
       </el-row>
     </section>
+
     <section class="campus-event-row">
       <el-row>
+
         <el-col :span="8">
           <campus-news type="important"
                        title="教学管理"
                        subTitle="Education"
                        routeLink="educationnews/file"
                        v-if="educationnews"
-                       :newsData="educationnews"></campus-news>
+                       :newsData="educationnews" />
         </el-col>
+
         <el-col :span="8">
           <campus-news type="comprehensive"
                        title="学生工作"
                        subTitle="Student Work"
                        routeLink="studentnews/condition"
                        v-if="studentnews"
-                       :newsData="studentnews"></campus-news>
+                       :newsData="studentnews" />
         </el-col>
+
         <el-col :span="8">
           <campus-news type=""
                        title="IEET认证"
                        subTitle="ieet"
                        routeLink="ieet"
                        v-if="ieet"
-                       :newsData="ieet"></campus-news>
+                       :newsData="ieet" />
         </el-col>
       </el-row>
     </section>
+
+    <!-- 教师队伍 -->
     <section class="campus-teacher" v-if="false && teacherinfo">
       <img class="bg" src="@static/img/background/logo3.jpg" alt="">
       <el-row class="campus-teacher-container">
@@ -97,8 +106,8 @@
   </div>
 </template>
 <script type="text/javascript">
-import '@css/main/majorSet.css'
-import '@css/main/teacherCarousel.css'
+// import '@css/main/majorSet.css'
+// import '@css/main/teacherCarousel.css'
 import { mapState } from 'vuex' // 引入mapState
 import { getAcademyData } from '@api/index'
 export default {
@@ -193,7 +202,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@css/main/campus-teacher.scss';
+// @import '@css/main/campus-teacher.scss';
 section{
   display: block;
   min-width: 1200px;

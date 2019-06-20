@@ -81,8 +81,8 @@ export default {
       }
       this.switchSection(section)
       // 如果有category 预加载当前category
-      console.log(category !== 'undefined')
-      if (category !== 'undefined') {
+      console.log(category !== 'independent')
+      if (category !== 'independent') {
         let subMenuItem = this.headerMenuItem[sectionIndex].subMenuItem
         if (subMenuItem) {
           let categoryIndex = subMenuItem.findIndex(item => item.name === category)

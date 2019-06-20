@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import '@css/custom/itemFigure.css'
 import { mapState, mapMutations } from 'vuex'
 import { getAcademyData } from '@api/index'
 export default {

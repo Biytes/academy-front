@@ -117,7 +117,7 @@ export default {
         created_time: item.created_time || null,
         updated_time: item.updated_time || null,
         ctr: item.ctr || null, // 请求次数
-        path: `/${this.section}/${this.category}/${item.id}` || '/'
+        path: `/${this.section}/${this.category || 'independent'}/${item.id}` || '/'
       }
     },
     ...mapMutations([
