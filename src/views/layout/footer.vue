@@ -1,33 +1,56 @@
 <template lang="html">
-  <footer class="footer-container" @click="resetSelectForm">
+  <footer class="layout-footer" @click="resetSelectForm">
     <div class="wrapper-footer">
-      <div class="wrapper-footer-top">
-        <div class="footer-top-left">
-          <ul>
-            <li><h3>Contact Us</h3></li>
+      <section class="wrapper-footer-top">
+        <div class="wrapper-footer-top-left">
+          <ul class="address">
+            <li>
+              <h3>Contact Us</h3>
+            </li>
             <li>地址：广州市花都区新华街道学府路一号</li>
             <li>邮编：510800</li>
             <!-- <li>电话：020-36903155(学院办公室)</li>
             <li>020-36903151(学生工作办公室)</li> -->
           </ul>
         </div>
-        <div class="footer-top-right">
-          <img src="@img/logo/logo.png" alt="">
-          <img src="@img/logo/学院.png" alt="">
+        <div class="wrapper-footer-top-right">
+          <img
+            class="logo"
+            src="@img/logo/logo.png"
+            alt=""
+          >
+          <img
+            class="academy"
+            src="@img/logo/学院.png"
+            alt=""
+          >
         </div>
-      </div>
-      <div class="wrapper-footer-bottom">
+      </section>
+      <section class="wrapper-footer-bottom">
         <el-row>
-          <el-col :span="12" align="left" class="footer-bottom-left">
-            <h4>Copyright <a href="/back">@</a> 2018华南理工大学广州学院 计算机工程学院</h4>
+          <el-col
+            :span="12"
+            align="left"
+            class="wrapper-footer-bottom-left"
+          >
+            <h4>Copyright
+              <a href="/back">@</a> 2018华南理工大学广州学院 计算机工程学院
+            </h4>
           </el-col>
-          <el-col :span="12" align="right" class="footer-bottom-right">
+          <el-col
+            :span="12"
+            align="right"
+            class="wrapper-footer-bottom-right"
+          >
             <ul>
               <li v-for="(department, index) in departments"
                   :key="index"
                   @click.stop="switchSelectForm(index)">{{ department.triggerName }}
                   <i :class="[currSelectForm === index ? 'icon-transform' : '', 'iconfont' ,'icon-down-copy']"></i>
-                <div :class="[index === 1 ? 'second-select-form' : '', 'select-form']" v-show="currSelectForm === index">
+                <div
+                  v-show="currSelectForm === index"
+                  :class="[index === 1 ? 'second-select-form' : '', 'select-form']"
+                >
                   <ul>
                     <li v-for="(item,index) in department.departmentName" :key="index">
                       <a
@@ -43,7 +66,7 @@
             </ul>
           </el-col>
         </el-row>
-      </div>
+      </section>
     </div>
   </footer>
 </template>
@@ -71,43 +94,32 @@ export default {
 </script>
 
 <style lang="scss">
-.footer-container {
+.layout-footer {
   background: #293d91;
-  // background: url('../../static/img/background/footerBackground.png') no-repeat;
-  background-size: cover;
-  color: #D4D2D2;
   height: 200px;
   min-width: 940px;
+  color: #D4D2D2;
+  // background: url('../../static/img/background/footerBackground.png') no-repeat;
   .wrapper-footer {
+    position:relative;
     height: 100%;
     width: 75%;
     margin: 0 auto;
-    position:relative;
 
     &-top {
-      height: 75%;
-      width: 100%;
       position: absolute;
       top: 10px;
+      height: 75%;
+      width: 100%;
       h3 {
         margin:5px 0;
       }
-    }
 
-    &-bottom {
-      position: absolute;
-      height: 20%;
-      width: 100%;
-      bottom: 0px;
-      border-top: 3px solid #efefef;
-    }
-
-    .footer-top {
       &-left {
-        padding: 0 20px;
         float: left;
         /* border:2px solid rgb(80, 81, 184); */
         border-radius: 4px;
+        padding: 0 20px;
 
         li:first-child ~ li {
           padding: 3px;
@@ -127,7 +139,13 @@ export default {
       }
     }
 
-    .footer-bottom {
+    &-bottom {
+      position: absolute;
+      bottom: 0;
+      border-top: 3px solid #efefef;
+      height: 20%;
+      width: 100%;
+
       &-left {
         h4 {
           margin:9px 5px;
@@ -145,10 +163,10 @@ export default {
         padding: 0 20px;
         & > ul {
           & > li {
-            display: inline-block;
             position: relative;
-            font-size: 15px;
+            display: inline-block;
             padding: 8px 20px 6px;
+            font-size: 15px;
             cursor: pointer;
 
             &:hover{
@@ -156,37 +174,37 @@ export default {
             }
 
             i {
-              vertical-align: middle;
-              font-size: 16px;
-              line-height: 24px;
-              margin-left: 5px;
               display: inline-block;
+              vertical-align: middle;
+              margin-left: 5px;
               transition: all 0.33s;
+              line-height: 24px;
+              font-size: 16px;
               &.icon-transform {
-                transform: rotate(180deg);
                 margin-top: -2px;
+                transform: rotate(180deg);
                 transform-origin: center;
               }
             }
 
             .select-form{
               position: absolute;
-              height:auto;
-              width:250px;
-              padding: 15px;
+              right: -30px;
+              bottom: 33px;
               background-color: rgba(34, 34, 34, 0.76);
               border-radius: 8px;
-              color:#fff;
+              padding: 15px;
+              height:auto;
+              width:250px;
               line-height: 25px;
-              bottom: 33px;
-              right: -30px;
+              color:#fff;
               transition: all 0.33s;
               box-shadow: 0 0 8px #DDD;
               ul {
                 list-style: none;
+                margin: auto;
                 padding:0;
                 width:94%;
-                margin: auto;
                 li {
                   display: inline-block;
                   text-align: left;
@@ -242,18 +260,16 @@ export default {
     }
   }
 }
-
 /* Extra Large Devices, Wide Screens */
 @media only screen and (max-width : 1400px) {
-  .footer-container {
+  .layout-footer {
     .wrapper-footer {
       width: 80%;
       &-top {
         h3 {
           margin:5px 0;
         }
-      }
-      .footer-top {
+
         &-left {
           li:first-child ~ li {
             font-size: 14px;
@@ -261,7 +277,7 @@ export default {
         }
       }
 
-      .footer-bottom {
+      &-bottom {
         &-left {
           padding: 0 5px;
           h4 {
@@ -303,7 +319,7 @@ export default {
 
 /* Large Devices, Wide Screens */
 @media only screen and (max-width : 1200px) {
-  .footer-container {
+  .layout-footer {
     min-width: 1200px;
   }
 }
