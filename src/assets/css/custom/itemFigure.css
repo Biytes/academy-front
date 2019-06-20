@@ -18,7 +18,7 @@
 .newslist_dt li .time {
   float: left;
   position: relative;
-  background: url(../../../src/assets/icons/icon5.gif) no-repeat left top;
+  background: url(../../../static/icons/icon5.gif) no-repeat left top;
   width: 61px;
   height: 61px;
   overflow: hidden;

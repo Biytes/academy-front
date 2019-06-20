@@ -21,7 +21,7 @@
           </el-breadcrumb>
           <router-view v-if="isCategoryLocated"></router-view>
           <!-- <img class="school-logo"
-               src="../../assets/img/logo/logo-grey.png"
+               src="../../static/img/logo/logo-grey.png"
                alt=""> -->
         </section>
         <FooterComponent></FooterComponent>
@@ -31,10 +31,10 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import HeaderComponent from '@views/layout/header.vue'
-import FooterComponent from '@views/layout/footer.vue'
-import scrollHeader from '@views/layout/scrollHeader.vue'
-import imgShowcase from '@views/layout/showImg.vue'
+import HeaderComponent from '@/views/layout/header.vue'
+import FooterComponent from '@/views/layout/footer.vue'
+import scrollHeader from '@/views/layout/scrollHeader.vue'
+import imgShowcase from '@/views/layout/showImg.vue'
 export default {
   mounted () {
     this.onRouteChange()

@@ -73,7 +73,7 @@ export default {
 <style lang="scss">
 .footer-container {
   background: #293d91;
-  // background: url('../../assets/img/background/footerBackground.png') no-repeat;
+  // background: url('../../static/img/background/footerBackground.png') no-repeat;
   background-size: cover;
   color: #D4D2D2;
   height: 200px;

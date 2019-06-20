@@ -2,7 +2,7 @@
   <div class="campus-news-container">
     <div :class="className">
       <div class="panel-header">
-        <img src="@assets/icons/item.png">
+        <img src="@static/icons/item.png">
         <span class="mytitle">
           {{ title }}
           <small>{{ subTitle }}</small>
@@ -42,7 +42,7 @@
         <p
           class="campus-news-more"
           v-if="newsData && newsData.length"
-        ><router-link :to="routeLink" tag="a">继续阅读<img src="@assets/icons/right-arrow.png" alt=""></router-link></p>
+        ><router-link :to="routeLink" tag="a">继续阅读<img src="@static/icons/right-arrow.png" alt=""></router-link></p>
       </div>
     </div>
   </div>

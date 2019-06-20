@@ -55,7 +55,7 @@
       </el-row>
     </section>
     <section class="campus-teacher" v-if="false && teacherinfo">
-      <img class="bg" src="@assets/img/background/logo3.jpg" alt="">
+      <img class="bg" src="@static/img/background/logo3.jpg" alt="">
       <el-row class="campus-teacher-container">
         <el-col :span="12" class="campus-teacher-carousel">
           <div style="width: 80%;margin: 0 auto">
@@ -77,7 +77,7 @@
         >
           <div class="teacher-info-box">
             <div class="teacher-header">
-              <img src="@assets/icons/events.png">
+              <img src="@static/icons/events.png">
               <span class="mytitle">
                 教师队伍
                 <small>Our Team</small>

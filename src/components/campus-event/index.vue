@@ -2,7 +2,7 @@
   <div class="campus-event-container">
     <div class="campus-events">
       <div class="panel-header">
-        <img src="@assets/icons/events.png">
+        <img src="@static/icons/events.png">
         <span class="mytitle">
           {{ title }}
           <small>{{ subTitle }}</small>
