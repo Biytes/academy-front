@@ -221,17 +221,4 @@ section{
   }
 }
 
-// @media only screen and (max-width : 480px) {
-//   section{
-//     display: block;
-//     min-width: unset;
-//     max-width: 100%;
-//     width: 100%;
-//     margin: 0 auto;
-//     padding: 30px 10px;
-//   }
-//   .campus-event-row > .el-row {
-//     width: 100%;
-//   }
-// }
 </style>

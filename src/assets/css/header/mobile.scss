@@ -1,0 +1,33 @@
+.mobile {
+
+  .header-carousel {
+    .el-carousel__container {
+      height: 20vh;
+      // min-height: 545px;
+      // min-width: 900px;
+    }
+  }
+
+  .quotes {
+    height: 4vh;
+    min-height: unset;
+    line-height: 10px;
+    .quotes-content-button {
+      line-height: 4vh;
+    }
+
+    .quotes-content {
+      width: 80%;
+      min-width: 930px;
+      margin: 0 auto;
+      height: 100%;
+      span {
+        height: 0.5vh;
+        padding: 0.7vh;
+      }
+      .quotes-content-container {
+        padding: 0.2vh 0 ;
+      }
+    }
+  }
+}
