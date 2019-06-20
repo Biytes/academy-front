@@ -52,8 +52,12 @@
                   :class="[index === 1 ? 'second-select-form' : '', 'select-form']"
                 >
                   <ul>
-                    <li v-for="(item,index) in department.departmentName" :key="index">
+                    <li
+                      v-for="(item,index) in department.departmentName"
+                      :key="index"
+                    >
                       <a
+
                         :href="item.href"
                         target="_blank_"
                       >

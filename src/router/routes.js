@@ -1,5 +1,5 @@
 
-const _import = file => resolve => require([`@views/${file}`], resolve)
+const _import = file => resolve => require([`@/views/${file}`], resolve)
 
 export default [{
   path: '/',
