@@ -262,7 +262,6 @@ export default {
         width: 80px;
         & > a {
           font-size: 16px;
-          font-weight: bold;
           color: #e4e0dc;
           text-decoration: none;
           -webkit-transition: all 0.45s;
