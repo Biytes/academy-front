@@ -168,7 +168,6 @@ export default {
       }
       & > a {
         font-size: 17px;
-        font-weight: bold;
         color: #e4e0dc;
         text-decoration: none;
         -webkit-transition: all 0.45s;
