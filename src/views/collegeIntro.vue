@@ -10,7 +10,17 @@
       </aside>
       <div class="news-container" v-loading="isLoading">
         <div v-if="currentCategory.index === 0" class="figure-container" style="text-align:center">
-          <video controls="controls" autoplay="autoplay" height="320" width="640"><source type="video/mp4" src=""></video>
+          <video
+            controls="controls"
+            autoplay="autoplay"
+            height="320"
+            width="640"
+          >
+            <source
+              type="video/mp4"
+              src="/upload/official.mp4"
+            >
+          </video>
           <div style="width: 700px; margin: 0 auto;text-align:left; font-size: 17px; line-height:24px; padding: 0 5px;">
             <p style="text-indent: 28px;">
               在华南理工大学的大力支持下，计算机工程学院经过多年的建设，目前已拥有一支结构合理、敬业奉献的高素质教师队伍。这支队伍中有广东省 “南粤优秀教师”，有“广东省职工经济技术创新能手”，有“广东省师德先进个人”，有分布在各个专业的博士与在读博士。学院目前有全日制本科在校生2297人，分布在学院4个专业中。历届的毕业生中有不少被腾讯、阿里等知名的IT企业所录用。
